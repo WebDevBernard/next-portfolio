@@ -53,7 +53,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
                 variant="fontawesome"
                 size={"lg"}
                 className={cn(
-                  "bg-slate-200/40 hover:bg-slate-300/10 hero-bg flex-1"
+                  "bg-slate-200/40 hover:bg-slate-300/10 hero-bg flex-1 py-2"
                 )}
               >
                 <a
@@ -72,7 +72,9 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
                 asChild
                 variant="fontawesome"
                 size={"lg"}
-                className={cn("bg-purple-300 hover:bg-purple-400/90 flex-1")}
+                className={cn(
+                  "bg-purple-300 hover:bg-purple-400/90 flex-1 py-2"
+                )}
               >
                 <a
                   className="flex flex-row items-center gap-2"
