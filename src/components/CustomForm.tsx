@@ -107,7 +107,7 @@ export function CustomForm() {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-4 rounded-xl p-10 flex flex-col w-full max-w-xl bg-gray-100 shadow-[0_6px_0_rgb(63,63,70)] border-2 border-zinc-700"
+          className="space-y-4 rounded-xl p-6 md:p-10 flex flex-col max-w-xl bg-gray-100 shadow-[0_6px_0_rgb(63,63,70)] border-2 border-zinc-700"
         >
           <FormField
             control={form.control}

@@ -12,7 +12,7 @@ export default function Page() {
 
   return (
     <section className="flex flex-col items-center justify-center max-w-5xl lg:mx-auto gap-y-6 ">
-      <h1 className="text-4xl font-semibold tracking-tighter text-zinc-800">
+      <h1 className="text-4xl font-semibold text-center tracking-tighter text-zinc-800">
         {title}
       </h1>
       <span className="flex flex-row items-start gap-2">
