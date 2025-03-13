@@ -21,7 +21,7 @@ export const ScrollToTop = () => {
           onClick={scrollToTop}
           width={50}
           height={50}
-          className="fixed bottom-14 right-8 cursor-pointer z-20"
+          className="fixed bottom-14 right-8 cursor-pointer z-20 hidden md:block"
           src="./top.svg"
           alt={"top"}
           unoptimized
