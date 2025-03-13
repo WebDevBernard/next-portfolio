@@ -21,16 +21,14 @@ import { Turnstile } from "@marsidev/react-turnstile";
 
 const formSchema = z.object({
   name: z.string().min(2, {
-    message: "Name must be at least 2 characters.",
+    message: "Enter more characters.",
   }),
   email: z
     .string({
       required_error: "Please select an email to display.",
     })
     .email({ message: "Please enter a valid email." }),
-  message: z
-    .string()
-    .min(4, { message: "Message must be at least 4 characters." }),
+  message: z.string().min(4, { message: "Enter more characters." }),
 });
 
 type FormValues = z.infer<typeof formSchema>;
