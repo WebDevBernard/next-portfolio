@@ -44,7 +44,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
           <div
             className={cn(
               "flex flex-col gap-4",
-              websiteUrl && gitHubUrl && "flex-row"
+              websiteUrl && gitHubUrl && "flex-row flex-wrap"
             )}
           >
             {websiteUrl && (
@@ -52,7 +52,9 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
                 asChild
                 variant="fontawesome"
                 size={"lg"}
-                className={cn("bg-slate-200/40 hover:bg-slate-300/10 hero-bg")}
+                className={cn(
+                  "bg-slate-200/40 hover:bg-slate-300/10 hero-bg flex-1"
+                )}
               >
                 <a
                   className="flex flex-row items-center gap-2"
@@ -70,7 +72,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
                 asChild
                 variant="fontawesome"
                 size={"lg"}
-                className={cn("bg-purple-300 hover:bg-purple-400/90")}
+                className={cn("bg-purple-300 hover:bg-purple-400/90 flex-1")}
               >
                 <a
                   className="flex flex-row items-center gap-2"
