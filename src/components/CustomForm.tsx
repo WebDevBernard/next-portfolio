@@ -57,7 +57,7 @@ export function CustomForm() {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues,
-    mode: "onChange",
+    mode: "onSubmit",
   });
 
   async function onSubmit(data: FormValues) {
@@ -180,7 +180,7 @@ export function CustomForm() {
               alt={"autonavi"}
               width={40}
               height={40}
-              className="text-zinc-700"
+              className="text-zinc-700 select-none"
               unoptimized
             />
             Submit

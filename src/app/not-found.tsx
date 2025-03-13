@@ -22,7 +22,7 @@ export default function NotFound() {
             alt={"autonavi"}
             width={40}
             height={40}
-            className="text-zinc-700"
+            className="text-zinc-700 select-none"
             unoptimized
           />
           Return Home
