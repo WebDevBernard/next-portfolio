@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { Card, CardContainer } from "@/components/Card";
 import { introContent, cardData } from "@/lib/data";
 import Image from "next/image";
-import ButtonLink from "@/components/ui/buttonlink";
+import ButtonLink from "@/components/Button";
 import { SideBar } from "@/components/Sidebar";
 import Avatar from "@/components/Avatar";
 export default function Page() {

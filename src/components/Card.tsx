@@ -2,7 +2,7 @@ import { forwardRef } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { CardProps } from "@/lib/data";
-import ButtonLink from "./ui/buttonlink";
+import ButtonLink from "./Button";
 
 type CardContainerProps = {
   children: React.ReactNode;

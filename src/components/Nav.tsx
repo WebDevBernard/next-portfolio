@@ -1,5 +1,5 @@
 import { navItems } from "@/lib/data";
-import ButtonLink from "./ui/buttonlink";
+import ButtonLink from "./Button";
 export function Navbar() {
   return (
     <aside className="mb-8 tracking-tight px-4">

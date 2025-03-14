@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { cn } from "@/lib/utils";
-import { buttonClass } from "./ui/buttonlink";
+import { buttonClass } from "./Button";
 import {
   Form,
   FormControl,

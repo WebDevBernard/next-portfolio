@@ -1,4 +1,4 @@
-import ButtonLink from "@/components/ui/buttonlink";
+import ButtonLink from "@/components/Button";
 export default function NotFound() {
   return (
     <section className="flex flex-col items-center justify-center max-w-5xl lg:mx-auto gap-y-6 ">
