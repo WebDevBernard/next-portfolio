@@ -146,15 +146,16 @@ export function ContactForm() {
               </FormItem>
             )}
           />
-
-          <Turnstile
-            options={{
-              // size: "invisible",
-              theme: "light",
-            }}
-            siteKey={process.env.NEXT_PUBLIC_CLOUDFLARE_SITE_KEY!}
-            onSuccess={handleTurnstileSubmission}
-          />
+          <div className="min-h-[72px] min-w-[300px]">
+            <Turnstile
+              options={{
+                // size: "invisible",
+                theme: "light",
+              }}
+              siteKey={process.env.NEXT_PUBLIC_CLOUDFLARE_SITE_KEY!}
+              onSuccess={handleTurnstileSubmission}
+            />
+          </div>
           <p className="text-zinc-700 font-semibold min-h-[24px]">
             {isLoading
               ? "Loading, please wait..."

@@ -29,7 +29,7 @@ export const navItems = {
 export const introContent = {
   title: "Welcome to my portfolio website",
   description:
-    "I am Bernard Yang, I work in the insurance industry. The site is a collection of projects I've built for work and things that have interested me.",
+    "I am Bernard Yang, I work in the insurance industry. This site is a collection of projects I've built for work and things that have interested me.",
   contactUrl: "/contact-me",
 };
 
@@ -39,11 +39,11 @@ export const homeMetaData = {
     template: "%s | Bernard Yang",
   },
   description:
-    "I am Bernard Yang, I work in the insurance industry. The site is a collection of projects I've built for work and things that have interested me.",
+    "I am Bernard Yang, I work in the insurance industry. This site is a collection of projects I've built for work and things that have interested me.",
   openGraph: {
     title: "Bernard Yang Portfolio",
     description:
-      "I am Bernard Yang, I work in the insurance industry. The site is a collection of projects I've built for work and things that have interested me.",
+      "I am Bernard Yang, I work in the insurance industry. This site is a collection of projects I've built for work and things that have interested me.",
     url: baseUrl,
     siteName: "Bernard Yang Portfolio",
   },
