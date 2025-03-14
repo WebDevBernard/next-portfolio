@@ -88,7 +88,7 @@ export function ContactForm() {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="card space-y-4 rounded-xl py-10 px-6 md:px-10 flex flex-col justify-between md:min-w-xl"
+          className="card space-y-4 rounded-xl py-10 px-6 md:px-10 md:min-w-xl flex flex-col justify-between"
         >
           <FormField
             control={form.control}
