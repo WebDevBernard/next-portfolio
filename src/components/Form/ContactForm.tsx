@@ -1,12 +1,11 @@
 "use client";
-import { useTurnstile } from "@/hooks/useTurnstile";
+
 import React, { useState } from "react";
-import Image from "next/image";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTurnstile } from "@/hooks/useTurnstile";
+import { Turnstile } from "@marsidev/react-turnstile";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { cn } from "@/lib/utils";
-import { buttonClass } from "./Button";
+import { formSchema, FormValues } from "./formSchema";
 import {
   Form,
   FormControl,
@@ -14,24 +13,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Turnstile } from "@marsidev/react-turnstile";
-
-const formSchema = z.object({
-  name: z.string().min(2, {
-    message: "Enter more characters.",
-  }),
-  email: z
-    .string({
-      required_error: "Please select an email to display.",
-    })
-    .email({ message: "Please enter a valid email." }),
-  message: z.string().min(4, { message: "Enter more characters." }),
-});
-
-type FormValues = z.infer<typeof formSchema>;
+} from "./form";
+import { Input, Textarea, Button } from "./formComponents";
 
 const defaultValues: Partial<FormValues> = {
   name: "",
@@ -47,7 +30,7 @@ export function ContactForm() {
     handleTurnstileSubmission,
   } = useTurnstile();
   const [isLoading, setIsLoading] = useState(false);
-  const [hasSubmitted, setHasSubmitted] = useState<boolean>();
+  const [hasSubmitted, setHasSubmitted] = useState<boolean>(false);
   const [error, setError] = useState<
     { message: string; status?: string } | undefined
   >();
@@ -105,7 +88,7 @@ export function ContactForm() {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-4 rounded-xl py-10 px-6 lg:px-10 flex flex-col lg:min-w-xl bg-[#fafafa] shadow-[0_6px_0_rgb(63,63,70)] border-2 border-zinc-700"
+          className="card space-y-4 rounded-xl py-10 px-6 md:px-10 flex flex-col justify-between md:min-w-xl"
         >
           <FormField
             control={form.control}
@@ -146,16 +129,17 @@ export function ContactForm() {
               </FormItem>
             )}
           />
+          {/* this div prevents Cumulative Layout Shift*/}
           <div className="min-h-[72px] min-w-[300px]">
             <Turnstile
               options={{
-                // size: "invisible",
                 theme: "light",
               }}
               siteKey={process.env.NEXT_PUBLIC_CLOUDFLARE_SITE_KEY!}
               onSuccess={handleTurnstileSubmission}
             />
           </div>
+          {/* form message */}
           <p className="text-zinc-700 font-semibold min-h-[24px]">
             {isLoading
               ? "Loading, please wait..."
@@ -167,25 +151,9 @@ export function ContactForm() {
                     ? "Your message has been submitted!"
                     : null}
           </p>
-
-          <button
-            disabled={!isVerified || hasSubmitted}
-            type="submit"
-            className={cn(
-              buttonClass,
-              "bg-lime-300 hover:bg-lime-400/80 active:shadow-[0_2px_0px_rgb(3,7,18)] active:translate-y-1"
-            )}
-          >
-            <Image
-              src="/autonavi.svg"
-              alt={"autonavi"}
-              width={40}
-              height={40}
-              className="text-zinc-700 select-none"
-              unoptimized
-            />
+          <Button isVerified={isVerified} hasSubmitted={hasSubmitted}>
             Submit
-          </button>
+          </Button>
         </form>
       </Form>
     </>

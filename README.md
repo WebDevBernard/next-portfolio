@@ -1,13 +1,13 @@
 # Next.js Portfolio
 
-A personal portfolio built with Next.js to showcase projects, skills, and experience.
+A personal portfolio built with Next.js to showcase projects.
 
 ## Features
 
 - Responsive design
-- Dynamic project showcase
-- Contact form
-- SEO optimized
+- Project showcase
+- Contact form with email notification
+- Sitemap and Robots
 
 ## Installation
 
@@ -22,16 +22,12 @@ A personal portfolio built with Next.js to showcase projects, skills, and experi
 
    ```sh
    npm install
-   # or
-   yarn install
    ```
 
 3. Run the development server:
 
    ```sh
    npm run dev
-   # or
-   yarn dev
    ```
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser.

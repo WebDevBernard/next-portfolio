@@ -10,7 +10,8 @@ export type CardProps = {
 };
 
 export const baseUrl: string = "https://bernardyang.com";
-
+export const githubAvatar =
+  "https://avatars.githubusercontent.com/u/72034695?v=4";
 export const navItems = {
   "/": {
     src: "/home.svg",

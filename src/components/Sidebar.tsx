@@ -40,12 +40,10 @@ export function SideBar({ projectData, cardRefs }: SideBarProps) {
         {projectData.map((project, index) => (
           <div
             key={index}
-            className="text-zinc-700 cursor-pointer"
+            className="cursor-pointer"
             onClick={() => handleScroll(project.title)}
           >
-            <p className="hidden xl:block xl:w-[300px]text-zinc-700">
-              {project.title}
-            </p>
+            <p className="hidden xl:block xl:w-[300px]">{project.title}</p>
             {project.iconUrl && (
               <Image
                 src={project.iconUrl}

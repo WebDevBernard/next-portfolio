@@ -15,18 +15,16 @@ export default function Page() {
   const { title, description, contactUrl } = introContent;
 
   return (
-    <section className="flex flex-col items-center justify-center max-w-5xl lg:mx-auto gap-y-6 ">
+    <section className="container">
       <SideBar projectData={cardData} cardRefs={cardRefs} />
       <Avatar />
-      <h1 className="text-4xl font-semibold text-center tracking-tighter text-zinc-800">
-        {title}
-      </h1>
-      <span className="flex flex-row items-start gap-2">
+
+      <h1>{title}</h1>
+      <span>
         <Image src="/hi.svg" alt={"hi"} width={40} height={40} unoptimized />
-        <p className="max-w-xl flex text-center text-zinc-700 ">
-          {description}
-        </p>
+        <p className="text-center">{description}</p>
       </span>
+
       <ButtonLink
         src="/autonavi.svg"
         href={contactUrl}
@@ -34,12 +32,9 @@ export default function Page() {
       >
         Contact Me
       </ButtonLink>
+
       {/* Work Projects */}
-      {workProjects && workProjects.length > 0 && (
-        <h2 className="text-4xl font-semibold tracking-tighter text-zinc-800">
-          Work Projects
-        </h2>
-      )}
+      {workProjects && workProjects.length > 0 && <h2>Work Projects</h2>}
       <CardContainer>
         {workProjects.map((card, index) => (
           <Card
@@ -53,11 +48,7 @@ export default function Page() {
       </CardContainer>
 
       {/* Other Projects */}
-      {otherProjects && otherProjects.length > 0 && (
-        <h2 className="text-4xl font-semibold tracking-tighter text-zinc-800">
-          Other Projects
-        </h2>
-      )}
+      {otherProjects && otherProjects.length > 0 && <h2>Other Projects</h2>}
       <CardContainer>
         {otherProjects.map((card, index) => (
           <Card

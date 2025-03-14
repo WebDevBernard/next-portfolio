@@ -21,7 +21,7 @@ export const Email: React.FC<Readonly<EmailProps>> = ({
   email,
   message,
 }) => {
-  const previewText = `You received a form submission from 🚀${name}.`;
+  const previewText = `You received a form submission from 🚀 ${name}.`;
   return (
     <Html>
       <Head />

@@ -18,12 +18,12 @@ transition-[color,box-shadow] disabled:pointer-events-none disabled:opacity-50 [
 [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring 
 focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 
 aria-invalid:border-destructive rounded-lg gap-4 text-zinc-800 font-semibold outline-none border-zinc-800 border-2 shadow-[0_6px_0_rgb(3,7,18)] 
-ease-out transition-all cursor-pointer h-10 rounded-md px-6 py-2.5 flex-1`;
+ease-out transition-all cursor-pointer h-10 rounded-md px-6 py-2.5 flex-1 hover:shadow-[0_2px_0px_rgb(3,7,18)] hover:translate-y-1`;
 
 const ButtonLink: React.FC<ButtonLinkProps> = ({
   href,
   children,
-  className = "",
+  className,
   src,
   customKey,
   hidden,
@@ -46,7 +46,7 @@ const ButtonLink: React.FC<ButtonLinkProps> = ({
   ) : (
     <>
       {src && (
-        <span className="flex flex-row items-center gap-2">
+        <span>
           <Image
             className="select-none"
             alt={src.replace(/^.*\/([^/]+)\.[^/.]+$/, "$1")}
@@ -64,14 +64,10 @@ const ButtonLink: React.FC<ButtonLinkProps> = ({
   return (
     <Link
       key={customKey}
-      href={href || "/"}
+      href={href}
       target={target}
       rel={rel}
-      className={cn(
-        className,
-        !hidden &&
-          `${buttonClass} hover:shadow-[0_2px_0px_rgb(3,7,18)] hover:translate-y-1`
-      )}
+      className={cn(className, !hidden && buttonClass)}
     >
       {content}
     </Link>
