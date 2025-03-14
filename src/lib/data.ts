@@ -93,7 +93,7 @@ export const cardData: CardProps[] = [
       "A graph of character count in World of Warcraft Mythic+ dungeons.",
     iconUrl: "/nodejs.svg",
     year: "2022",
-    websiteUrl: "https://mythicplus.vercel.app/",
+    websiteUrl: "https://mythicplus.bernardyang.com/",
     gitHubUrl: "https://github.com/WebDevBernard/MythicPlus-RunCount",
   },
 ];
