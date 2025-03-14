@@ -2,7 +2,6 @@
 import { useState } from "react";
 import Image from "next/image";
 import { CardProps } from "@/lib/data";
-import renameAltTags from "@/lib/renameAltTags";
 
 interface SideBarProps {
   projectData: CardProps[];
@@ -50,7 +49,7 @@ export function SideBar({ projectData, cardRefs }: SideBarProps) {
             {project.iconUrl && (
               <Image
                 src={project.iconUrl}
-                alt={renameAltTags(project.iconUrl)}
+                alt={project.iconUrl.replace(/^.*\/([^/]+)\.[^/.]+$/, "$1")}
                 width={30}
                 height={30}
                 className="mb-4 ml-1 block xl:hidden"

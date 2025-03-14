@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import { buttonClass } from "./ui/buttonlink";
 import {
   Form,
   FormControl,
@@ -39,7 +39,7 @@ const defaultValues: Partial<FormValues> = {
   message: "",
 };
 
-export function CustomForm() {
+export function ContactForm() {
   const {
     turnstileToken,
     isVerified,
@@ -105,7 +105,7 @@ export function CustomForm() {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-4 rounded-xl p-10 flex flex-col w-full sm:max-w-xl bg-gray-100 shadow-[0_6px_0_rgb(63,63,70)] border-2 border-zinc-700"
+          className="space-y-4 rounded-xl py-10 px-6 lg:px-10 flex flex-col lg:min-w-xl bg-[#fafafa] shadow-[0_6px_0_rgb(63,63,70)] border-2 border-zinc-700"
         >
           <FormField
             control={form.control}
@@ -146,10 +146,10 @@ export function CustomForm() {
               </FormItem>
             )}
           />
+
           <Turnstile
-            className="hidden"
             options={{
-              size: "invisible",
+              // size: "invisible",
               theme: "light",
             }}
             siteKey={process.env.NEXT_PUBLIC_CLOUDFLARE_SITE_KEY!}
@@ -166,12 +166,14 @@ export function CustomForm() {
                     ? "Your message has been submitted!"
                     : null}
           </p>
-          <Button
+
+          <button
             disabled={!isVerified || hasSubmitted}
             type="submit"
-            variant={"submit"}
-            size="submit"
-            className={cn("bg-lime-300 hover:bg-lime-400/80")}
+            className={cn(
+              buttonClass,
+              "bg-lime-300 hover:bg-lime-400/80 active:shadow-[0_2px_0px_rgb(3,7,18)] active:translate-y-1"
+            )}
           >
             <Image
               src="/autonavi.svg"
@@ -182,7 +184,7 @@ export function CustomForm() {
               unoptimized
             />
             Submit
-          </Button>
+          </button>
         </form>
       </Form>
     </>

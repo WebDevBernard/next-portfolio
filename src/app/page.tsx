@@ -1,10 +1,10 @@
 "use client";
 import { useRef } from "react";
-import { Button } from "@/components/ui/button";
+
 import { Card, CardContainer } from "@/components/Card";
 import { introContent, cardData } from "@/lib/data";
 import Image from "next/image";
-import Link from "next/link";
+import ButtonLink from "@/components/ui/buttonlink";
 import { SideBar } from "@/components/Sidebar";
 import Avatar from "@/components/Avatar";
 export default function Page() {
@@ -27,24 +27,13 @@ export default function Page() {
           {description}
         </p>
       </span>
-      <Button
-        asChild
+      <ButtonLink
+        src="/autonavi.svg"
+        href={contactUrl}
         className="bg-yellow-300 hover:bg-yellow-400/90"
-        variant={"fontawesome"}
-        size={"lg"}
       >
-        <Link href={contactUrl}>
-          <Image
-            src="/autonavi.svg"
-            alt={"autonavi"}
-            width={40}
-            height={40}
-            className="text-zinc-700 select-none"
-            unoptimized
-          />
-          Contact Me
-        </Link>
-      </Button>
+        Contact Me
+      </ButtonLink>
       {/* Work Projects */}
       {workProjects && workProjects.length > 0 && (
         <h2 className="text-4xl font-semibold tracking-tighter text-zinc-800">

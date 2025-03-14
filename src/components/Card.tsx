@@ -2,18 +2,27 @@ import { forwardRef } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { CardProps } from "@/lib/data";
-import renameAltTags from "@/lib/renameAltTags";
-import { changeBgColor } from "@/lib/changeBgColor";
-import { Globe } from "lucide-react";
-import { Button } from "./ui/button";
+import ButtonLink from "./ui/buttonlink";
+
 type CardContainerProps = {
   children: React.ReactNode;
   className?: string;
 };
 
+const colorMap: Record<string, string> = {
+  "2022": "#bef264",
+  "2023": "#fde047",
+  "2024": "#fdba74",
+  "2025": "#fca5a5",
+  "2026": "#6ee7b7",
+  "2027": "#7dd3fc",
+  "2028": "#a5b4fc",
+  "2029": "#c4b5fd",
+};
+
 const Card = forwardRef<HTMLDivElement, CardProps>(
   ({ title, description, year, iconUrl, websiteUrl, gitHubUrl }, ref) => {
-    const bgColor = changeBgColor(year);
+    const bgColor = colorMap[String(year)];
     return (
       <div
         ref={ref}
@@ -27,74 +36,43 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
         >
           {year}
         </div>
-        <div>
-          <span className="flex items-center gap-4 mb-2">
-            {iconUrl && (
-              <Image
-                src={iconUrl}
-                alt={renameAltTags(iconUrl)}
-                width={20}
-                height={20}
-                unoptimized
-              />
-            )}
-            <h4 className="text-lg tracking-tighter text-zinc-800">{title}</h4>
-          </span>
-          <p className="mb-4 max-w-xl flex text-zinc-700">{description}</p>
-          <div
-            className={cn(
-              "flex flex-col gap-4",
-              websiteUrl && gitHubUrl && "flex-row flex-wrap"
-            )}
-          >
-            {websiteUrl && (
-              <Button
-                asChild
-                variant="fontawesome"
-                size={"lg"}
-                className={cn(
-                  "bg-slate-200/40 hover:bg-slate-300/10 hero-bg flex-1 py-2"
-                )}
-              >
-                <a
-                  className="flex flex-row items-center gap-2"
-                  href={websiteUrl}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  <Globe className="w-5 h-5" />
-                  View Website
-                </a>
-              </Button>
-            )}
-            {gitHubUrl && (
-              <Button
-                asChild
-                variant="fontawesome"
-                size={"lg"}
-                className={cn(
-                  "bg-purple-300 hover:bg-purple-400/90 flex-1 py-2"
-                )}
-              >
-                <a
-                  className="flex flex-row items-center gap-2"
-                  href={gitHubUrl}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  <Image
-                    className="select-none"
-                    src="/github.svg"
-                    alt="GitHub"
-                    width={20}
-                    height={20}
-                    unoptimized
-                  />
-                  View Github
-                </a>
-              </Button>
-            )}
-          </div>
+        <span className="flex items-center gap-4 mb-2">
+          {iconUrl && (
+            <Image
+              src={iconUrl}
+              alt={iconUrl.replace(/^.*\/([^/]+)\.[^/.]+$/, "$1")}
+              width={20}
+              height={20}
+              unoptimized
+            />
+          )}
+          <h4 className="text-lg tracking-tighter text-zinc-800">{title}</h4>
+        </span>
+        <p className="mb-4 max-w-xl flex text-zinc-700">{description}</p>
+        <div
+          className={cn(
+            "flex flex-col gap-4",
+            websiteUrl && gitHubUrl && "flex-row flex-wrap"
+          )}
+        >
+          {websiteUrl && (
+            <ButtonLink
+              src="/globe.svg"
+              href={websiteUrl}
+              className="bg-slate-200/40 hover:bg-slate-300/10 hero-bg"
+            >
+              View Website
+            </ButtonLink>
+          )}
+          {gitHubUrl && (
+            <ButtonLink
+              src="/github.svg"
+              href={gitHubUrl}
+              className="bg-purple-300 hover:bg-purple-400/90"
+            >
+              View Github
+            </ButtonLink>
+          )}
         </div>
       </div>
     );

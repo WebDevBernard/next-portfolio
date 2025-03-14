@@ -1,15 +1,13 @@
-import { getPostsSitemap } from "@/lib/mdxUtils";
 import { MetadataRoute } from "next";
-
-export const BASE_URL = "https://bernardyang.com";
+import { baseUrl } from "@/lib/data";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     {
-      url: BASE_URL,
+      url: baseUrl,
     },
     {
-      url: BASE_URL + "/contact-me",
+      url: baseUrl + "/contact-me",
     },
   ];
 }

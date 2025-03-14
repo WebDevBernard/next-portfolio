@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-export const ScrollToTop = () => {
+export const Scroll = () => {
   const [showScrollButton, setShowScrollButton] = useState(false);
   useEffect(() => {
     const handleScroll = () => {
@@ -19,9 +19,9 @@ export const ScrollToTop = () => {
       {showScrollButton && (
         <Image
           onClick={scrollToTop}
-          width={50}
-          height={50}
-          className="fixed bottom-14 right-8 cursor-pointer z-20 hidden md:block"
+          width={40}
+          height={40}
+          className="fixed bottom-25 right-8 cursor-pointer z-20 hidden md:block"
           src="/top.svg"
           alt={"top"}
           unoptimized

@@ -1,6 +1,4 @@
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import ButtonLink from "@/components/ui/buttonlink";
 export default function NotFound() {
   return (
     <section className="flex flex-col items-center justify-center max-w-5xl lg:mx-auto gap-y-6 ">
@@ -10,24 +8,13 @@ export default function NotFound() {
       <p className="max-w-xl flex text-center text-zinc-700 ">
         The page you are looking for does not exist.
       </p>
-      <Button
-        asChild
-        className="bg-yellow-300 hover:bg-yellow-400/90 text-zinc-700 font-semibold"
-        variant={"fontawesome"}
-        size={"lg"}
+      <ButtonLink
+        href={"/"}
+        className="bg-violet-300 hover:bg-violet-400/90"
+        src="/home.svg"
       >
-        <Link href={"/"}>
-          <Image
-            src="/home.svg"
-            alt={"home"}
-            width={40}
-            height={40}
-            className="text-zinc-700 select-none"
-            unoptimized
-          />
-          Return Home
-        </Link>
-      </Button>
+        Return Home
+      </ButtonLink>
     </section>
   );
 }

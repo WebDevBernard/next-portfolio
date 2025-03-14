@@ -1,9 +1,3 @@
-export type introProps = {
-  title: string;
-  description: string;
-  contactUrl: string;
-};
-
 export type CardProps = {
   type: "work" | "other";
   title: string;
@@ -15,12 +9,15 @@ export type CardProps = {
   gitHubUrl?: string;
 };
 
-export type ContactProps = {
-  title: string;
-  description: string;
-};
+export const baseUrl: string = "https://bernardyang.com";
 
 export const navItems = {
+  "/": {
+    src: "/home.svg",
+  },
+  "contact-me": {
+    src: "/autonavi.svg",
+  },
   "https://www.linkedin.com/in/bernard-yang/": {
     src: "/linkedin-outline.svg",
   },
@@ -29,11 +26,44 @@ export const navItems = {
   },
 };
 
-export const introContent: introProps = {
+export const introContent = {
   title: "Welcome to my portfolio website",
   description:
     "I am Bernard Yang, I work in the insurance industry. The site is a collection of projects I've built for work and things that have interested me.",
   contactUrl: "/contact-me",
+};
+
+export const homeMetaData = {
+  title: {
+    default: "Portfolio | Bernard Yang",
+    template: "%s | Bernard Yang",
+  },
+  description:
+    "I am Bernard Yang, I work in the insurance industry. The site is a collection of projects I've built for work and things that have interested me.",
+  openGraph: {
+    title: "Bernard Yang Portfolio",
+    description:
+      "I am Bernard Yang, I work in the insurance industry. The site is a collection of projects I've built for work and things that have interested me.",
+    url: baseUrl,
+    siteName: "Bernard Yang Portfolio",
+  },
+};
+
+export const contactContent = {
+  title: "Contact Me",
+  description:
+    "You can reach out to me by either filling out this form or sending an email to mail@bernardyang.com",
+};
+
+export const contactMeMeta = {
+  title: "Contact Me",
+  description:
+    "You can reach out to me by sending an email to mail@bernardyang.com",
+};
+
+export const emailInfo = {
+  from: "Bernard Yang <mail@bernardyang.com>",
+  to: ["mail@bernardyang.com"],
 };
 
 export const cardData: CardProps[] = [
@@ -66,9 +96,3 @@ export const cardData: CardProps[] = [
     gitHubUrl: "https://github.com/WebDevBernard/MythicPlus-RunCount",
   },
 ];
-
-export const contactContent: ContactProps = {
-  title: "Contact Me",
-  description:
-    "You can reach out to me by either filling out this form or sending an email to mail@bernardyang.com",
-};

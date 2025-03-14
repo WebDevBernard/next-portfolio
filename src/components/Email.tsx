@@ -10,13 +10,13 @@ import {
   Tailwind,
   Text,
 } from "@react-email/components";
-interface EmailTemplateProps {
+interface EmailProps {
   name: string;
   email: string;
   message: string;
 }
 
-export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
+export const Email: React.FC<Readonly<EmailProps>> = ({
   name,
   email,
   message,

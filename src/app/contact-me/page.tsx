@@ -1,11 +1,9 @@
-import { contactContent } from "@/lib/data";
+import { contactContent, contactMeMeta } from "@/lib/data";
 import { Metadata } from "next";
-
-import { CustomForm } from "@/components/CustomForm";
+import { ContactForm } from "@/components/Form";
 export const metadata: Metadata = {
-  title: "Contact Me",
-  description:
-    "You can reach out to me by sending an email to mail@bernardyang.com",
+  title: contactMeMeta.title,
+  description: contactMeMeta.description,
 };
 export default function Page() {
   const { title, description } = contactContent;
@@ -21,7 +19,7 @@ export default function Page() {
         </p>
       </span>
 
-      <CustomForm />
+      <ContactForm />
     </section>
   );
 }

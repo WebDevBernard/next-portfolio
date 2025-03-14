@@ -3,23 +3,22 @@ import type { Metadata } from "next";
 import { Navbar } from "@/components/Nav";
 import { Reddit_Sans } from "next/font/google";
 import Footer from "@/components/Footer";
-import { ScrollToTop } from "@/components/ScrollToTop";
+import { Scroll } from "@/components/Scroll";
 import { cn } from "@/lib/utils";
-import { BASE_URL as baseUrl } from "./sitemap";
+import { baseUrl, homeMetaData } from "@/lib/data";
+
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: "Portfolio | Bernard Yang",
-    template: "%s | Bernard Yang",
+    default: homeMetaData.title.default,
+    template: homeMetaData.title.template,
   },
-  description:
-    "I am Bernard Yang, I work in the insurance industry. The site is a collection of projects I've built for work and things that have interested me.",
+  description: homeMetaData.description,
   openGraph: {
-    title: "Bernard Yang Portfolio",
-    description:
-      "I am Bernard Yang, I work in the insurance industry. The site is a collection of projects I've built for work and things that have interested me.",
+    title: homeMetaData.openGraph.title,
+    description: homeMetaData.openGraph.description,
     url: baseUrl,
-    siteName: "Bernard Yang Portfolio",
+    siteName: homeMetaData.openGraph.siteName,
     locale: "en_US",
     type: "website",
     images: [{ url: `${baseUrl}/opengraph-image.png` }],
@@ -57,7 +56,7 @@ export default function RootLayout({
       )}
     >
       <body className="antialiased mx-4 mt-8 bg-transparent">
-        <ScrollToTop />
+        <Scroll />
         <Navbar /> <main>{children}</main>
         <Footer />
       </body>
