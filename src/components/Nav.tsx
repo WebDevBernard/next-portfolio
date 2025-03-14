@@ -1,7 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
 import { navItems } from "@/lib/data";
 import renameAltTags from "@/lib/renameAltTags";
-import Link from "next/link";
 import HomeIcon from "./HomeIcon";
 
 export function Navbar() {
@@ -14,6 +14,15 @@ export function Navbar() {
         >
           <div className="flex flex-row items-center space-x-2 md:space-x-8">
             <HomeIcon />
+            <Link href="/content">
+              <Image
+                src="/code.svg"
+                alt="code"
+                width={40}
+                height={40}
+                unoptimized
+              />
+            </Link>
             {Object.entries(navItems).map(([path, { src }]) => {
               return (
                 <a

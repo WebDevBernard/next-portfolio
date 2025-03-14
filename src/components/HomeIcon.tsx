@@ -9,7 +9,7 @@ const HomeIcon = () => {
   return (
     <Link href={pathname !== "/" ? "/" : "contact-me"}>
       <Image
-        src={pathname !== "/" ? "./home.svg" : "./autonavi.svg"}
+        src={pathname !== "/" ? "/home.svg" : "/autonavi.svg"}
         alt={pathname !== "/" ? "home" : "autonavi"}
         width={40}
         height={40}

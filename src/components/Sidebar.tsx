@@ -25,8 +25,8 @@ export function SideBar({ projectData, cardRefs }: SideBarProps) {
       onMouseEnter={() => setShowProjects(true)}
     >
       <Image
-        src="./code.svg"
-        alt={"code"}
+        src="/editor.svg"
+        alt={"editor"}
         width={40}
         height={40}
         onMouseEnter={() => setShowProjects(true)}

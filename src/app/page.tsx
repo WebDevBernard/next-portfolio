@@ -22,7 +22,7 @@ export default function Page() {
         {title}
       </h1>
       <span className="flex flex-row items-start gap-2">
-        <Image src="./hi.svg" alt={"hi"} width={40} height={40} unoptimized />
+        <Image src="/hi.svg" alt={"hi"} width={40} height={40} unoptimized />
         <p className="max-w-xl flex text-center text-zinc-700 ">
           {description}
         </p>
@@ -35,11 +35,11 @@ export default function Page() {
       >
         <Link href={contactUrl}>
           <Image
-            src="./autonavi.svg"
+            src="/autonavi.svg"
             alt={"autonavi"}
             width={40}
             height={40}
-            className="text-zinc-700"
+            className="text-zinc-700 select-none"
             unoptimized
           />
           Contact Me

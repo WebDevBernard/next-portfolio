@@ -18,8 +18,8 @@ export default function NotFound() {
       >
         <Link href={"/"}>
           <Image
-            src="./autonavi.svg"
-            alt={"autonavi"}
+            src="/home.svg"
+            alt={"home"}
             width={40}
             height={40}
             className="text-zinc-700 select-none"

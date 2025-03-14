@@ -22,13 +22,10 @@ export type ContactProps = {
 
 export const navItems = {
   "https://www.linkedin.com/in/bernard-yang/": {
-    src: "./linkedin-outline.svg",
-  },
-  "https://discord.com/users/695431067448115280": {
-    src: "./discord-outline.svg",
+    src: "/linkedin-outline.svg",
   },
   "https://github.com/WebDevBernard": {
-    src: "./github-outline.svg",
+    src: "/github-outline.svg",
   },
 };
 
@@ -45,7 +42,7 @@ export const cardData: CardProps[] = [
     title: "Horizon West Insurance Website",
     description:
       "NextJS PayloadCMS Website created using the official PayloadCMS website template.",
-    iconUrl: "./payload.svg",
+    iconUrl: "/payload.svg",
     year: "2025",
     websiteUrl: "https://hwi-website.vercel.app/",
   },
@@ -54,7 +51,7 @@ export const cardData: CardProps[] = [
     title: "ICBC E-Stamp Tool",
     description:
       "A Python Script to automate stamping of ICBC policy documents.",
-    iconUrl: "./python.svg",
+    iconUrl: "/python.svg",
     year: "2024",
     gitHubUrl: "https://github.com/WebDevBernard/ICBC_E-Stamp_Tool",
   },
@@ -63,7 +60,7 @@ export const cardData: CardProps[] = [
     title: "Mythic+ Run Count",
     description:
       "A graph of character count in World of Warcraft Mythic+ dungeons.",
-    iconUrl: "./nodejs.svg",
+    iconUrl: "/nodejs.svg",
     year: "2022",
     websiteUrl: "https://mythicplus.vercel.app/",
     gitHubUrl: "https://github.com/WebDevBernard/MythicPlus-RunCount",

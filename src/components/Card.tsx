@@ -84,7 +84,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
                 >
                   <Image
                     className="select-none"
-                    src="./github.svg"
+                    src="/github.svg"
                     alt="GitHub"
                     width={20}
                     height={20}

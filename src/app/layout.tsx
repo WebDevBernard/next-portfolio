@@ -5,7 +5,7 @@ import { Reddit_Sans } from "next/font/google";
 import Footer from "@/components/Footer";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { cn } from "@/lib/utils";
-import { baseUrl } from "./baseUrl";
+import { BASE_URL as baseUrl } from "./sitemap";
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
