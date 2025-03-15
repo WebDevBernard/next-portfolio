@@ -19,7 +19,7 @@ export function SideBar({ projectData, cardRefs }: SideBarProps) {
   };
   return (
     <aside
-      className="hidden md:block h-screen fixed left-0 top-0 z-10 px-6 py-8"
+      className="hidden md:block h-screen fixed left-0 top-0 px-6 py-8"
       onMouseLeave={() => setShowProjects(false)}
       onMouseEnter={() => setShowProjects(true)}
     >
