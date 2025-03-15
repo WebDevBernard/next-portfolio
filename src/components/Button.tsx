@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-
+import { subDomainInNewTab } from "@/lib/data";
 interface ButtonLinkProps {
   href: string;
   children?: React.ReactNode;
@@ -30,8 +30,9 @@ const ButtonLink: React.FC<ButtonLinkProps> = ({
 }) => {
   // handles external links
   const isExternal = href.startsWith("http");
-  const target = isExternal ? "_blank" : "_self";
-  const rel = isExternal ? "noopener noreferrer" : undefined;
+  const isInternal = href.endsWith(subDomainInNewTab);
+  const target = isExternal && !isInternal ? "_blank" : "_self";
+  const rel = isExternal && !isInternal ? "noopener noreferrer" : undefined;
 
   const content = hidden ? (
     src && (

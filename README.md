@@ -7,7 +7,7 @@ A personal portfolio built with Next.js to showcase projects.
 - Responsive design
 - Project showcase
 - Contact form with email notification
-- Sitemap and Robots
+- Sitemap and robots
 
 ## Installation
 
@@ -32,15 +32,9 @@ A personal portfolio built with Next.js to showcase projects.
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Deployment
+## Extra
 
-To deploy on Vercel, run:
-
-```sh
-vercel
-```
-
-Or follow [Next.js deployment guide](https://nextjs.org/docs/deployment).
+All https links open as new tabs, except for subdomains. Force subdomains to open in new Tab by putting "/" at the end.
 
 ## License
 
