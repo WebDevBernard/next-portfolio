@@ -2,12 +2,9 @@
 
 A personal portfolio built with Next.js to showcase projects.
 
-## Features
-
-- Responsive design
-- Project showcase
-- Contact form with email notification
-- Sitemap and robots
+RESEND_API_KEY=
+NEXT_PUBLIC_CLOUDFLARE_SITE_KEY=
+CLOUDFLARE_SECRET_KEY=
 
 ## Installation
 
@@ -24,13 +21,19 @@ A personal portfolio built with Next.js to showcase projects.
    npm install
    ```
 
-3. Run the development server:
+3. Make a .env file using .env.example. You need to get Cloudflare Turnstile Keys and Resend Api keys to enable the form email notification.
+
+RESEND_API_KEY=
+NEXT_PUBLIC_CLOUDFLARE_SITE_KEY=
+CLOUDFLARE_SECRET_KEY=
+
+4. Run the development server:
 
    ```sh
    npm run dev
    ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Extra
 
