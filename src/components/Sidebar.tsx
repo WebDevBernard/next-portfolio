@@ -30,6 +30,7 @@ export function SideBar({ projectData, cardRefs }: SideBarProps) {
         height={40}
         onMouseEnter={() => setShowProjects(true)}
         className="cursor-pointer mb-4 select-none"
+        unoptimized
       />
 
       <div
