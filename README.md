@@ -2,10 +2,6 @@
 
 A personal portfolio built with Next.js to showcase projects.
 
-RESEND_API_KEY=
-NEXT_PUBLIC_CLOUDFLARE_SITE_KEY=
-CLOUDFLARE_SECRET_KEY=
-
 ## Installation
 
 1. Clone the repository:
@@ -23,9 +19,11 @@ CLOUDFLARE_SECRET_KEY=
 
 3. Make a .env file using .env.example. You need to get Cloudflare Turnstile Keys and Resend Api keys to enable the form email notification.
 
+```sh
 RESEND_API_KEY=
 NEXT_PUBLIC_CLOUDFLARE_SITE_KEY=
 CLOUDFLARE_SECRET_KEY=
+```
 
 4. Run the development server:
 
