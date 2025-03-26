@@ -74,16 +74,18 @@ export const cardData: CardProps[] = [
     type: "work",
     title: "Horizon West Insurance Website",
     description:
-      "Work website I built using Payload headless CMS and NextJS front-end. Created using the official PayloadCMS website template.  This project integrates Cloudflare R2, Cloudflare Turnstile, Resend API, React Hook Form + Zod, PostgreSQL, and Google Maps Embed API.",
+      "Work website I built using Payload CMS and NextJS front-end.  Github link to official Payload CMS 3.0 Website Template.",
     iconUrl: "/payload.svg",
     year: "2025",
     websiteUrl: "https://hwi-website.vercel.app/",
+    gitHubUrl:
+      "https://github.com/payloadcms/payload/tree/main/templates/website",
   },
   {
     type: "work",
     title: "ICBC E-Stamp Tool",
     description:
-      "A Python script I made to help insurance brokers stamp ICBC policy documents.  With one click, it can generate a 'stamped' customer copy pdf with the appropriate agency number and transaction date.  View Github to learn how to create the exe file.",
+      "A Python script I made to help insurance brokers stamp ICBC policy documents.  Built with PyMuPDF and Pandas.",
     iconUrl: "/python.svg",
     year: "2024",
     gitHubUrl: "https://github.com/WebDevBernard/ICBC_E-Stamp_Tool",
@@ -92,20 +94,10 @@ export const cardData: CardProps[] = [
     type: "other",
     title: "Mythic+ Run Count",
     description:
-      "A graph of character count in World of Warcraft Mythic+ dungeons.  Uses AWS Lambda and Eventbridge to automate an API call and display data using React and Chart.js.  This a data anaylsis project that is no longer active.  You can view Github to see how the API calls worked.",
+      "A graph of character count in World of Warcraft Mythic+ dungeons.  Built with AWS Lambda/Eventbridge, React and Chart.js.",
     iconUrl: "/nodejs.svg",
     year: "2022",
     websiteUrl: "https://mythicplus.bernardyang.com/",
     gitHubUrl: "https://github.com/WebDevBernard/MythicPlus-RunCount",
-  },
-  {
-    type: "other",
-    title: "React Memory Game",
-    description:
-      "This is a Net Ninja tutorial I remade and improved with TypeScript, a React Custom Hook, score keeping with local storage, responsive design, and CSS animations.  Even though it is a tutorial, I'm putting it here since it is a good practice project to learn React.",
-    iconUrl: "/nextjs.svg",
-    year: "2025",
-    websiteUrl: "https://game.bernardyang.com/",
-    gitHubUrl: "https://github.com/WebDevBernard/react-game-ts",
   },
 ];
