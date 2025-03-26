@@ -74,7 +74,7 @@ export const cardData: CardProps[] = [
     type: "work",
     title: "Horizon West Insurance Website",
     description:
-      "NextJS PayloadCMS Website created using the official PayloadCMS website template.",
+      "Work website I built using Payload headless CMS and NextJS front-end. Created using the official PayloadCMS website template.  This project integrates Cloudflare R2, Cloudflare Turnstile, Resend API, React Hook Form + Zod, PostgreSQL, and Google Maps Embed API.",
     iconUrl: "/payload.svg",
     year: "2025",
     websiteUrl: "https://hwi-website.vercel.app/",
@@ -83,7 +83,7 @@ export const cardData: CardProps[] = [
     type: "work",
     title: "ICBC E-Stamp Tool",
     description:
-      "A Python Script to automate stamping of ICBC policy documents.",
+      "A Python script I made to help insurance brokers stamp ICBC policy documents.  With one click, it can generate a 'stamped' customer copy pdf with the appropriate agency number and transaction date.  View Github to learn how to create the exe file.",
     iconUrl: "/python.svg",
     year: "2024",
     gitHubUrl: "https://github.com/WebDevBernard/ICBC_E-Stamp_Tool",
@@ -92,10 +92,20 @@ export const cardData: CardProps[] = [
     type: "other",
     title: "Mythic+ Run Count",
     description:
-      "A graph of character count in World of Warcraft Mythic+ dungeons.",
+      "A graph of character count in World of Warcraft Mythic+ dungeons.  Uses AWS Lambda and Eventbridge to automate an API call and display data using React and Chart.js.  This a data anaylsis project that is no longer active.  You can view Github to see how the API calls worked.",
     iconUrl: "/nodejs.svg",
     year: "2022",
     websiteUrl: "https://mythicplus.bernardyang.com/",
     gitHubUrl: "https://github.com/WebDevBernard/MythicPlus-RunCount",
+  },
+  {
+    type: "other",
+    title: "React Memory Game",
+    description:
+      "This is a Net Ninja tutorial I remade and improved with TypeScript, a React Custom Hook, score keeping with local storage, responsive design, and CSS animations.  Even though it is a tutorial, I'm putting it here since it is a good practice project to learn React.",
+    iconUrl: "/nextjs.svg",
+    year: "2025",
+    websiteUrl: "https://game.bernardyang.com/",
+    gitHubUrl: "https://github.com/WebDevBernard/react-game-ts",
   },
 ];

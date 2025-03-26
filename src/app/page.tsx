@@ -9,8 +9,12 @@ import { SideBar } from "@/components/Sidebar";
 import Avatar from "@/components/Avatar";
 export default function Page() {
   const cardRefs = useRef<Record<string, HTMLDivElement | null>>({});
-  const workProjects = cardData.filter((card) => card.type === "work");
-  const otherProjects = cardData.filter((card) => card.type === "other");
+  const workProjects = cardData
+    .filter((card) => card.type === "work")
+    .sort((a, b) => Number(b.year) - Number(a.year));
+  const otherProjects = cardData
+    .filter((card) => card.type === "other")
+    .sort((a, b) => Number(b.year) - Number(a.year));
 
   const { title, description, contactUrl } = introContent;
 

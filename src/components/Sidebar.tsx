@@ -10,7 +10,9 @@ interface SideBarProps {
 
 export function SideBar({ projectData, cardRefs }: SideBarProps) {
   const [showProjects, setShowProjects] = useState(false);
-
+  const sortedData = projectData.sort(
+    (a, b) => Number(b.year) - Number(a.year)
+  );
   const handleScroll = (title: string) => {
     cardRefs.current[title]?.scrollIntoView({
       behavior: "smooth",
@@ -38,7 +40,7 @@ export function SideBar({ projectData, cardRefs }: SideBarProps) {
           showProjects ? "duration-700 opacity-100" : "duration-2100 opacity-0"
         }`}
       >
-        {projectData.map((project, index) => (
+        {sortedData.map((project, index) => (
           <div
             key={index}
             className="cursor-pointer"

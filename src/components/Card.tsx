@@ -27,7 +27,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
       <div
         ref={ref}
         className={cn(
-          "card col-span-2 lg:col-span-1 max-w-lg gap-4 rounded-lg p-6 flex flex-col justify-between relative"
+          "card col-span-2 lg:col-span-1 max-w-lg rounded-lg p-6 space-y-6 flex flex-col justify-between relative min-h-full"
         )}
       >
         <div
@@ -36,19 +36,21 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
         >
           {year}
         </div>
-        <span>
-          {iconUrl && (
-            <Image
-              src={iconUrl}
-              alt={iconUrl.replace(/^.*\/([^/]+)\.[^/.]+$/, "$1")}
-              width={20}
-              height={20}
-              unoptimized
-            />
-          )}
-          <h4>{title}</h4>
-        </span>
-        <p>{description}</p>
+        <div className="space-y-4">
+          <span className="flex items-center">
+            {iconUrl && (
+              <Image
+                src={iconUrl}
+                alt={iconUrl.replace(/^.*\/([^/]+)\.[^/.]+$/, "$1")}
+                width={20}
+                height={20}
+                unoptimized
+              />
+            )}
+            <h4>{title}</h4>
+          </span>
+          <p>{description}</p>
+        </div>
         <div
           className={cn(
             "flex flex-col gap-4",

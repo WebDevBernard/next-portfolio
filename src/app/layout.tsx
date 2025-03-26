@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     siteName: homeMetaData.openGraph.siteName,
     locale: "en_US",
     type: "website",
-    images: [{ url: `${baseUrl}/opengraph-image.png` }],
+    images: [{ url: `${baseUrl}/opengraph-image.webp` }],
   },
   robots: {
     index: true,
