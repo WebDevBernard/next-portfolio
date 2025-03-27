@@ -13,8 +13,8 @@ const Avatar = () => {
 
   return (
     <Image
-      width={90}
-      height={90}
+      width={150}
+      height={150}
       className={cn(
         "rounded-lg border-2 border-zinc-700 relative cursor-pointer",
         bounce && "animate-[wiggle_1s_ease-in-out]"
