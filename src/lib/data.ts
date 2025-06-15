@@ -12,7 +12,7 @@ export type CardProps = {
 export const baseUrl: string = "https://bernardyang.com";
 // By default all https opens on new tab except for subdomains. You can still make subdomains open in new tab by putting a "/" at the end of the href
 export const subDomainInNewTab = "bernardyang.com";
-export const githubAvatar = "/profile.webp";
+export const githubAvatar = "https://avatars.githubusercontent.com/u/72034695?v=4";
 export const navItems = {
   "/": {
     src: "/home.svg",
