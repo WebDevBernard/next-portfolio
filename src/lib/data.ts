@@ -76,7 +76,7 @@ export const cardData: CardProps[] = [
       "Work website I built using Payload CMS and NextJS front-end.  Github link to official Payload CMS 3.0 Website Template.",
     iconUrl: "/payload.svg",
     year: "2025",
-    websiteUrl: "https://hwi-website.vercel.app/",
+    websiteUrl: "https://hwi.bernardyang.com/",
     gitHubUrl:
       "https://github.com/payloadcms/payload/tree/main/templates/website",
   },
