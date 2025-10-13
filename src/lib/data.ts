@@ -82,16 +82,6 @@ export const cardData: CardProps[] = [
   },
   {
     type: "work",
-    title: "Reconciler Tool",
-    description:
-      "A PyMuPDF script used to reconcile insurance brokerage/company statements or any table looking data.",
-    iconUrl: "/python.svg",
-    year: "2025",
-    gitHubUrl:
-      "https://github.com/WebDevBernard/Reconciler_Tool",
-  },
-  {
-    type: "work",
     title: "ICBC E-Stamp Tool",
     description:
       "A Python script I made to help insurance brokers stamp ICBC policy documents.  Built with PyMuPDF and Pandas.",
