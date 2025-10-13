@@ -84,7 +84,7 @@ export const cardData: CardProps[] = [
     type: "work",
     title: "Reconciler Tool",
     description:
-      "A PyMuPDF script used to reconcille insurance brokerage/company statements or any table looking data.",
+      "A PyMuPDF script used to reconcile insurance brokerage/company statements or any table looking data.",
     iconUrl: "/python.svg",
     year: "2025",
     gitHubUrl:
