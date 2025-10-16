@@ -84,7 +84,7 @@ export const cardData: CardProps[] = [
     type: "work",
     title: "ICBC E-Stamp Tool",
     description:
-      "A Python script I made to help insurance brokers stamp ICBC policy documents.  Built with PyMuPDF and Pandas.",
+      "A Python script I made to help insurance brokers stamp ICBC policy documents.  Built with PyMuPDF.",
     iconUrl: "/python.svg",
     year: "2024",
     gitHubUrl: "https://github.com/WebDevBernard/ICBC_E-Stamp_Tool",
