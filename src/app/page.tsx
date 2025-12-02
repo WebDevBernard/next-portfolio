@@ -21,7 +21,7 @@ export default function Page() {
   return (
     <section className="container">
       <SideBar projectData={cardData} cardRefs={cardRefs} />
-      <Avatar />
+      {/* <Avatar /> */}
 
       <h1>{title}</h1>
       <span>
