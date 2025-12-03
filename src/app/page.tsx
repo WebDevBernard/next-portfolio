@@ -33,7 +33,13 @@ export default function Page() {
       <h1 className="underline-offset-[8px] md:underline-offset-[12px] transition-all duration-300 underline decoration-8 decoration-[#4AE54A]/60">
         {title}
       </h1>
-      <Avatar />
+      <div>
+        <Avatar />
+        <p className="flex justify-end px-2 pt-1 text-xs">
+          Example of AI Generated Bulldog
+        </p>
+      </div>
+
       <span className="bg-white/60 rounded-2xl p-3">
         <Image src="/hi.svg" alt={"hi"} width={40} height={40} unoptimized />
         <p className="">{description}</p>
