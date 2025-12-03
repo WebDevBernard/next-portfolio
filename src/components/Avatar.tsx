@@ -18,19 +18,20 @@ const Avatar = () => {
   }, []);
 
   return (
-    <Image
-      width={500}
-      height={500}
-      className={cn(
-        "rounded-2xl border-4 object-cover max-h-[500px] border-white relative cursor-pointer transition-opacity duration-700",
-        bounce && "animate-[wiggle_1s_ease-in-out]"
-      )}
-      src={"/opengraph-image.webp"}
-      alt="github_avatar"
-      onClick={handleClick}
-      loading="eager"
-      unoptimized
-    />
+    <div className="w-[500px] h-[500px]">
+      <Image
+        width={500}
+        height={500}
+        className={cn(
+          "rounded-2xl border-4 object-cover w-full h-full border-white cursor-pointer",
+          bounce && "animate-[wiggle_1s_ease-in-out]"
+        )}
+        src={"/opengraph-image.webp"}
+        alt="github_avatar"
+        onClick={handleClick}
+        priority
+      />
+    </div>
   );
 };
 export default Avatar;
