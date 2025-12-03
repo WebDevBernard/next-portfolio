@@ -36,7 +36,7 @@ export default function Page() {
       <div>
         <Avatar />
         <p className="flex justify-end px-2 pt-1 text-xs">
-          Picture of an AI Generated Turkey
+          Picture of an AI Generated Bag of Potatoes
         </p>
       </div>
 
