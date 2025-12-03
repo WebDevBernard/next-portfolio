@@ -1,8 +1,10 @@
+"use client";
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { subDomainInNewTab } from "@/lib/data";
+
 interface ButtonLinkProps {
   href: string;
   children?: React.ReactNode;
@@ -11,13 +13,14 @@ interface ButtonLinkProps {
   submit?: boolean;
   customKey?: React.Key;
   hidden?: boolean;
+  onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 }
 
 export const buttonClass = `inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-md font-medium 
 transition-[color,box-shadow] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none 
 [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring 
 focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 
-aria-invalid:border-destructive rounded-lg gap-4 text-zinc-800 font-semibold outline-none border-zinc-800 border-2 shadow-[0_6px_0_rgb(3,7,18)] 
+aria-invalid:border-destructive rounded-lg gap-4 text-zinc-700 font-semibold outline-none  border-2 shadow-[0_6px_0_rgb(63,63,70)] 
 ease-out transition-all cursor-pointer h-10 rounded-md px-6 py-2.5 flex-1 hover:shadow-[0_2px_0px_rgb(3,7,18)] hover:translate-y-1`;
 
 const ButtonLink: React.FC<ButtonLinkProps> = ({
@@ -27,12 +30,20 @@ const ButtonLink: React.FC<ButtonLinkProps> = ({
   src,
   customKey,
   hidden,
+  onClick,
 }) => {
   // handles external links
   const isExternal = href.startsWith("http");
   const isInternal = href.endsWith(subDomainInNewTab);
   const target = isExternal && !isInternal ? "_blank" : "_self";
   const rel = isExternal && !isInternal ? "noopener noreferrer" : undefined;
+
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (onClick) {
+      e.preventDefault(); // Prevent navigation when using onClick for scrolling
+      onClick(e);
+    }
+  };
 
   const content = hidden ? (
     src && (
@@ -69,6 +80,7 @@ const ButtonLink: React.FC<ButtonLinkProps> = ({
       target={target}
       rel={rel}
       className={cn(className, !hidden && buttonClass)}
+      onClick={handleClick}
     >
       {content}
     </Link>

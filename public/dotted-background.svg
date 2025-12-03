@@ -1,0 +1,12 @@
+<svg width="1400" height="400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Define the dot pattern -->
+  <defs>
+    <pattern id="dotPattern" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+      <circle cx="15" cy="15" r="2" fill="#000000" opacity="0.1"/>
+    </pattern>
+  </defs>
+  
+  <!-- Background with dots covering entire area -->
+  <rect width="1400" height="400" fill="#E5E5E5"/>
+  <rect width="1400" height="400" fill="url(#dotPattern)"/>
+</svg>

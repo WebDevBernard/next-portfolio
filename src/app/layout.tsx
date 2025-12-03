@@ -48,13 +48,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      className={cn(
-        "bg-indigo-900/10 hero-bg-check lg:mx-auto",
-        font.className
-      )}
-    >
+    <html lang="en" className={cn("hero-bg lg:mx-auto", font.className)}>
       <body className="antialiased mx-4 mt-8 bg-transparent">
         <Scroll />
         <Navbar /> <main>{children}</main>

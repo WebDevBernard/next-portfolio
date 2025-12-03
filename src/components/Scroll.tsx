@@ -19,9 +19,9 @@ export const Scroll = () => {
       {showScrollButton && (
         <Image
           onClick={scrollToTop}
-          width={40}
-          height={40}
-          className="fixed bottom-25 right-8 cursor-pointer z-20 hidden md:block"
+          width={50}
+          height={50}
+          className="fixed bottom-25 right-8 cursor-pointer z-20 hover:bg-white/60 p-2 rounded-lg transition-all duration-700"
           src="/top.svg"
           alt={"top"}
           unoptimized

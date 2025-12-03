@@ -27,7 +27,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
       <div
         ref={ref}
         className={cn(
-          "card col-span-2 lg:col-span-1 max-w-lg rounded-lg p-6 space-y-6 flex flex-col justify-between relative min-h-full"
+          "card col-span-2 max-w-lg rounded-lg p-6 space-y-6 flex flex-col justify-between relative min-h-full"
         )}
       >
         <div
@@ -61,7 +61,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
             <ButtonLink
               src="/globe.svg"
               href={websiteUrl}
-              className="bg-slate-200/40 hover:bg-slate-300/10 hero-bg"
+              className="bg-slate-200/40 hover:bg-slate-300/10"
             >
               View Website
             </ButtonLink>
@@ -70,7 +70,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
             <ButtonLink
               src="/github.svg"
               href={gitHubUrl}
-              className="bg-purple-300 hover:bg-purple-400/90"
+              className="bg-purple-200 hover:bg-purple-300/80 "
             >
               View Github
             </ButtonLink>

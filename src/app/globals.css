@@ -32,11 +32,8 @@
 }
 
 @layer utilities {
-  .hero-bg-check {
-    background-image: url("/herobg-check.svg");
-  }
   .hero-bg {
-    background-image: url("/herobg.svg");
+    background-image: url("/dotted-background.svg");
   }
 }
 

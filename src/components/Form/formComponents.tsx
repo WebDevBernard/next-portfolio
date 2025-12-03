@@ -56,7 +56,7 @@ function Button({
       className={cn(
         formButtonClass,
         className,
-        "bg-lime-300 hover:bg-lime-400/80"
+        "bg-lime-200 hover:bg-lime-300/80"
       )}
     >
       <Image
