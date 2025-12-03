@@ -88,7 +88,7 @@ const CardContainer: React.FC<CardContainerProps> = ({
   return (
     <div
       className={cn(
-        "grid grid-cols-2 justify-center items-center gap-6",
+        "grid grid-cols-2 justify-center items-center gap-24",
         className
       )}
     >

@@ -31,7 +31,7 @@ export default function Page() {
     <section className="container space-y-6">
       <SideBar projectData={cardData} cardRefs={cardRefs} />
       {/* <Avatar /> */}
-      <h1 className="underline-offset-[12px] underline decoration-8 decoration-[#4AE54A]/60">
+      <h1 className="underline-offset-[8px] md:underline-offset-[12px] transition-all duration-300 underline decoration-8 decoration-[#4AE54A]/60">
         {title}
       </h1>
       <span className="bg-white/60 rounded-2xl p-3">
@@ -49,7 +49,7 @@ export default function Page() {
 
       {/* Work Projects */}
       {workProjects && workProjects.length > 0 && (
-        <h2 className="underline-offset-[12px] underline decoration-8 decoration-purple-300">
+        <h2 className="underline-offset-[8px] md:underline-offset-[12px] transition-all duration-300 underline decoration-8 decoration-purple-300">
           Work Projects
         </h2>
       )}
@@ -67,7 +67,7 @@ export default function Page() {
 
       {/* Other Projects */}
       {otherProjects && otherProjects.length > 0 && (
-        <h2 className="underline-offset-[12px] underline decoration-8 decoration-pink-300">
+        <h2 className="underline-offset-[8px] md:underline-offset-[12px] transition-all duration-300 underline decoration-8 decoration-pink-300">
           Other Projects
         </h2>
       )}
@@ -86,9 +86,9 @@ export default function Page() {
       {/* Contact Section */}
       <div
         ref={contactRef}
-        className="flex flex-col items-center justify-center gap-6"
+        className="flex flex-col items-center justify-center gap-2"
       >
-        <h2 className="underline-offset-[12px] underline decoration-8 decoration-orange-300">
+        <h2 className="underline-offset-[8px] md:underline-offset-[12px] transition-all duration-300 underline decoration-8 decoration-orange-300">
           {contactContent.title}
         </h2>
         <p className=" bg-white/60 rounded-2xl p-3">
