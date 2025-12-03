@@ -49,7 +49,7 @@ export default function Page() {
 
       {/* Work Projects */}
       {workProjects && workProjects.length > 0 && (
-        <h2 className="underline-offset-[12px] underline decoration-6 decoration-purple-300">
+        <h2 className="underline-offset-[12px] underline decoration-8 decoration-purple-300">
           Work Projects
         </h2>
       )}
@@ -67,7 +67,7 @@ export default function Page() {
 
       {/* Other Projects */}
       {otherProjects && otherProjects.length > 0 && (
-        <h2 className="underline-offset-[12px] underline decoration-6 decoration-pink-300">
+        <h2 className="underline-offset-[12px] underline decoration-8 decoration-pink-300">
           Other Projects
         </h2>
       )}
@@ -88,7 +88,7 @@ export default function Page() {
         ref={contactRef}
         className="flex flex-col items-center justify-center gap-6"
       >
-        <h2 className="underline-offset-[12px] underline decoration-6 decoration-orange-300">
+        <h2 className="underline-offset-[12px] underline decoration-8 decoration-orange-300">
           {contactContent.title}
         </h2>
         <p className=" bg-white/60 rounded-2xl p-3">
