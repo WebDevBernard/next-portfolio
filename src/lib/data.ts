@@ -31,8 +31,8 @@ export const introContent = {
 
 export const homeMetaData = {
   title: {
-    default: "Portfolio | Bernard Yang",
-    template: "%s | Bernard Yang",
+    default: "Bernard Yang | Portfolio",
+    template: "Bernard Yang | %s",
   },
   description:
     "I am Bernard Yang, I work in the insurance industry. This site is a collection of projects I've built for work and things that have interested me.",

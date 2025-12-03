@@ -86,7 +86,7 @@ export default function Page() {
       {/* Contact Section */}
       <div
         ref={contactRef}
-        className="flex flex-col items-center justify-center gap-2"
+        className="flex flex-col items-center justify-center space-y-6"
       >
         <h2 className="underline-offset-[8px] md:underline-offset-[12px] transition-all duration-300 underline decoration-8 decoration-orange-300">
           {contactContent.title}
