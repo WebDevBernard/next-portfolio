@@ -36,7 +36,7 @@ export default function Page() {
       <div>
         <Avatar />
         <p className="flex justify-end px-2 pt-1 text-xs">
-          AI Generated of Big Tuna
+          AI Generated Picture of Big Tuna
         </p>
       </div>
 
