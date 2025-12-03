@@ -36,7 +36,7 @@ export default function Page() {
       <div>
         <Avatar />
         <p className="flex justify-end px-2 pt-1 text-xs">
-          AI Generated Bag of Potatoes
+          AI Generated Sack of Potatoes
         </p>
       </div>
 
@@ -46,7 +46,7 @@ export default function Page() {
       </span>
       <ButtonLink
         src="/autonavi.svg"
-        href={contactUrl}
+        href={"/"}
         className="bg-stone-200 hover:bg-stone-300/80"
         onClick={handleContactScroll}
       >
