@@ -70,7 +70,11 @@ export default function Page() {
           Big Tuna in the Wild
         </p>
       </div>
-      <span className="bg-white/60 rounded-2xl p-3">
+      <span
+        className="relative bg-teal-100 border-2 border-teal-400 rounded-2xl p-3 
+  before:content-[''] before:absolute before:left-1/2 before:-translate-x-1/2 before:-bottom-[22px] before:border-l-[22px] before:border-l-transparent before:border-r-[22px] before:border-r-transparent before:border-t-[22px] before:border-t-teal-400
+  after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:-bottom-5 after:border-l-[20px] after:border-l-transparent after:border-r-[20px] after:border-r-transparent after:border-t-[20px] after:border-t-teal-100"
+      >
         <Image src="/hi.svg" alt={"hi"} width={40} height={40} unoptimized />
         <p className="">{description}</p>
       </span>
@@ -124,10 +128,13 @@ export default function Page() {
         <h2 className="underline-offset-[8px] md:underline-offset-[12px] transition-all duration-300 underline decoration-8 decoration-orange-300">
           {contactContent.title}
         </h2>
-        <p className=" rounded-2xl p-3 bg-yellow-100 border-yellow-400 border-2">
+        <p
+          className="relative rounded-2xl p-3 bg-yellow-100 border-yellow-400 border-2
+  before:content-[''] before:absolute before:left-1/2 before:-translate-x-1/2 before:-top-[22px] before:border-l-[22px] before:border-l-transparent before:border-r-[22px] before:border-r-transparent before:border-b-[22px] before:border-b-yellow-400
+  after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:-top-5 after:border-l-[20px] after:border-l-transparent after:border-r-[20px] after:border-r-transparent after:border-b-[20px] after:border-b-yellow-100"
+        >
           {contactContent.description}
         </p>
-
         <div
           ref={contactFormRef}
           className="w-full flex flex-col items-center justify-center  space-y-12"
