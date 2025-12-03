@@ -54,7 +54,7 @@ export const contactContent = {
 export const contactMeMeta = {
   title: "Contact Me",
   description:
-    "You can reach out to me by sending an email to mail@bernardyang.com",
+    "You can reach out to me by sending an email to mail@bernardyang.com.",
 };
 
 export const emailInfo = {
