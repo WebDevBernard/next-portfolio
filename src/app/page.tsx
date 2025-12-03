@@ -30,10 +30,10 @@ export default function Page() {
   return (
     <section className="container space-y-6">
       <SideBar projectData={cardData} cardRefs={cardRefs} />
-      {/* <Avatar /> */}
       <h1 className="underline-offset-[8px] md:underline-offset-[12px] transition-all duration-300 underline decoration-8 decoration-[#4AE54A]/60">
         {title}
       </h1>
+      <Avatar />
       <span className="bg-white/60 rounded-2xl p-3">
         <Image src="/hi.svg" alt={"hi"} width={40} height={40} unoptimized />
         <p className="">{description}</p>
@@ -91,6 +91,7 @@ export default function Page() {
         <h2 className="underline-offset-[8px] md:underline-offset-[12px] transition-all duration-300 underline decoration-8 decoration-orange-300">
           {contactContent.title}
         </h2>
+
         <p className=" bg-white/60 rounded-2xl p-3">
           {contactContent.description}
         </p>

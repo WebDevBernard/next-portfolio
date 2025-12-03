@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { githubAvatar } from "@/lib/data";
@@ -11,15 +11,22 @@ const Avatar = () => {
     setTimeout(() => setBounce(false), 1000);
   };
 
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setIsLoaded(true);
+  }, []);
+
   return (
     <Image
-      width={120}
-      height={120}
+      width={500}
+      height={500}
       className={cn(
-        "rounded-full border-4 object-cover border-white relative cursor-pointer",
+        "rounded-2xl border-4 object-cover border-white relative cursor-pointer transition-opacity duration-700",
+        "pointer-events-none xl:pointer-events-auto",
         bounce && "animate-[wiggle_1s_ease-in-out]"
       )}
-      src={githubAvatar}
+      src={"/opengraph-image.webp"}
       alt="github_avatar"
       onClick={handleClick}
       loading="eager"
@@ -27,5 +34,4 @@ const Avatar = () => {
     />
   );
 };
-
 export default Avatar;
