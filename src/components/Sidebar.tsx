@@ -6,9 +6,14 @@ import Avatar from "./Avatar";
 interface SideBarProps {
   projectData: CardProps[];
   cardRefs: React.RefObject<Record<string, HTMLDivElement | null>>;
+  isContactFormInView: boolean;
 }
 
-export function SideBar({ projectData, cardRefs }: SideBarProps) {
+export function SideBar({
+  projectData,
+  cardRefs,
+  isContactFormInView,
+}: SideBarProps) {
   const [showProjects, setShowProjects] = useState(false);
 
   const sortedData = projectData.sort(
@@ -66,6 +71,9 @@ export function SideBar({ projectData, cardRefs }: SideBarProps) {
             )}
           </div>
         ))}
+      </div>
+      <div className="mt-4 p-2 bg-yellow-100 border border-yellow-400 rounded text-xs">
+        Form: {isContactFormInView ? "✅ RENDERED" : "❌ NOT RENDERED"}
       </div>
     </aside>
   );

@@ -1,5 +1,5 @@
 "use client";
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import { Card, CardContainer } from "@/components/Card";
 import { introContent, cardData, contactContent } from "@/lib/data";
 import Image from "next/image";
@@ -7,9 +7,36 @@ import ButtonLink from "@/components/Button";
 import { SideBar } from "@/components/Sidebar";
 import { ContactForm } from "@/components/Form/ContactForm";
 import Avatar from "@/components/Avatar";
+
 export default function Page() {
   const cardRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const contactRef = useRef<HTMLDivElement | null>(null);
+  const contactFormRef = useRef<HTMLDivElement>(null);
+  const [isContactFormInView, setIsContactFormInView] = useState(false);
+
+  useEffect(() => {
+    const currentRef = contactFormRef.current;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // Only set to true, never back to false
+        if (entry.isIntersecting) {
+          setIsContactFormInView(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (currentRef) {
+      observer.observe(currentRef);
+    }
+
+    return () => {
+      if (currentRef) {
+        observer.unobserve(currentRef);
+      }
+    };
+  }, []);
 
   const workProjects = cardData
     .filter((card) => card.type === "work")
@@ -17,7 +44,6 @@ export default function Page() {
   const otherProjects = cardData
     .filter((card) => card.type === "other")
     .sort((a, b) => Number(b.year) - Number(a.year));
-
   const { title, description, contactUrl } = introContent;
 
   const handleContactScroll = () => {
@@ -29,17 +55,21 @@ export default function Page() {
 
   return (
     <section className="container space-y-6">
-      <SideBar projectData={cardData} cardRefs={cardRefs} />
+      <SideBar
+        projectData={cardData}
+        cardRefs={cardRefs}
+        isContactFormInView={isContactFormInView}
+      />
       <h1 className="underline-offset-[8px] md:underline-offset-[12px] transition-all duration-300 underline decoration-8 decoration-[#4AE54A]/60">
         {title}
       </h1>
+
       <div>
         <Avatar />
         <p className="flex justify-end px-2 pt-1 text-xs">
           AI Generated Picture of Big Tuna
         </p>
       </div>
-
       <span className="bg-white/60 rounded-2xl p-3">
         <Image src="/hi.svg" alt={"hi"} width={40} height={40} unoptimized />
         <p className="">{description}</p>
@@ -52,7 +82,6 @@ export default function Page() {
       >
         Contact Me
       </ButtonLink>
-
       {/* Work Projects */}
       {workProjects && workProjects.length > 0 && (
         <h2 className="underline-offset-[8px] md:underline-offset-[12px] transition-all duration-300 underline decoration-8 decoration-purple-300">
@@ -70,7 +99,6 @@ export default function Page() {
           />
         ))}
       </CardContainer>
-
       {/* Other Projects */}
       {otherProjects && otherProjects.length > 0 && (
         <h2 className="underline-offset-[8px] md:underline-offset-[12px] transition-all duration-300 underline decoration-8 decoration-pink-300">
@@ -88,7 +116,6 @@ export default function Page() {
           />
         ))}
       </CardContainer>
-
       {/* Contact Section */}
       <div
         ref={contactRef}
@@ -97,11 +124,16 @@ export default function Page() {
         <h2 className="underline-offset-[8px] md:underline-offset-[12px] transition-all duration-300 underline decoration-8 decoration-orange-300">
           {contactContent.title}
         </h2>
-
-        <p className=" bg-white/60 rounded-2xl p-3">
+        <p className="bg-white/60 rounded-2xl p-3">
           {contactContent.description}
         </p>
-        <ContactForm />
+
+        <div
+          ref={contactFormRef}
+          className="w-full flex flex-col items-center justify-center  space-y-12"
+        >
+          {isContactFormInView && <ContactForm />}
+        </div>
       </div>
     </section>
   );
