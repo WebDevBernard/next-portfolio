@@ -67,7 +67,7 @@ export default function Page() {
       <div>
         <Avatar />
         <p className="flex justify-end px-2 pt-1 text-xs">
-          AI Generated Picture of Big Tuna
+          Big Tuna in the Wild
         </p>
       </div>
       <span className="bg-white/60 rounded-2xl p-3">
@@ -124,7 +124,7 @@ export default function Page() {
         <h2 className="underline-offset-[8px] md:underline-offset-[12px] transition-all duration-300 underline decoration-8 decoration-orange-300">
           {contactContent.title}
         </h2>
-        <p className="bg-white/60 rounded-2xl p-3">
+        <p className=" rounded-2xl p-3 bg-yellow-100 border-yellow-400 border-2">
           {contactContent.description}
         </p>
 

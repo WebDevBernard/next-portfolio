@@ -45,8 +45,8 @@ export function SideBar({
         <Image
           src="/home.svg"
           alt={"home"}
-          width={40}
-          height={40}
+          width={50}
+          height={50}
           onClick={scrollToTop}
           onMouseEnter={() => setShowProjects(true)}
           className="cursor-pointer mb-6 ml-1 select-none"
@@ -72,7 +72,7 @@ export function SideBar({
           </div>
         ))}
       </div>
-      <div className="mt-4 p-2 bg-yellow-100 border border-yellow-400 rounded text-xs">
+      <div className="mt-4 p-2 text-xs">
         Form: {isContactFormInView ? "✅ RENDERED" : "❌ NOT RENDERED"}
       </div>
     </aside>

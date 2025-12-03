@@ -17,15 +17,20 @@ export const Scroll = () => {
   return (
     <>
       {showScrollButton && (
-        <Image
+        <div
+          className="fixed bottom-5 right-8 z-20 flex flex-col justify-center items-center cursor-pointer"
           onClick={scrollToTop}
-          width={50}
-          height={50}
-          className="fixed bottom-25 right-8 cursor-pointer z-20 hover:bg-white/60 p-2 rounded-lg transition-all duration-700"
-          src="/top.svg"
-          alt={"top"}
-          unoptimized
-        />
+        >
+          <Image
+            width={60}
+            height={60}
+            className="rounded p-2 transition-all duration-700"
+            src="/top.svg"
+            alt={"top"}
+            unoptimized
+          />
+          <p className="text-xs">Scroll to Top</p>
+        </div>
       )}
     </>
   );

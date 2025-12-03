@@ -50,8 +50,8 @@ const ButtonLink: React.FC<ButtonLinkProps> = ({
       <Image
         alt={src.replace(/^.*\/([^/]+)\.[^/.]+$/, "$1")}
         src={src}
-        height={40}
-        width={40}
+        height={50}
+        width={50}
         unoptimized
       />
     )
