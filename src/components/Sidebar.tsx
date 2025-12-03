@@ -72,7 +72,7 @@ export function SideBar({
           </div>
         ))}
       </div>
-      <div className="mt-4 p-2 text-xs">
+      <div className="hidden xl:block mt-4 p-2 text-xs">
         Contact Form: {isContactFormInView ? "✅ RENDERED" : "❌ NOT RENDERED"}
       </div>
     </aside>
