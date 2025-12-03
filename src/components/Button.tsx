@@ -20,7 +20,7 @@ export const buttonClass = `inline-flex items-center justify-center gap-2 whites
 transition-[color,box-shadow] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none 
 [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring 
 focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 
-aria-invalid:border-destructive rounded-lg gap-4 text-zinc-700 font-semibold outline-none  border-2 shadow-[0_6px_0_rgb(63,63,70)] 
+aria-invalid:border-destructive rounded-lg gap-4 text-zinc-700 font-semibold outline-none border-2 shadow-[0_6px_0_rgb(63,63,70)] 
 ease-out transition-all cursor-pointer h-10 rounded-md px-6 py-2.5 flex-1 hover:shadow-[0_2px_0px_rgb(3,7,18)] hover:translate-y-1`;
 
 const ButtonLink: React.FC<ButtonLinkProps> = ({

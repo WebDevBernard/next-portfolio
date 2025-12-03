@@ -41,7 +41,7 @@ export default function Page() {
       <ButtonLink
         src="/autonavi.svg"
         href={contactUrl}
-        className="bg-lime-200 hover:bg-lime-300/80"
+        className="bg-stone-200 hover:bg-stone-300/80"
         onClick={handleContactScroll}
       >
         Contact Me
@@ -86,7 +86,7 @@ export default function Page() {
       {/* Contact Section */}
       <div
         ref={contactRef}
-        className="flex flex-col items-center justify-center space-y-6"
+        className="flex flex-col items-center justify-center space-y-12"
       >
         <h2 className="underline-offset-[8px] md:underline-offset-[12px] transition-all duration-300 underline decoration-8 decoration-orange-300">
           {contactContent.title}
