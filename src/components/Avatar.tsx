@@ -18,10 +18,10 @@ const Avatar = () => {
   }, []);
 
   return (
-    <div className="w-[500px] h-[500px]">
+    <div className="w-[500px] h-[336px]">
       <Image
         width={500}
-        height={500}
+        height={336}
         className={cn(
           "rounded-2xl border-4 object-cover w-full h-full border-white cursor-pointer",
           bounce && "animate-[wiggle_1s_ease-in-out]"
