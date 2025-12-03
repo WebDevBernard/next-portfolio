@@ -22,7 +22,7 @@ const Avatar = () => {
       width={500}
       height={500}
       className={cn(
-        "rounded-2xl border-4 object-cover border-white relative cursor-pointer transition-opacity duration-700",
+        "rounded-2xl border-4 object-cover max-h-[500px] border-white relative cursor-pointer transition-opacity duration-700",
         bounce && "animate-[wiggle_1s_ease-in-out]"
       )}
       src={"/opengraph-image.webp"}
