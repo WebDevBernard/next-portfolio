@@ -48,11 +48,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={cn("hero-bg lg:mx-auto", font.className)}>
-      <body className="antialiased mx-4 mt-8 bg-transparent">
+    <html lang="en" className={cn("hero-bg", font.className)}>
+      <body className="antialiased mt-8 bg-transparent">
         <Scroll />
-        <Navbar /> <main>{children}</main>
-        <Footer />
+        <Navbar /> {/* Navbar outside container to use full width */}
+        <div className="mx-auto px-4 max-w-7xl">
+          <main>{children}</main>
+          <Footer />
+        </div>
       </body>
     </html>
   );
