@@ -1,8 +1,8 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import { githubAvatar } from "@/lib/data";
+
 const Avatar = () => {
   const [bounce, setBounce] = useState(false);
 
@@ -11,14 +11,8 @@ const Avatar = () => {
     setTimeout(() => setBounce(false), 1000);
   };
 
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    setIsLoaded(true);
-  }, []);
-
   return (
-    <div className="w-[500px] h-[336px]">
+    <div className="w-full max-w-[500px] aspect-[500/336]">
       <Image
         width={500}
         height={336}
@@ -34,4 +28,5 @@ const Avatar = () => {
     </div>
   );
 };
+
 export default Avatar;

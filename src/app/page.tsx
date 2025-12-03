@@ -36,7 +36,7 @@ export default function Page() {
       <div>
         <Avatar />
         <p className="flex justify-end px-2 pt-1 text-xs">
-          Example of AI Generated Bulldog
+          Picture of an AI Generated Bulldog
         </p>
       </div>
 
