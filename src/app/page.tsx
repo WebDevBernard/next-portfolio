@@ -123,7 +123,7 @@ export default function Page() {
         ref={contactRef}
         className="flex flex-col items-center justify-center space-y-12"
       >
-        <h2 className="underline-offset-[8px] md:underline-offset-[12px] transition-all duration-300 underline decoration-8 decoration-orange-300">
+        <h2 className="underline-offset-[8px] md:underline-offset-[12px] transition-all duration-300 underline decoration-12 decoration-orange-300">
           {contactContent.title}
         </h2>
         <p
