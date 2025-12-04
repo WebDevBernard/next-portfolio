@@ -86,6 +86,7 @@ const Carousel: React.FC = () => {
                   width={500}
                   height={336}
                   className="w-full h-auto object-cover"
+                  unoptimized
                 />
                 <div className="pointer-events-none absolute inset-x-0 bottom-3 text-center text-white drop-shadow-lg">
                   <h3 className="font-semibold">{slide.title}</h3>
