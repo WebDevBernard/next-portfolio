@@ -60,11 +60,9 @@ export default function Page() {
         cardRefs={cardRefs}
         isContactFormInView={isContactFormInView}
       />
-      <h1 className="underline-offset-[8px] md:underline-offset-[12px] transition-all duration-300 underline decoration-8 decoration-[#4AE54A]/60">
+      <h1 className="underline-offset-[8px] md:underline-offset-[12px] transition-all duration-300 underline decoration-12 decoration-[#4AE54A]/60">
         {title}
       </h1>
-
-      <Carousel />
 
       <span
         className="relative bg-teal-100 border-2 border-teal-400 rounded-2xl p-3 
@@ -84,7 +82,7 @@ export default function Page() {
       </ButtonLink>
       {/* Work Projects */}
       {workProjects && workProjects.length > 0 && (
-        <h2 className="underline-offset-[8px] md:underline-offset-[12px] transition-all duration-300 underline decoration-8 decoration-purple-300">
+        <h2 className="underline-offset-[8px] md:underline-offset-[12px] transition-all duration-300 underline decoration-12 decoration-purple-300">
           Work Projects
         </h2>
       )}
@@ -101,7 +99,7 @@ export default function Page() {
       </CardContainer>
       {/* Other Projects */}
       {otherProjects && otherProjects.length > 0 && (
-        <h2 className="underline-offset-[8px] md:underline-offset-[12px] transition-all duration-300 underline decoration-8 decoration-pink-300">
+        <h2 className="underline-offset-[8px] md:underline-offset-[12px] transition-all duration-300 underline decoration-12 decoration-pink-300">
           Other Projects
         </h2>
       )}
@@ -116,6 +114,10 @@ export default function Page() {
           />
         ))}
       </CardContainer>
+      <h2 className="underline-offset-[8px] md:underline-offset-[12px] transition-all duration-300 underline decoration-12 decoration-yellow-300">
+        Animated Bulldogs
+      </h2>
+      <Carousel />
       {/* Contact Section */}
       <div
         ref={contactRef}
