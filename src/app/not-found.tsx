@@ -8,7 +8,7 @@ export default function NotFound() {
       </p>
       <ButtonLink
         href={"/"}
-        className="bg-violet-300 hover:bg-violet-400/90"
+        className="bg-white hover:bg-white/80"
         src="/home.svg"
       >
         Return Home
