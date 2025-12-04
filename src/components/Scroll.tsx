@@ -18,7 +18,7 @@ export const Scroll = () => {
 
   return (
     <p
-      className={`text-sm fixed bottom-11 right-[max(2rem,calc((100vw-96rem)/2+2rem))] z-20 flex flex-col justify-center items-center cursor-pointer transition-all duration-700 ${
+      className={`text-sm fixed bottom-8 right-[max(2rem,calc((100vw-96rem)/2+2rem))] z-20 flex flex-col justify-center items-center cursor-pointer transition-all duration-700 ${
         showScrollButton
           ? "opacity-100 pointer-events-auto"
           : "opacity-0 pointer-events-none"

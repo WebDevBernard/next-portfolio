@@ -77,7 +77,7 @@ export default function Page() {
       <ButtonLink
         src="/autonavi.svg"
         href={"/"}
-        className="bg-stone-200 hover:bg-stone-300/80"
+        className="bg-lime-200 hover:bg-lime-300/80"
         onClick={handleContactScroll}
       >
         Contact Me

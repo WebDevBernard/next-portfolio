@@ -14,21 +14,21 @@ interface Slide {
 const slides: Slide[] = [
   {
     id: 1,
-    title: "Mountain Vista",
-    description: "A beautiful view of the mountains.",
-    image: "/Bulldog-1.webp",
-  },
-  {
-    id: 2,
-    title: "Ocean Waves",
-    description: "Relax by the ocean waves.",
+    title: "Obedient Bulldog",
+    description: "Obedient Bulldog",
     image: "/Bulldog.webp",
   },
   {
-    id: 3,
-    title: "Forest Path",
-    description: "Take a walk through the forest.",
+    id: 2,
+    title: "Classic Tuna",
+    description: "Classic Tuna",
     image: "/Bulldog-2.webp",
+  },
+  {
+    id: 3,
+    title: "Forbidden Burrito",
+    description: "Forbidden Burrito",
+    image: "/Bulldog-1.webp",
   },
 ];
 
@@ -89,7 +89,7 @@ const Carousel: React.FC = () => {
                 />
                 <div className="pointer-events-none absolute inset-x-0 bottom-3 text-center text-white drop-shadow-lg">
                   <h3 className="font-semibold">{slide.title}</h3>
-                  <p className="text-sm text-white ">{slide.description}</p>
+                  {/* <p className="text-sm text-white ">{slide.description}</p> */}
                 </div>
               </div>
             </div>

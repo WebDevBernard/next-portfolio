@@ -32,23 +32,23 @@ export function SideBar({
 
   return (
     <aside
-      className="hidden z-20 md:flex justify-between flex-col h-screen fixed left-[max(1.5rem,calc((100vw-96rem)/2+1.5rem))] top-0 py-8"
+      className="hidden z-20 md:flex justify-between flex-col h-screen fixed left-[max(1.5rem,calc((100vw-96rem)/2+1.5rem))] top-0 py-4"
       onMouseLeave={() => setShowProjects(false)}
       onMouseEnter={() => setShowProjects(true)}
     >
       <div
-        className={`space-y-4 transition-all duration-700 ${
+        className={`space-y-2 transition-all duration-700 ${
           showProjects ? "duration-700 opacity-100" : "duration-2100 opacity-0"
         }`}
       >
         <Image
-          src="/home.svg"
-          alt={"home"}
+          src="/pin.svg"
+          alt={"pin"}
           width={50}
           height={50}
           onClick={scrollToTop}
           onMouseEnter={() => setShowProjects(true)}
-          className="cursor-pointer mb-6 ml-1 select-none"
+          className="cursor-pointer mt-4 select-none"
           unoptimized
         />
         {sortedData.map((project, index) => (
@@ -71,7 +71,7 @@ export function SideBar({
           </div>
         ))}
       </div>
-      <div className="hidden xl:block mt-4 p-2 text-xs">
+      <div className="hidden xl:block mb-3 p-2 text-xs">
         Contact Form: {isContactFormInView ? "✅ RENDERED" : "❌ NOT RENDERED"}
       </div>
     </aside>
