@@ -15,19 +15,19 @@ const slides: Slide[] = [
   {
     id: 1,
     title: "Obedient Bulldog",
-    description: "Obedient Bulldog",
+    description: "Does whatever he's told",
     image: "/Bulldog.webp",
   },
   {
     id: 2,
-    title: "Classic Tuna",
-    description: "Classic Tuna",
+    title: "Big Tuna",
+    description: "Classic Big Tuna",
     image: "/Bulldog-2.webp",
   },
   {
     id: 3,
     title: "Forbidden Burrito",
-    description: "Forbidden Burrito",
+    description: "Real bulldog also has belly",
     image: "/Bulldog-1.webp",
   },
 ];
@@ -89,7 +89,7 @@ const Carousel: React.FC = () => {
                 />
                 <div className="pointer-events-none absolute inset-x-0 bottom-3 text-center text-white drop-shadow-lg">
                   <h3 className="font-semibold">{slide.title}</h3>
-                  {/* <p className="text-sm text-white ">{slide.description}</p> */}
+                  <p className="text-sm text-zinc-300 ">{slide.description}</p>
                 </div>
               </div>
             </div>
