@@ -49,11 +49,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={cn("hero-bg", font.className)}>
-      <body className="antialiased mt-8 bg-transparent">
-        <Scroll />
-        <Navbar /> {/* Navbar outside container to use full width */}
-        <div className="mx-auto px-4 max-w-7xl">
-          <main>{children}</main>
+      <body className="antialiased mt-8 bg-transparent mx-auto max-w-[96rem]">
+        <Scroll /> <Navbar />
+        <div className="mx-auto px-4 max-w-5xl">
+          <div className="relative">
+            <main>{children}</main>
+          </div>
           <Footer />
         </div>
       </body>

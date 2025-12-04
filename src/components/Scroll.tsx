@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import Image from "next/image";
 
 export const Scroll = () => {
   const [showScrollButton, setShowScrollButton] = useState(false);
@@ -18,23 +17,15 @@ export const Scroll = () => {
   };
 
   return (
-    <div
-      className={`fixed bottom-5 right-8 z-20 flex flex-col justify-center items-center cursor-pointer transition-all duration-700 ${
+    <p
+      className={`text-sm fixed bottom-11 right-[max(2rem,calc((100vw-96rem)/2+2rem))] z-20 flex flex-col justify-center items-center cursor-pointer transition-all duration-700 ${
         showScrollButton
           ? "opacity-100 pointer-events-auto"
           : "opacity-0 pointer-events-none"
       }`}
       onClick={scrollToTop}
     >
-      <Image
-        width={60}
-        height={60}
-        className="rounded p-2"
-        src="/top.svg"
-        alt={"top"}
-        unoptimized
-      />
-      <p className="text-xs">Scroll to Top</p>
-    </div>
+      ⏫ Scroll to Top
+    </p>
   );
 };

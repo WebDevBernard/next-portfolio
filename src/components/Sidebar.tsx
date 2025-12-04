@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { CardProps } from "@/lib/data";
-import Avatar from "./Avatar";
+
 interface SideBarProps {
   projectData: CardProps[];
   cardRefs: React.RefObject<Record<string, HTMLDivElement | null>>;
@@ -15,7 +15,6 @@ export function SideBar({
   isContactFormInView,
 }: SideBarProps) {
   const [showProjects, setShowProjects] = useState(false);
-
   const sortedData = projectData.sort(
     (a, b) => Number(b.year) - Number(a.year)
   );
@@ -33,7 +32,7 @@ export function SideBar({
 
   return (
     <aside
-      className="hidden z-20 md:flex justify-between flex-col h-screen fixed left-0 top-0 px-6 py-8"
+      className="hidden z-20 md:flex justify-between flex-col h-screen fixed left-[max(1.5rem,calc((100vw-96rem)/2+1.5rem))] top-0 py-8"
       onMouseLeave={() => setShowProjects(false)}
       onMouseEnter={() => setShowProjects(true)}
     >
@@ -58,7 +57,7 @@ export function SideBar({
             className="cursor-pointer hover:bg-white md:hover:bg-white/60 transition-colors duration-300 rounded-lg p-2"
             onClick={() => handleScroll(project.title)}
           >
-            <p className="hidden xl:block xl:w-[300px]">{project.title}</p>
+            <p className="hidden xl:block xl:w-[16rem]">{project.title}</p>
             {project.iconUrl && (
               <Image
                 src={project.iconUrl}
