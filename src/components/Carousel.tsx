@@ -20,8 +20,8 @@ const slides: Slide[] = [
   },
   {
     id: 2,
-    title: "Big Tuna",
-    description: "Classic Big Tuna",
+    title: "Classic Tuna",
+    description: "Even cats like Big Tuna",
     image: "/Bulldog-2.webp",
   },
   {
