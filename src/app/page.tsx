@@ -115,7 +115,7 @@ export default function Page() {
         ))}
       </CardContainer>
       <h2 className="underline-offset-[8px] md:underline-offset-[12px] transition-all duration-300 underline decoration-12 decoration-yellow-300">
-        Animated Bulldogs
+        Ghibli Bulldogs
       </h2>
       <Carousel />
       {/* Contact Section */}
