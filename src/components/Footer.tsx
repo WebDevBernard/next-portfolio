@@ -1,3 +1,4 @@
+"use client";
 export default function Footer() {
   return (
     <footer className="mb-8 flex justify-center lg:mx-auto">
