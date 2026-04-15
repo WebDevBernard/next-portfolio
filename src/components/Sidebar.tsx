@@ -1,30 +1,19 @@
 "use client";
+
 import { useState } from "react";
 import Image from "next/image";
 import { CardProps } from "@/lib/data";
+import { SidebarLinks } from "./SidebarLinks.client";
 
 interface SideBarProps {
   projectData: CardProps[];
-  cardRefs: React.RefObject<Record<string, HTMLDivElement | null>>;
-  isContactFormInView: boolean;
 }
 
-export function SideBar({
-  projectData,
-  cardRefs,
-  isContactFormInView,
-}: SideBarProps) {
+export function SideBar({ projectData }: SideBarProps) {
   const [showProjects, setShowProjects] = useState(false);
-  const sortedData = projectData.sort(
-    (a, b) => Number(b.year) - Number(a.year)
+  const sortedData = [...projectData].sort(
+    (a, b) => Number(b.year) - Number(a.year),
   );
-
-  const handleScroll = (title: string) => {
-    cardRefs.current[title]?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  };
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -43,7 +32,7 @@ export function SideBar({
       >
         <Image
           src="/pin.svg"
-          alt={"pin"}
+          alt="pin"
           width={50}
           height={50}
           onClick={scrollToTop}
@@ -51,28 +40,7 @@ export function SideBar({
           className="cursor-pointer mt-4 select-none"
           unoptimized
         />
-        {sortedData.map((project, index) => (
-          <div
-            key={index}
-            className="cursor-pointer hover:bg-white md:hover:bg-white/60 transition-colors duration-300 rounded-lg p-2"
-            onClick={() => handleScroll(project.title)}
-          >
-            <p className="hidden xl:block xl:w-[16rem]">{project.title}</p>
-            {project.iconUrl && (
-              <Image
-                src={project.iconUrl}
-                alt={project.iconUrl.replace(/^.*\/([^/]+)\.[^/.]+$/, "$1")}
-                width={30}
-                height={30}
-                className="block xl:hidden"
-                unoptimized
-              />
-            )}
-          </div>
-        ))}
-      </div>
-      <div className="hidden xl:block mb-3 p-2 text-xs">
-        Contact Form: {isContactFormInView ? "✅ RENDERED" : "❌ NOT RENDERED"}
+        <SidebarLinks projectData={sortedData} />
       </div>
     </aside>
   );

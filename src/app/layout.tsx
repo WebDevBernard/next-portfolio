@@ -50,11 +50,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={cn("hero-bg", font.className)}>
       <body className="antialiased mt-8 bg-transparent mx-auto max-w-[96rem]">
-        <Scroll /> <Navbar />
+        <Scroll />
+        <Navbar />
         <div className="mx-auto px-4 max-w-5xl">
-          <div className="relative">
-            <main>{children}</main>
-          </div>
+          <main className="relative">{children}</main>
           <Footer />
         </div>
       </body>

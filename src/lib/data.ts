@@ -1,4 +1,5 @@
 export type CardProps = {
+  id?: string; // ✅
   type: "work" | "other";
   title: string;
   description: string;
