@@ -1,7 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Navbar } from "@/components/Nav";
-import { Reddit_Sans } from "next/font/google";
+import { DM_Sans as Font } from "next/font/google";
 import Footer from "@/components/Footer";
 import { Scroll } from "@/components/Scroll";
 import { cn } from "@/lib/utils";
@@ -36,11 +36,7 @@ export const metadata: Metadata = {
   },
 };
 
-const font = Reddit_Sans({
-  subsets: ["latin"],
-  display: "swap",
-  weight: "400",
-});
+const font = Font({ subsets: ["latin"], weight: "500" });
 
 export default function RootLayout({
   children,
