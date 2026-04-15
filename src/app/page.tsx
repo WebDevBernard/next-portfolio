@@ -42,7 +42,7 @@ export default function Page() {
 
       {workProjects.length > 0 && (
         <section aria-label="Work Projects" className="space-y-6">
-          <h2 className="underline-offset-[8px] md:underline-offset-[12px] transition-all duration-300 underline decoration-12 decoration-purple-300">
+          <h2 className="underline-offset-[8px] md:underline-offset-[12px] transition-all duration-300 underline decoration-12 decoration-purple-300 pb-4">
             Work Projects
           </h2>
           <CardContainer>
@@ -55,7 +55,7 @@ export default function Page() {
 
       {otherProjects.length > 0 && (
         <section aria-label="Other Projects" className="space-y-6">
-          <h2 className="underline-offset-[8px] md:underline-offset-[12px] transition-all duration-300 underline decoration-12 decoration-pink-300">
+          <h2 className="underline-offset-[8px] md:underline-offset-[12px] transition-all duration-300 underline decoration-12 decoration-pink-300 pb-4">
             Other Projects
           </h2>
           <CardContainer>

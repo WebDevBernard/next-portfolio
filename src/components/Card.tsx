@@ -41,7 +41,7 @@ function Card({
         {year}
       </div>
       <div className="space-y-4">
-        <span className="flex items-center space-x-2">
+        <span className="flex items-center space-x-1">
           {iconUrl && (
             <Image
               src={iconUrl}
