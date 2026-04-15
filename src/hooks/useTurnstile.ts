@@ -1,35 +1,24 @@
-import { useState, useEffect } from "react";
+import { useState, useCallback, useRef } from "react";
+import type { TurnstileHandle } from "@/components/Form/Turnstile";
 
 export function useTurnstile() {
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
-  const [isVerified, setIsVerified] = useState<boolean>(false);
-  const [turnstileMessage, setTurnstileMessage] = useState<string | null>(null);
+  const widgetRef = useRef<TurnstileHandle>(null);
 
-  async function handleTurnstileSubmission(token: string | null) {
+  const handleTurnstileSubmission = useCallback((token: string) => {
     setTurnstileToken(token);
-    try {
-      const res = await fetch("/api/verify", {
-        method: "POST",
-        body: JSON.stringify({ token }),
-        headers: { "Content-Type": "application/json" },
-      });
-      const data = await res.json();
-      setIsVerified(data.success);
-    } catch {
-      setIsVerified(false);
-    }
-  }
+  }, []);
 
-  useEffect(() => {
-    setTurnstileMessage(
-      isVerified ? "Ready to submit" : "One moment, checking for bots..."
-    );
-  }, [isVerified]);
+  const resetTurnstile = useCallback(() => {
+    setTurnstileToken(null);
+    widgetRef.current?.reset();
+  }, []);
 
   return {
     turnstileToken,
-    isVerified,
-    turnstileMessage,
+    isVerified: !!turnstileToken,
+    widgetRef,
     handleTurnstileSubmission,
+    resetTurnstile,
   };
 }

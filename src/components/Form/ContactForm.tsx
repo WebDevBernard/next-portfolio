@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTurnstile } from "@/hooks/useTurnstile";
-import { Turnstile } from "@marsidev/react-turnstile";
+import Turnstile from "./Turnstile";
 import { useForm } from "react-hook-form";
 import { formSchema, FormValues } from "./formSchema";
 import {
@@ -26,8 +26,9 @@ export function ContactForm() {
   const {
     turnstileToken,
     isVerified,
-    turnstileMessage,
+    widgetRef,
     handleTurnstileSubmission,
+    resetTurnstile,
   } = useTurnstile();
   const [isLoading, setIsLoading] = useState(false);
   const [hasSubmitted, setHasSubmitted] = useState<boolean>(false);
@@ -60,6 +61,7 @@ export function ContactForm() {
           name: data.name,
           email: data.email,
           message: data.message,
+          turnstileToken,
         }),
       });
       const res = await req.json();
@@ -70,17 +72,20 @@ export function ContactForm() {
         setError({
           message: res.errors?.[0]?.message || "Internal Server Error",
         });
+        resetTurnstile();
         return;
       }
       form.reset();
       setIsLoading(false);
       setHasSubmitted(true);
+      resetTurnstile();
     } catch (err) {
       console.error("Error caught in catch block:", err);
       setIsLoading(false);
       setError({
         message: "Unknown Error",
       });
+      resetTurnstile();
     }
   }
   return (
@@ -132,11 +137,12 @@ export function ContactForm() {
           {/* this div prevents Cumulative Layout Shift*/}
           <div className="min-h-[72px] min-w-[300px]">
             <Turnstile
-              options={{
-                theme: "light",
-              }}
+              ref={widgetRef}
               siteKey={process.env.NEXT_PUBLIC_CLOUDFLARE_SITE_KEY!}
+              options={{ theme: "light" }}
               onSuccess={handleTurnstileSubmission}
+              onExpire={resetTurnstile}
+              onError={resetTurnstile}
             />
           </div>
           {/* form message */}
@@ -145,11 +151,9 @@ export function ContactForm() {
               ? "Loading, please wait..."
               : error
                 ? error.message
-                : !hasSubmitted && turnstileMessage
-                  ? turnstileMessage
-                  : hasSubmitted
-                    ? "Your message has been submitted!"
-                    : null}
+                : hasSubmitted
+                  ? "Your message has been submitted!"
+                  : null}
           </p>
           <Button isVerified={isVerified} hasSubmitted={hasSubmitted}>
             Submit
