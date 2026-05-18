@@ -1,0 +1,51 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const description = "Privacy Policy for bernardyang.com — how we handle your data";
+---
+
+<BaseLayout title="Privacy Policy" description={description}>
+  <div class="max-w-2xl mx-auto py-12 px-4">
+    <div class="card rounded-lg p-6 space-y-4">
+      <div>
+        <h2>Privacy Policy</h2>
+        <p class="text-zinc-500 text-sm">Last updated: May 2026</p>
+      </div>
+      <ol class="list-decimal pl-5 space-y-4 text-zinc-700">
+        <li>
+          <span class="font-semibold text-zinc-800">Data We Collect.</span> When you submit the
+          contact form, we collect your name, email address, and message content. This data is sent
+          via Resend and stored in my email inbox for the sole purpose of responding to your inquiry.
+        </li>
+        <li>
+          <span class="font-semibold text-zinc-800">How Your Data Is Used.</span> Your contact form
+          submission is used only to respond to your message. Your information is never sold, shared
+          with third parties, or used for marketing.
+        </li>
+        <li>
+          <span class="font-semibold text-zinc-800">Data Retention.</span> Contact form emails are
+          retained indefinitely for reference, unless you request deletion. To request deletion,
+          contact me and I will remove your message data.
+        </li>
+        <li>
+          <span class="font-semibold text-zinc-800">Third-Party Services.</span> This site uses
+          Cloudflare Turnstile (bot protection), Resend (email delivery), and Vercel (hosting). Each
+          has its own privacy policy governing how they process data.
+        </li>
+        <li>
+          <span class="font-semibold text-zinc-800">Cookies.</span> This site does not use tracking
+          cookies. Cloudflare Turnstile may set a functional cookie required for bot verification.
+        </li>
+        <li>
+          <span class="font-semibold text-zinc-800">Your Rights.</span> You may request access to,
+          correction of, or deletion of any personal data you submitted through the contact form.
+        </li>
+        <li>
+          <span class="font-semibold text-zinc-800">Contact.</span> Questions about this policy?
+          Reach out at{" "}
+          <a href="mailto:mail@bernardyang.com" class="underline">mail@bernardyang.com</a>.
+        </li>
+      </ol>
+    </div>
+  </div>
+</BaseLayout>

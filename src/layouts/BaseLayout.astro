@@ -1,0 +1,84 @@
+---
+import Footer from "../components/Footer.astro";
+import { Navbar } from "../components/Nav";
+import "../styles/global.css";
+
+export interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+
+const siteTitle = title
+  ? `${title} — Bernard Yang`
+  : "Bernard Yang's Website";
+const siteDescription =
+  description ||
+  "I am Bernard Yang. I work in the insurance industry. This site is a collection of projects I've built for work and things that have interested me.";
+const baseUrl = "https://bernardyang.com";
+const currentUrl = new URL(Astro.url.pathname, baseUrl).href;
+---
+
+<html lang="en" class="hero-bg">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{siteTitle}</title>
+    <meta name="description" content={siteDescription} />
+    <link rel="canonical" href={currentUrl} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title || "Bernard Yang's Website"} />
+    <meta property="og:description" content={siteDescription} />
+    <meta property="og:url" content={baseUrl} />
+    <meta property="og:site_name" content="Bernard Yang Portfolio" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content={`${baseUrl}/opengraph-image.webp`} />
+
+    <!-- Robots -->
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1" />
+
+    <!-- DM Sans Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Structured Data -->
+    {Astro.url.pathname === "/" && (
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Person",
+          "name": "Bernard Yang",
+          "url": "https://bernardyang.com",
+          "jobTitle": "Process Automation & Web Developer",
+          "description": "Building process automation tools and websites that save time and eliminate manual work. Python scripts, full-stack web apps, and custom solutions.",
+          "sameAs": [
+            "https://github.com/WebDevBernard",
+            "https://www.linkedin.com/in/bernard-yang"
+          ]
+        })}
+      </script>
+    )}
+  </head>
+  <body
+    class="antialiased mt-8 bg-transparent mx-auto max-w-[96rem]"
+    style="font-family: 'DM Sans', sans-serif;"
+  >
+    <Navbar client:load pathname={Astro.url.pathname} />
+    <div class="mx-auto px-4 max-w-5xl">
+      <main class="relative">
+        <slot />
+      </main>
+      <Footer />
+    </div>
+  </body>
+</html>

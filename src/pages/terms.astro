@@ -1,0 +1,48 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const description = "Terms of Use for bernardyang.com";
+---
+
+<BaseLayout title="Terms of Use" description={description}>
+  <div class="max-w-2xl mx-auto py-12 px-4">
+    <div class="card rounded-lg p-6 space-y-4">
+      <div>
+        <h2>Terms of Use</h2>
+        <p class="text-zinc-500 text-sm">Last updated: May 2026</p>
+      </div>
+      <ol class="list-decimal pl-5 space-y-4 text-zinc-700">
+        <li>
+          <span class="font-semibold text-zinc-800">Acceptance of Terms.</span> By using
+          bernardyang.com, you accept these terms. If you do not agree, please do not use this site.
+        </li>
+        <li>
+          <span class="font-semibold text-zinc-800">Contact Form Misuse.</span> You agree not to
+          misuse the contact form. This includes sending spam or unsolicited advertising, submitting
+          malicious content or links, attempting to exploit or compromise the form's security, or
+          harassing, impersonating, or submitting false information.
+        </li>
+        <li>
+          <span class="font-semibold text-zinc-800">Intellectual Property.</span> All content on
+          this site — including text, images, code, and artwork — is my intellectual property unless
+          otherwise noted. You may not reproduce, distribute, or use it without permission.
+        </li>
+        <li>
+          <span class="font-semibold text-zinc-800">Disclaimer.</span> This site is provided "as is"
+          without warranties of any kind. I make no guarantees about accuracy, reliability, or
+          availability. I am not liable for any damages arising from your use of this site.
+        </li>
+        <li>
+          <span class="font-semibold text-zinc-800">Changes to These Terms.</span> I may update
+          these terms at any time. Changes take effect upon posting. Continued use of the site after
+          changes constitutes acceptance.
+        </li>
+        <li>
+          <span class="font-semibold text-zinc-800">Contact.</span> Questions about these terms?
+          Reach out at{" "}
+          <a href="mailto:mail@bernardyang.com" class="underline">mail@bernardyang.com</a>.
+        </li>
+      </ol>
+    </div>
+  </div>
+</BaseLayout>

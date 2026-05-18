@@ -1,43 +1,34 @@
-# Astro Starter Kit: Minimal
+# New Astro V6 Portfolio
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Personal portfolio site originally built with Next.js and migrated to [Astro](https://astro.build) v6 using DeepSeek, for better performance, simpler architecture, and reduced client-side JavaScript.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+**[bernardyang.com](https://bernardyang.com)**
 
-## 🚀 Project Structure
+## Development
 
-Inside of your Astro project, you'll see the following folders and files:
+This project uses [Claude Code](https://claude.ai/code) with the DeepSeek V4 Pro API and MCP servers for AI-assisted development:
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+- **Astro MCP** — official Astro docs for framework-specific questions
+- **Context7 MCP** — general programming concepts and non-Astro documentation
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Commands
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+| Command               | Action                                           |
+| --------------------- | ------------------------------------------------ |
+| `npm run dev`         | Start dev server at `localhost:4321`             |
+| `npm run build`       | Production build to `dist/`                      |
+| `npm run preview`     | Preview production build locally                 |
+| `npm run astro check` | Type-check all `.astro`, `.ts`, and `.tsx` files |
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Migration Notes
 
-## 🧞 Commands
+This project was originally built as a Next.js application and was migrated to Astro using DeepSeek. The migration involved:
 
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- Moving from Next.js file-based routing to Astro's `src/pages/` routing
+- Converting the Next.js layout to `BaseLayout.astro` with slot-based content
+- Replacing Next.js `Image` and `Link` components with native HTML elements
+- Adopting Tailwind v4's CSS-first configuration (no `tailwind.config.js`)
+- Adding `astro check` for type safety (Next.js uses `tsc --noEmit`)
+- Using `client:load` directives for interactive React islands instead of the Next.js hydration model
+- Replacing Next.js API routes with Astro API endpoints (`src/pages/api/`)
+- Upgrading Zod from v3 to v4 (`required_error` → `error` callback, `z.string().email()` → `z.email()`)
