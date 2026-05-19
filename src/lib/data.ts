@@ -56,12 +56,12 @@ export const contactContent = {
 export const contactMeMeta = {
   title: "Contact Me",
   description:
-    "You can reach out to me by sending an email to mail@bernardyang.com.",
+    "You can reach out to me by sending an email to bernard@bernardyang.com.",
 };
 
 export const emailInfo = {
-  from: "Bernard Yang <mail@bernardyang.com>",
-  to: ["mail@bernardyang.com"],
+  from: "Bernard Yang <bernard@bernardyang.com>",
+  to: ["bernard@bernardyang.com"],
 };
 
 export const cardData: CardProps[] = [
