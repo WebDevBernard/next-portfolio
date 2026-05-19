@@ -70,7 +70,7 @@ function Card({
         ))}
       </div>
       <div className="space-y-4">
-        <span className="flex items-center space-x-1">
+        <span className="flex items-center gap-2">
           {iconUrl && (
             <img
               src={iconUrl}
@@ -120,7 +120,7 @@ function CardContainer({ children, className }: CardContainerProps) {
       whileInView="visible"
       viewport={{ once: true, margin: "-80px" }}
       className={cn(
-        "grid grid-cols-2 justify-center items-center gap-y-12",
+        "grid grid-cols-2 justify-center justify-items-center items-center gap-y-12",
         className,
       )}
     >

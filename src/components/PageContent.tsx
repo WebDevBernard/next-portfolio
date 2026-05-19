@@ -20,8 +20,8 @@ export default function PageContent() {
   const { title, description } = introContent;
 
   return (
-    <section className="container space-y-6 mt-8">
-      <h1 className="underline-offset-[8px] md:underline-offset-[12px] transition-all duration-300 underline decoration-12 decoration-[#4AE54A]/60">
+    <section className="w-full space-y-6 mt-8">
+      <h1 className="underline-offset-[8px] md:underline-offset-[12px] transition-all duration-300 underline decoration-12 decoration-[#4AE54A]/60 pb-4">
         {title}
       </h1>
 
@@ -34,21 +34,23 @@ export default function PageContent() {
         <p>{description}</p>
       </div>
 
-      <Button
-        onClick={() =>
-          document.getElementById("contact-heading")?.scrollIntoView({ behavior: "smooth" })
-        }
-        className="bg-lime-200 hover:bg-lime-300/80"
-      >
-        <img
-          className="select-none"
-          alt="autonavi"
-          src="/autonavi.svg"
-          height={20}
-          width={20}
-        />
-        Contact Me
-      </Button>
+      <div className="flex justify-center mt-12">
+        <Button
+          onClick={() =>
+            document.getElementById("contact-heading")?.scrollIntoView({ behavior: "smooth" })
+          }
+          className="bg-lime-200 hover:bg-lime-300/80 flex-none"
+        >
+          <img
+            className="select-none"
+            alt="autonavi"
+            src="/autonavi.svg"
+            height={20}
+            width={20}
+          />
+          Contact Me
+        </Button>
+      </div>
 
       {workProjects.length > 0 && (
         <section aria-label="Work Projects" className="space-y-6">

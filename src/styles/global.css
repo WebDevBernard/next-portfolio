@@ -5,6 +5,10 @@ html {
   overscroll-behavior-y: none;
 }
 
+img {
+  color: transparent;
+}
+
 @layer base {
   .container {
     @apply flex flex-col items-center justify-center max-w-5xl lg:mx-auto gap-y-6;
