@@ -57,6 +57,7 @@ html {
 
 @layer utilities {
   .hero-bg {
+    background-color: #E5E5E5;
     background-image: url("/background.svg");
   }
 }
