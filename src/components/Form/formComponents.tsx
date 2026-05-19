@@ -32,7 +32,6 @@ interface SubmitButtonProps {
   isVerified: boolean;
   isLoading: boolean;
   hasSubmitted: boolean;
-  error?: { message: string; status?: string };
   children: React.ReactNode;
   className?: string;
 }
@@ -41,7 +40,6 @@ function SubmitButton({
   isVerified,
   isLoading,
   hasSubmitted,
-  error,
   children,
   className,
 }: SubmitButtonProps) {
@@ -49,8 +47,6 @@ function SubmitButton({
 
   let text = children;
   if (isLoading) text = "Loading, please wait...";
-  else if (hasSubmitted) text = "Your message has been submitted!";
-  else if (error) text = error.message;
 
   return (
     <Button

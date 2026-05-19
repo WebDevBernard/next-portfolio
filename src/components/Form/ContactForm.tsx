@@ -152,14 +152,17 @@ export function ContactForm() {
               </div>
             </div>
             <div className="flex-1 min-w-0 w-full self-center">
-              <p className="text-xs text-zinc-500 mb-1.5">
-                Verify you're human, then click submit.
+              <p className={`text-xs mb-1.5 ${error ? "text-red-500" : "text-zinc-500"}`}>
+                {error
+                  ? error.message
+                  : hasSubmitted
+                    ? "Your message has been submitted!"
+                    : "Verify you're human, then click submit."}
               </p>
               <Button
                 isVerified={isVerified}
                 isLoading={isLoading}
                 hasSubmitted={hasSubmitted}
-                error={error}
               >
                 Submit
               </Button>
