@@ -157,7 +157,9 @@ export function ContactForm() {
                   ? error.message
                   : hasSubmitted
                     ? "Your message has been submitted!"
-                    : "Verify you're human, then click submit."}
+                    : isVerified
+                      ? "Not a robot. Ready to submit."
+                      : "Verify you're human, then click submit."}
               </p>
               <Button
                 isVerified={isVerified}

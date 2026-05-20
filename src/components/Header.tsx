@@ -2,9 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { cardData, navItems } from "@/lib/data";
-import ButtonLink from "./Button";
-export function Navbar({ pathname }: { pathname: string }) {
+import { bulldogSayings, cardData, navItems } from "@/lib/data";
+import ButtonLink from "@/components/ui/Button";
+export function Header({ pathname }: { pathname: string }) {
   const isHome = pathname === "/";
   const sortedData = [...cardData].sort(
     (a, b) =>
@@ -14,22 +14,6 @@ export function Navbar({ pathname }: { pathname: string }) {
   const [scrollY, setScrollY] = useState(0);
   const [socialsOpen, setSocialsOpen] = useState(false);
   const [projectsOpen, setProjectsOpen] = useState(false);
-  const bulldogSayings = [
-    "Yes, sir?",
-    "How can I help?",
-    "I'm the assistant!",
-    "Sir, yes sir!",
-    "I bark, therefore I am.",
-    "Bulldog at your service.",
-    "Right away, sir.",
-    "Woof. I mean, yesh?",
-    "I tired, sir.",
-    "They don't pay me enough for this.",
-    "Reddit, funneh!",
-    "Head heavy, sir.",
-    "Please, sir.",
-  ];
-
   const [bubbleOpen, setBubbleOpen] = useState(false);
   const [dialogueIndex, setDialogueIndex] = useState(0);
   const [jiggling, setJiggling] = useState(false);
@@ -108,10 +92,9 @@ export function Navbar({ pathname }: { pathname: string }) {
       initial={{ opacity: 0, y: -60 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ type: "spring" as const, stiffness: 80, damping: 8 }}
-      className="sticky top-4 z-20 max-w-5xl w-[calc(100%-2rem)] mx-auto bg-[#fafafa] border-2 border-zinc-400 rounded-lg shadow-[0_6px_0_rgb(161,161,170)] relative overflow-visible"
+      className="sticky top-4 z-20 max-w-5xl w-[calc(100%-2rem)] mx-auto bg-[#fafafa] border-2 border-zinc-400 rounded-lg shadow-[0_6px_0_rgb(161,161,170)] relative overflow-visible flex items-start justify-between gap-4 md:gap-6 px-4 py-2 min-w-0"
     >
-      <div className="flex items-start justify-between gap-4 md:gap-6 px-4 py-2 min-w-0">
-        <div className="flex items-center gap-4 min-w-0 flex-wrap">
+      <div className="flex items-center gap-4 min-w-0 flex-wrap">
           <div className="relative shrink-0">
             <img
               src="/bulldog-profile.webp"
@@ -133,20 +116,22 @@ export function Navbar({ pathname }: { pathname: string }) {
               </div>
             )}
           </div>
-          {/* Projects: inline on md+, dropdown on smaller screens — only on home */}
-          {isHome && (
-            <>
+          <nav className="flex items-center gap-1">
+            {/* Projects: inline on md+, dropdown on smaller screens — only on home */}
+            {isHome && (
               <div className="hidden md:flex items-center gap-1 min-w-0">
                 {sortedData.map((project) => (
-                  <div
+                  <button
                     key={project.title}
-                    className="cursor-pointer hover:underline transition-colors duration-300 rounded-lg p-2 whitespace-nowrap"
+                    className="cursor-pointer hover:text-zinc-500 transition-colors duration-300 rounded-lg p-2 whitespace-nowrap text-sm"
                     onClick={() => scrollToProject(project.title)}
                   >
-                    <p className="text-sm">{project.title}</p>
-                  </div>
+                    {project.title}
+                  </button>
                 ))}
               </div>
+            )}
+            {isHome && (
               <div
                 ref={projectsRef}
                 className="relative shrink-0 md:hidden"
@@ -172,7 +157,7 @@ export function Navbar({ pathname }: { pathname: string }) {
                       {sortedData.map((project) => (
                         <button
                           key={project.title}
-                          className="flex items-center gap-4 px-3 py-2 text-sm text-zinc-700 hover:underline cursor-pointer transition-colors w-full text-left"
+                          className="flex items-center gap-4 px-3 py-2 text-sm text-zinc-700 hover:text-zinc-500 hover:[&_img]:brightness-125 cursor-pointer transition-colors w-full text-left"
                           onClick={() => {
                             setProjectsOpen(false);
                             const el = document.getElementById(project.title);
@@ -191,6 +176,7 @@ export function Navbar({ pathname }: { pathname: string }) {
                               alt=""
                               width={20}
                               height={20}
+                              className="transition"
                             />
                           )}
                           {project.title}
@@ -200,53 +186,53 @@ export function Navbar({ pathname }: { pathname: string }) {
                   </>
                 )}
               </div>
-            </>
-          )}
-          {/* Socials: icon buttons on md+, dropdown on smaller screens */}
-          <nav className="hidden md:flex flex-row items-center gap-3 shrink-0">
-            {Object.entries(navItems).map(([path, { src, label }]) => (
-              <ButtonLink key={path} href={path} src={src} hidden ariaLabel={label} />
-            ))}
-          </nav>
-          <div
-            ref={socialsRef}
-            className="relative shrink-0 md:hidden"
-            onMouseEnter={() => setSocialsOpen(true)}
-            onMouseLeave={() => setSocialsOpen(false)}
-          >
-            <button className="text-sm text-zinc-700 cursor-pointer flex items-center gap-1">
-              Socials
-              <svg
-                className={`w-3.5 h-3.5 transition-transform duration-200 ${socialsOpen ? "-rotate-180" : ""}`}
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-              >
-                <path d="M6 9l6 6 6-6" />
-              </svg>
-            </button>
-            {socialsOpen && (
-              <>
-                <div className="absolute left-0 top-full h-4 w-36" />
-                <div className="absolute left-0 top-[calc(100%+12px)] w-36 rounded-md border-2 border-zinc-400 bg-[#fafafa] shadow-[0_4px_0_rgb(161,161,170)] py-1 z-10">
-                  {Object.entries(navItems).map(([path, { src }]) => (
-                    <a
-                      key={path}
-                      href={path}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-3 py-2 text-sm  text-zinc-700 hover:underline transition-colors"
-                      onClick={() => setSocialsOpen(false)}
-                    >
-                      <img src={src} alt="" width={20} height={20} />
-                      {src.includes("linkedin") ? "LinkedIn" : "GitHub"}
-                    </a>
-                  ))}
-                </div>
-              </>
             )}
-          </div>
+            {/* Socials: icon buttons on md+, dropdown on smaller screens */}
+            <div className="hidden md:flex flex-row items-center gap-3 shrink-0">
+              {Object.entries(navItems).map(([path, { src, label }]) => (
+                <ButtonLink key={path} href={path} src={src} hidden ariaLabel={label} className="hover:brightness-125 transition" />
+              ))}
+            </div>
+            <div
+              ref={socialsRef}
+              className="relative shrink-0 md:hidden"
+              onMouseEnter={() => setSocialsOpen(true)}
+              onMouseLeave={() => setSocialsOpen(false)}
+            >
+              <button className="text-sm text-zinc-700 cursor-pointer flex items-center gap-1">
+                Socials
+                <svg
+                  className={`w-3.5 h-3.5 transition-transform duration-200 ${socialsOpen ? "-rotate-180" : ""}`}
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                >
+                  <path d="M6 9l6 6 6-6" />
+                </svg>
+              </button>
+              {socialsOpen && (
+                <>
+                  <div className="absolute left-0 top-full h-4 w-36" />
+                  <div className="absolute left-0 top-[calc(100%+12px)] w-36 rounded-md border-2 border-zinc-400 bg-[#fafafa] shadow-[0_4px_0_rgb(161,161,170)] py-1 z-10">
+                    {Object.entries(navItems).map(([path, { src }]) => (
+                      <a
+                        key={path}
+                        href={path}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 px-3 py-2 text-sm text-zinc-700 hover:text-zinc-500 hover:[&_img]:brightness-125 transition-colors"
+                        onClick={() => setSocialsOpen(false)}
+                      >
+                        <img src={src} alt="" width={28} height={28} class="transition" />
+                        {src.includes("linkedin") ? "LinkedIn" : "GitHub"}
+                      </a>
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
+          </nav>
         </div>
 
         <div className="flex items-center gap-2 shrink-0">
@@ -270,7 +256,6 @@ export function Navbar({ pathname }: { pathname: string }) {
             <img src="/top.svg" alt="Top" width={16} height={16} />
           </button>
         </div>
-      </div>
     </motion.header>
   );
 }

@@ -3,34 +3,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-
-interface Slide {
-  id: number;
-  title: string;
-  description: string;
-  image: string;
-}
-
-const slides: Slide[] = [
-  {
-    id: 1,
-    title: "Obedient Bulldog",
-    description: "Does whatever he's told",
-    image: "/Bulldog.webp",
-  },
-  {
-    id: 2,
-    title: "Classic Tuna",
-    description: "Even cats like Big Tuna",
-    image: "/Bulldog-2.webp",
-  },
-  {
-    id: 3,
-    title: "Forbidden Burrito",
-    description: "Real bulldog also has belly",
-    image: "/Bulldog-1.webp",
-  },
-];
+import { type Slide, carouselSlides } from "@/lib/data";
 
 function CarouselCard({
   slide,
@@ -130,9 +103,9 @@ const Carousel: React.FC = () => {
     <div className="w-full max-w-7xl mx-auto overflow-hidden mask-gradient py-8 px-4 md:px-0">
       <div className="embla" ref={emblaRef}>
         <div className="embla__container flex items-center">
-          {slides.map((slide, index) => {
+          {carouselSlides.map((slide, index) => {
             const isSelected = index === selectedIndex;
-            const totalSlides = slides.length;
+            const totalSlides = carouselSlides.length;
             const relativePos =
               (index - selectedIndex + totalSlides) % totalSlides;
             const isLeft = relativePos > totalSlides / 2;

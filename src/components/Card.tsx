@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import type { CardProps } from "@/lib/data";
-import ButtonLink from "./Button";
+import ButtonLink from "@/components/ui/Button";
 
 type CardContainerProps = {
   children: React.ReactNode;

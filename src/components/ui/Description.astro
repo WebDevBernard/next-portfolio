@@ -1,0 +1,56 @@
+---
+type BubbleColor = "teal" | "blue" | "yellow";
+
+export interface Props {
+  direction: "up" | "down";
+  color: BubbleColor;
+  class?: string;
+}
+
+const { direction, color, class: className } = Astro.props;
+
+const styles = {
+  teal: {
+    bg: "bg-teal-100",
+    border: "border-teal-400",
+    beforeB: "before:border-b-teal-400",
+    beforeT: "before:border-t-teal-400",
+    afterB: "after:border-b-teal-100",
+    afterT: "after:border-t-teal-100",
+  },
+  blue: {
+    bg: "bg-blue-100",
+    border: "border-blue-300",
+    beforeB: "before:border-b-blue-300",
+    beforeT: "before:border-t-blue-300",
+    afterB: "after:border-b-blue-100",
+    afterT: "after:border-t-blue-100",
+  },
+  yellow: {
+    bg: "bg-yellow-100",
+    border: "border-yellow-400",
+    beforeB: "before:border-b-yellow-400",
+    beforeT: "before:border-t-yellow-400",
+    afterB: "after:border-b-yellow-100",
+    afterT: "after:border-t-yellow-100",
+  },
+} as const;
+
+const c = styles[color];
+const isUp = direction === "up";
+const beforeBorder = isUp ? c.beforeB : c.beforeT;
+const afterBorder = isUp ? c.afterB : c.afterT;
+---
+
+<div
+  class={`relative w-full max-w-md md:max-w-lg mx-auto rounded-2xl p-3 ${c.bg} ${c.border} border-2 ${isUp ? "mt-6" : ""}
+    before:content-[''] before:absolute before:left-1/2 before:-translate-x-1/2
+    ${isUp ? "before:-top-[22px] before:border-b-[22px]" : "before:-bottom-[22px] before:border-t-[22px]"}
+    before:border-l-[22px] before:border-l-transparent before:border-r-[22px] before:border-r-transparent ${beforeBorder}
+    after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2
+    ${isUp ? "after:-top-[19px] after:border-b-[20px]" : "after:-bottom-[19px] after:border-t-[20px]"}
+    after:border-l-[20px] after:border-l-transparent after:border-r-[20px] after:border-r-transparent ${afterBorder}
+    ${className ?? ""}`}
+>
+  <slot />
+</div>

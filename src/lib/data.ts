@@ -1,19 +1,32 @@
-export type CardProps = {
-  id?: string; // ✅
+export const siteDescription =
+  "I am Bernard Yang. I work in the insurance industry. This site is a collection of projects I've built for work and things that have interested me.";
+
+export const baseUrl = "https://bernardyang.com";
+// Links to bernardyang.com open in the same tab; all other external URLs open in a new tab.
+export const subDomainInNewTab = "bernardyang.com";
+
+// ── Types ──
+
+export interface Slide {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+}
+
+export interface CardProps {
+  id?: string;
   type: "work" | "other";
   title: string;
   description: string;
   year: string;
   iconUrl: string;
-  buttonText?: string;
   websiteUrl?: string;
   gitHubUrl?: string;
-};
+}
 
-export const baseUrl: string = "https://bernardyang.com";
-// By default all https opens on new tab except for subdomains. You can still make subdomains open in new tab by putting a "/" at the end of the href
-export const subDomainInNewTab = "bernardyang.com";
-export const githubAvatar = "https://avatars.githubusercontent.com/u/72034695?v=4";
+// ── Content ──
+
 export const navItems = {
   "https://www.linkedin.com/in/bernard-yang/": {
     src: "/linkedin-outline.svg",
@@ -27,24 +40,7 @@ export const navItems = {
 
 export const introContent = {
   title: "Hi, I'm Bernard",
-  description:
-    "I am Bernard Yang. I work in the insurance industry. This site is a collection of projects I've built for work and things that have interested me.",
-};
-
-export const homeMetaData = {
-  title: {
-    default: "Bernard Yang's Website",
-    template: "%s | Bernard Yang",
-  },
-  description:
-    "I am Bernard Yang. I work in the insurance industry. This site is a collection of projects I've built for work and things that have interested me.",
-  openGraph: {
-    title: "Bernard Yang's Website",
-    description:
-      "I am Bernard Yang. I work in the insurance industry. This site is a collection of projects I've built for work and things that have interested me.",
-    url: baseUrl,
-    siteName: "Bernard Yang",
-  },
+  description: siteDescription,
 };
 
 export const contactContent = {
@@ -53,23 +49,54 @@ export const contactContent = {
     "You can reach out to me by either filling out the form below or sending an email to bernard@bernardyang.com.",
 };
 
-export const contactMeMeta = {
-  title: "Contact Me",
-  description:
-    "You can reach out to me by sending an email to bernard@bernardyang.com.",
-};
-
 export const emailInfo = {
   from: "Bernard Yang <bernard@bernardyang.com>",
   to: ["bernard@bernardyang.com"],
 };
+
+export const bulldogSayings = [
+  "Yes, sir?",
+  "How can I help?",
+  "I'm the assistant!",
+  "Sir, yes sir!",
+  "I bark, therefore I am.",
+  "Bulldog at your service.",
+  "Right away, sir.",
+  "Woof. I mean, yesh?",
+  "I tired, sir.",
+  "They don't pay me enough for this.",
+  "Reddit, funneh!",
+  "Head heavy, sir.",
+  "Please, sir.",
+];
+
+export const carouselSlides: Slide[] = [
+  {
+    id: 1,
+    title: "Obedient Bulldog",
+    description: "Does whatever he's told",
+    image: "/Bulldog.webp",
+  },
+  {
+    id: 2,
+    title: "Classic Tuna",
+    description: "Even cats like Big Tuna",
+    image: "/Bulldog-2.webp",
+  },
+  {
+    id: 3,
+    title: "Forbidden Burrito",
+    description: "Real bulldog also has belly",
+    image: "/Bulldog-1.webp",
+  },
+];
 
 export const cardData: CardProps[] = [
   {
     type: "work",
     title: "Horizon West Insurance Website",
     description:
-      "Work website I built using Payload CMS and NextJS front-end.  Github link to official Payload CMS 3.0 Website Template.",
+      "Work website I built using Payload CMS and NextJS front-end. Github link to official Payload CMS 3.0 Website Template.",
     iconUrl: "/payload.svg",
     year: "2025–2026",
     websiteUrl: "https://hwi.bernardyang.com/",
@@ -80,7 +107,7 @@ export const cardData: CardProps[] = [
     type: "work",
     title: "ICBC E-Stamp Tool",
     description:
-      "A Python script I made to help insurance brokers stamp and organize ICBC policy documents.  Built with PyMuPDF.",
+      "A Python script I made to help insurance brokers stamp and organize ICBC policy documents. Built with PyMuPDF.",
     iconUrl: "/python.svg",
     year: "2024–2026",
     gitHubUrl: "https://github.com/WebDevBernard/ICBC_E-Stamp_Tool",
@@ -89,7 +116,7 @@ export const cardData: CardProps[] = [
     type: "other",
     title: "Mythic+ Run Count",
     description:
-      "A graph of character count in World of Warcraft Mythic+ dungeons.  Built with AWS Lambda/Eventbridge, React and Chart.js.",
+      "A graph of character count in World of Warcraft Mythic+ dungeons. Built with AWS Lambda/Eventbridge, React and Chart.js.",
     iconUrl: "/nodejs.svg",
     year: "2022",
     websiteUrl: "https://mythicplus.bernardyang.com/",

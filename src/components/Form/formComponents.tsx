@@ -1,6 +1,6 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/Button";
+import { Button } from "@/components/ui/Button";
 
 const inputClass = `w-full text-md font-semibold text-zinc-800 py-5 px-6 inset-shadow-[0_6px_0_rgb(240,240,240)]
 rounded-lg border-2 border-zinc-600 bg-white disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50

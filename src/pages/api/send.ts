@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 import { Resend } from "resend";
-import { Email } from "../../components/Email";
+import { Email } from "../../lib/Email";
 import { emailInfo } from "../../lib/data";
 
 const resend = new Resend(import.meta.env.RESEND_API_KEY);

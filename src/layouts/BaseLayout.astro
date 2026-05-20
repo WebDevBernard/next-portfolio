@@ -1,6 +1,7 @@
 ---
 import Footer from "../components/Footer.astro";
-import { Navbar } from "../components/Nav";
+import { Header } from "../components/Header";
+import { siteDescription as defaultDescription, baseUrl } from "../lib/data";
 import "../styles/global.css";
 
 export interface Props {
@@ -13,10 +14,7 @@ const { title, description } = Astro.props;
 const siteTitle = title
   ? `${title} | Bernard Yang`
   : "Bernard Yang's Website";
-const siteDescription =
-  description ||
-  "I am Bernard Yang. I work in the insurance industry. This site is a collection of projects I've built for work and things that have interested me.";
-const baseUrl = "https://bernardyang.com";
+const siteDescription = description || defaultDescription;
 const currentUrl = new URL(Astro.url.pathname, baseUrl).href;
 ---
 
@@ -73,12 +71,10 @@ const currentUrl = new URL(Astro.url.pathname, baseUrl).href;
     class="antialiased mt-8 bg-transparent mx-auto max-w-[96rem]"
     style="font-family: 'DM Sans', sans-serif;"
   >
-    <Navbar client:load pathname={Astro.url.pathname} />
-    <div class="mx-auto px-4 max-w-5xl">
-      <main class="relative">
-        <slot />
-      </main>
-      <Footer />
-    </div>
+    <Header client:load pathname={Astro.url.pathname} />
+    <main class="relative mx-auto px-4 max-w-5xl flex flex-col gap-y-10">
+      <slot />
+    </main>
+    <Footer />
   </body>
 </html>
