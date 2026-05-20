@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useTurnstile } from "@/hooks/useTurnstile";
 import Turnstile from "./Turnstile";
 import { useForm } from "react-hook-form";
+import { contactEmail } from "@/lib/data";
 import { formSchema, type FormValues } from "./formSchema";
 import {
   Form,
@@ -78,7 +79,7 @@ export function ContactForm() {
       console.error("Error caught in catch block:", err);
       setIsLoading(false);
       setError({
-        message: "Something went wrong. Please try again or email me directly at mail@bernardyang.com.",
+        message: `Something went wrong. Please try again or email me directly at ${contactEmail}.`,
       });
     }
   }

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { contactEmail } from "../lib/data";
 
 const description = "Terms of Use for bernardyang.com";
 ---
@@ -40,7 +41,7 @@ const description = "Terms of Use for bernardyang.com";
         <li>
           <span class="font-semibold text-zinc-800">Contact.</span> Questions about these terms?
           Reach out at{" "}
-          <a href="mailto:mail@bernardyang.com" class="underline">mail@bernardyang.com</a>.
+          <a href={`mailto:${contactEmail}`} class="underline">{contactEmail}</a>.
         </li>
       </ol>
     </div>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { contactEmail } from "../lib/data";
 
 const description = "Privacy Policy for bernardyang.com — how we handle your data";
 ---
@@ -43,7 +44,7 @@ const description = "Privacy Policy for bernardyang.com — how we handle your d
         <li>
           <span class="font-semibold text-zinc-800">Contact.</span> Questions about this policy?
           Reach out at{" "}
-          <a href="mailto:mail@bernardyang.com" class="underline">mail@bernardyang.com</a>.
+          <a href={`mailto:${contactEmail}`} class="underline">{contactEmail}</a>.
         </li>
       </ol>
     </div>

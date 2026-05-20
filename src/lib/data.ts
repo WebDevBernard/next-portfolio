@@ -1,6 +1,8 @@
 export const siteDescription =
   "I am Bernard Yang. I work in the insurance industry. This site is a collection of projects I've built for work and things that have interested me.";
 
+export const contactEmail = "bernard@bernardyang.com";
+
 export const baseUrl = "https://bernardyang.com";
 // Links to bernardyang.com open in the same tab; all other external URLs open in a new tab.
 export const subDomainInNewTab = "bernardyang.com";
@@ -45,13 +47,12 @@ export const introContent = {
 
 export const contactContent = {
   title: "Contact Me",
-  description:
-    "You can reach out to me by either filling out the form below or sending an email to bernard@bernardyang.com.",
+  description: `You can reach out to me by either filling out the form below or sending an email to ${contactEmail}.`,
 };
 
 export const emailInfo = {
-  from: "Bernard Yang <bernard@bernardyang.com>",
-  to: ["bernard@bernardyang.com"],
+  from: `Bernard Yang <${contactEmail}>`,
+  to: [contactEmail],
 };
 
 export const bulldogSayings = [
