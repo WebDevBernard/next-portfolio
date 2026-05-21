@@ -25,7 +25,7 @@ export function Header({ pathname }: { pathname: string }) {
   const handleBulldogClick = () => {
     if (jiggling) return;
     setJiggling(true);
-    setTimeout(() => setJiggling(false), 600);
+    setTimeout(() => setJiggling(false), 500);
 
     setDialogueIndex((prev) => (prev + 1) % bulldogSayings.length);
     setBubbleOpen(true);
@@ -101,9 +101,11 @@ export function Header({ pathname }: { pathname: string }) {
               alt="Profile"
               width={40}
               height={40}
+              draggable={false}
+              onDragStart={(e) => e.preventDefault()}
               onClick={handleBulldogClick}
               className={`${
-                jiggling ? "animate-jiggle" : ""
+                jiggling ? "animate-belly-wobble" : ""
               } rounded-md border-2 border-zinc-500 cursor-pointer select-none`}
             />
             {bubbleOpen && (
@@ -116,7 +118,7 @@ export function Header({ pathname }: { pathname: string }) {
               </div>
             )}
           </div>
-          <nav className="flex items-center gap-1">
+          <nav className="flex items-center gap-3">
             {/* Projects: inline on md+, dropdown on smaller screens — only on home */}
             {isHome && (
               <div className="hidden md:flex items-center gap-1 min-w-0">

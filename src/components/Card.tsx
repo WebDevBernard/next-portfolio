@@ -93,7 +93,7 @@ function Card({
           <ButtonLink
             src="/globe.svg"
             href={websiteUrl}
-            className="bg-slate-200/40 hover:bg-slate-300/10"
+            className="bg-slate-200/40 hover:bg-slate-300/50"
           >
             View Website
           </ButtonLink>

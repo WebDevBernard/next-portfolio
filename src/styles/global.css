@@ -62,7 +62,6 @@ img {
 @layer utilities {
   .hero-bg {
     background-color: #E5E5E5;
-    background-image: url("/background.svg");
   }
 }
 
@@ -85,6 +84,28 @@ img {
   }
   75% {
     transform: rotate(-2deg) scale(1.01);
+  }
+}
+
+@keyframes belly-wobble {
+  0%,
+  100% {
+    transform: scale(1, 1);
+  }
+  15% {
+    transform: scale(1.08, 0.92);
+  }
+  30% {
+    transform: scale(0.94, 1.06);
+  }
+  45% {
+    transform: scale(1.04, 0.96);
+  }
+  60% {
+    transform: scale(0.97, 1.03);
+  }
+  75% {
+    transform: scale(1.01, 0.99);
   }
 }
 
@@ -126,6 +147,7 @@ img {
 
 @theme inline {
   --animate-jiggle: jiggle 0.6s ease-in-out;
+  --animate-belly-wobble: belly-wobble 0.5s ease-in-out;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);

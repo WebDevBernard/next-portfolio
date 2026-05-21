@@ -5,6 +5,8 @@ import Description from "../components/ui/Description.astro";
 import ProjectCards from "../components/ProjectCards";
 import Carousel from "../components/Carousel";
 import { ContactForm } from "../components/Form/ContactForm";
+import { ContactButton } from "../components/Contact/ContactButton";
+import { ContactSectionHeading } from "../components/Contact/ContactSectionHeading";
 import { introContent, contactContent } from "../lib/data";
 ---
 
@@ -18,25 +20,7 @@ import { introContent, contactContent } from "../lib/data";
       <img src="/hi.svg" alt="hi" width={40} height={40} />
       <p>{introContent.description}</p>
     </Description>
-    <div class="flex justify-center mt-12">
-      <a
-        href="#contact-heading"
-        class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-semibold
-          transition-all cursor-pointer h-10 px-6 py-2.5 text-zinc-700 border-2 border-zinc-400
-          shadow-[0_6px_0_rgb(161,161,170)] active:shadow-[0_2px_0px_rgb(161,161,170)] active:translate-y-1
-          bg-lime-200 hover:bg-lime-300/80 flex-none outline-none
-          focus-visible:ring-[3px] focus-visible:ring-ring/50"
-      >
-        <img
-          class="select-none"
-          alt="autonavi"
-          src="/autonavi.svg"
-          height={20}
-          width={20}
-        />
-        Contact Me
-      </a>
-    </div>
+    <ContactButton client:load />
   </section>
 
   <!-- Work Projects -->
@@ -65,19 +49,13 @@ import { introContent, contactContent } from "../lib/data";
     </Heading>
     <Carousel client:visible />
     <Description direction="up" color="blue">
-      Ghibli-style bulldogs generated in Sora.
+      Ghibli-style bulldogs made in Sora, with jiggle physics in Three.js.
     </Description>
   </section>
 
   <!-- Contact -->
   <section aria-label="Contact" class="space-y-6 flex flex-col items-center">
-    <Heading
-      as="h2"
-      id="contact-heading"
-      underlineColor="decoration-orange-300"
-    >
-      {contactContent.title}
-    </Heading>
+    <ContactSectionHeading title={contactContent.title} client:load />
     <Description direction="up" color="yellow">
       {contactContent.description}
     </Description>

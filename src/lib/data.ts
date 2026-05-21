@@ -14,6 +14,7 @@ export interface Slide {
   title: string;
   description: string;
   image: string;
+  interactive?: boolean;
 }
 
 export interface CardProps {
@@ -59,8 +60,7 @@ export const bulldogSayings = [
   "Yes, sir?",
   "How can I help?",
   "I'm the assistant!",
-  "Sir, yes sir!",
-  "I bark, therefore I am.",
+  "Jiggling, sir.",
   "Bulldog at your service.",
   "Right away, sir.",
   "Woof. I mean, yesh?",
@@ -73,6 +73,13 @@ export const bulldogSayings = [
 
 export const carouselSlides: Slide[] = [
   {
+    id: 3,
+    title: "Forbidden Burrito",
+    description: "Poke that belly!",
+    image: "/Bulldog-1.webp",
+    interactive: true,
+  },
+  {
     id: 1,
     title: "Obedient Bulldog",
     description: "Does whatever he's told",
@@ -84,18 +91,12 @@ export const carouselSlides: Slide[] = [
     description: "Even cats like Big Tuna",
     image: "/Bulldog-2.webp",
   },
-  {
-    id: 3,
-    title: "Forbidden Burrito",
-    description: "Real bulldog also has belly",
-    image: "/Bulldog-1.webp",
-  },
 ];
 
 export const cardData: CardProps[] = [
   {
     type: "work",
-    title: "Horizon West Insurance Website",
+    title: "HWI Website",
     description:
       "Work website I built using Payload CMS and NextJS front-end. Github link to official Payload CMS 3.0 Website Template.",
     iconUrl: "/payload.svg",

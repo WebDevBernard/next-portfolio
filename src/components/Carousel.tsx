@@ -4,6 +4,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { type Slide, carouselSlides } from "@/lib/data";
+import BulldogBelly from "@/components/BulldogJiggle";
 
 function CarouselCard({
   slide,
@@ -20,6 +21,8 @@ function CarouselCard({
   scale: number;
   onSelect: (index: number) => void;
 }) {
+  const isInteractive = slide.interactive && isSelected;
+
   const mouseX = useMotionValue(0.5);
   const mouseY = useMotionValue(0.5);
   const springX = useSpring(mouseX, { stiffness: 400, damping: 30 });
@@ -39,29 +42,36 @@ function CarouselCard({
     mouseY.set(0.5);
   };
 
+  const animateRotateY = isInteractive ? 0 : carouselRotateY;
+  const opacity = isSelected ? 1 : 0.6;
+
   return (
     <motion.div
       onClick={() => onSelect(index)}
-      onMouseMove={isSelected ? handleMouseMove : undefined}
-      onMouseLeave={isSelected ? handleMouseLeave : undefined}
-      initial={{ rotateY: 0, scale: 1 }}
-      animate={{ rotateY: carouselRotateY, scale }}
+      onMouseMove={isSelected && !isInteractive ? handleMouseMove : undefined}
+      onMouseLeave={isSelected && !isInteractive ? handleMouseLeave : undefined}
+      initial={{ rotateY: 0, scale: 1, opacity: 1 }}
+      animate={{ rotateY: animateRotateY, scale, opacity }}
       transition={{ type: "spring", stiffness: 200, damping: 25 }}
       style={{
-        rotateX: isSelected ? tiltRotateX : 0,
-        ...(isSelected ? { rotateY: tiltRotateY } : {}),
-        transformPerspective: 800,
+        rotateX: isSelected && !isInteractive ? tiltRotateX : 0,
+        ...(isSelected && !isInteractive ? { rotateY: tiltRotateY } : {}),
+        transformPerspective: isInteractive ? "none" : 800,
       }}
-      className={`relative ${isSelected ? "cursor-default" : "cursor-pointer"}`}
+      className={`relative ${isInteractive ? "cursor-default" : isSelected ? "cursor-default" : "cursor-pointer"}`}
     >
-      <img
-        src={slide.image}
-        alt={slide.title}
-        width={500}
-        height={336}
-        className="w-full h-auto object-cover rounded-2xl select-none"
-      />
-      <div className="pointer-events-none absolute inset-x-0 bottom-6 text-center text-white drop-shadow-lg">
+      {isInteractive ? (
+        <BulldogBelly src={slide.image} />
+      ) : (
+        <img
+          src={slide.image}
+          alt={slide.title}
+          width={500}
+          height={336}
+          className="w-full h-auto object-cover rounded-2xl select-none"
+        />
+      )}
+      <div className="pointer-events-none absolute inset-x-0 bottom-6 text-center text-white select-none [text-shadow:0_1px_3px_rgba(0,0,0,0.6)]">
         <h3 className="font-semibold">{slide.title}</h3>
         <p className="text-sm text-zinc-300 ">{slide.description}</p>
       </div>
@@ -110,7 +120,7 @@ const Carousel: React.FC = () => {
               (index - selectedIndex + totalSlides) % totalSlides;
             const isLeft = relativePos > totalSlides / 2;
             const carouselRotateY = isSelected ? 0 : isLeft ? 15 : -15;
-            const scale = isSelected ? 1.1 : 0.85;
+            const scale = isSelected ? 1 : 0.85;
 
             return (
               <div

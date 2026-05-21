@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forbidden Burrito</title>
+<meta property="og:title" content="Forbidden Burrito">
+<meta property="og:description" content="Poke that belly!">
+<meta property="og:image" content="/Bulldog-1.webp">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: system-ui, sans-serif;
+  }
+  #container {
+    width: min(90vw, 600px);
+    aspect-ratio: 500 / 336;
+    border-radius: 1rem;
+    overflow: hidden;
+    position: relative;
+  }
+  #overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding-bottom: 1.25rem;
+    pointer-events: none;
+    color: #fff;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+  }
+  #overlay h2 { font-size: 1.1rem; font-weight: 600; }
+  #overlay p  { font-size: 0.8rem; color: #d1d5db; }
+</style>
+</head>
+<body>
+<div id="container">
+  <div id="overlay">
+    <h2>Forbidden Burrito</h2>
+    <p>Poke that belly!</p>
+  </div>
+</div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.184.0/build/three.module.js"
+  }
+}
+</script>
+<script type="module">
+import * as THREE from "three";
+
+const MAX_RIPPLES = 6;
+const BELLY = { cx: 0.43, cy: 0.25, rx: 0.22, ry: 0.12, yMax: 0.36 };
+const IMG = "/Bulldog-1.webp";
+
+const vert = `
+varying vec2 vUv;
+void main() {
+  vUv = uv;
+  gl_Position = vec4(position.xy, 0.0, 1.0);
+}`;
+
+const frag = `
+precision highp float;
+uniform sampler2D uTexture;
+uniform float     uTime;
+uniform float     uAspect;
+uniform vec4      uRipples[6];
+uniform vec2      uBellyC;
+uniform vec2      uBellyRad;
+uniform float     uBellyYMax;
+varying vec2 vUv;
+
+float dogMask(vec2 uv) {
+  vec4  c      = texture2D(uTexture, clamp(uv, 0.001, 0.999));
+  float warmth = c.r - c.b;
+  return smoothstep(-0.08, 0.18, warmth);
+}
+
+float bellyMask(vec2 uv) {
+  if (uv.y > uBellyYMax) return 0.0;
+  vec2  d     = (uv - uBellyC) / uBellyRad;
+  float yFade = smoothstep(uBellyYMax, uBellyYMax - 0.06, uv.y);
+  return smoothstep(1.0, 0.0, length(d)) * yFade;
+}
+
+void main() {
+  vec2 disp = vec2(0.0);
+  for (int i = 0; i < 6; i++) {
+    float t0 = uRipples[i].z;
+    if (t0 < 0.0) continue;
+    float age = uTime - t0;
+    if (age > 2.8) continue;
+    vec2  ctr  = uRipples[i].xy;
+    float jStr = uRipples[i].w;
+    vec2  diff = vUv - ctr;
+    diff.x *= uAspect;
+    float dist = length(diff);
+    float decay = exp(-age * 1.9) * exp(-dist * 4.5);
+    float wave  = sin(dist * 38.0 - age * 14.0) * 0.016 * decay;
+    if (dist > 0.001) {
+      vec2 dir = diff / dist;
+      dir.x /= uAspect;
+      disp  += dir * wave;
+    }
+    if (jStr > 0.0) {
+      float squish = sin(age * 22.0) * exp(-age * 3.2) * jStr * 0.011 * bellyMask(vUv);
+      disp.y += squish;
+      disp.x += squish * 0.25;
+    }
+  }
+  float mask = dogMask(vUv);
+  vec2  uv   = vUv + disp * mask;
+  gl_FragColor = texture2D(uTexture, clamp(uv, 0.001, 0.999));
+}`;
+
+const container = document.getElementById("container");
+const el = container;
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setSize(el.clientWidth, el.clientHeight);
+renderer.outputColorSpace = THREE.LinearSRGBColorSpace;
+el.insertBefore(renderer.domElement, el.firstChild);
+
+const scene  = new THREE.Scene();
+const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+
+const ripples = Array.from({ length: MAX_RIPPLES }, () => new THREE.Vector4(0, 0, -1, 0));
+let head = 0;
+const clock = new THREE.Clock();
+
+const uniforms = {
+  uTexture:   { value: null },
+  uTime:      { value: 0 },
+  uAspect:    { value: el.clientWidth / el.clientHeight },
+  uRipples:   { value: ripples },
+  uBellyC:    { value: new THREE.Vector2(BELLY.cx, BELLY.cy) },
+  uBellyRad:  { value: new THREE.Vector2(BELLY.rx, BELLY.ry) },
+  uBellyYMax: { value: BELLY.yMax },
+};
+
+scene.add(new THREE.Mesh(
+  new THREE.PlaneGeometry(2, 2),
+  new THREE.ShaderMaterial({ uniforms, vertexShader: vert, fragmentShader: frag })
+));
+
+new THREE.TextureLoader().load(IMG, tex => {
+  tex.colorSpace = THREE.LinearSRGBColorSpace;
+  tex.minFilter  = THREE.LinearFilter;
+  uniforms.uTexture.value = tex;
+});
+
+function isInBelly(uvX, uvY) {
+  if (uvY >= BELLY.yMax) return false;
+  const dx = (uvX - BELLY.cx) / BELLY.rx;
+  const dy = (uvY - BELLY.cy) / BELLY.ry;
+  return Math.sqrt(dx * dx + dy * dy) < 1.0;
+}
+
+el.addEventListener("click", e => {
+  const r   = el.getBoundingClientRect();
+  const uvX = (e.clientX - r.left) / r.width;
+  const uvY = 1 - (e.clientY - r.top) / r.height;
+  if (!isInBelly(uvX, uvY)) return;
+  const dx = (uvX - BELLY.cx) / BELLY.rx;
+  const dy = (uvY - BELLY.cy) / BELLY.ry;
+  const d  = Math.sqrt(dx * dx + dy * dy);
+  ripples[head % MAX_RIPPLES].set(uvX, uvY, clock.getElapsedTime(), (1 - d) * 2.5);
+  head++;
+});
+
+el.addEventListener("mousemove", e => {
+  const r   = el.getBoundingClientRect();
+  const uvX = (e.clientX - r.left) / r.width;
+  const uvY = 1 - (e.clientY - r.top) / r.height;
+  el.style.cursor = isInBelly(uvX, uvY) ? "pointer" : "default";
+});
+
+new ResizeObserver(() => {
+  renderer.setSize(el.clientWidth, el.clientHeight);
+  uniforms.uAspect.value = el.clientWidth / el.clientHeight;
+}).observe(el);
+
+requestAnimationFrame(function tick() {
+  requestAnimationFrame(tick);
+  uniforms.uTime.value = clock.getElapsedTime();
+  renderer.render(scene, camera);
+});
+</script>
+</body>
+</html>
