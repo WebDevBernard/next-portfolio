@@ -116,7 +116,7 @@ export const cardData: CardProps[] = [
   },
   {
     type: "other",
-    title: "Mythic+ Run Count",
+    title: "M+ Run Count",
     description:
       "A graph of character count in World of Warcraft Mythic+ dungeons. Built with AWS Lambda/Eventbridge, React and Chart.js.",
     iconUrl: "/nodejs.svg",
