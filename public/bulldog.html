@@ -13,11 +13,67 @@
   body {
     background: #111;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    gap: 2rem;
     font-family: system-ui, sans-serif;
   }
+  #slider-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    color: #9ca3af;
+    font-size: 0.8rem;
+    padding: 0 1rem;
+  }
+  .slider-group, .toggle-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  @media (min-width: 768px) {
+    #slider-row {
+      flex-direction: row;
+      align-items: center;
+      gap: 1rem;
+    }
+  }
+  #slider-row input[type=range] {
+    width: 100px;
+    height: 20px;
+    accent-color: #3b82f6;
+    cursor: pointer;
+  }
+  #slider-row span {
+    min-width: 2.5rem;
+    text-align: center;
+    color: #d1d5db;
+    font-variant-numeric: tabular-nums;
+  }
+  .toggle {
+    appearance: none;
+    width: 36px;
+    height: 20px;
+    background: #374151;
+    border-radius: 10px;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .toggle:checked { background: #3b82f6; }
+  .toggle::after {
+    content: "";
+    position: absolute;
+    top: 2px; left: 2px;
+    width: 16px; height: 16px;
+    background: #fff;
+    border-radius: 50%;
+    transition: transform 0.2s;
+  }
+  .toggle:checked::after { transform: translateX(16px); }
   #container {
     width: min(90vw, 600px);
     aspect-ratio: 500 / 336;
@@ -25,27 +81,57 @@
     overflow: hidden;
     position: relative;
   }
-  #overlay {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-    padding-bottom: 1.25rem;
-    pointer-events: none;
+  #heading {
+    text-align: center;
     color: #fff;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.6);
   }
-  #overlay h2 { font-size: 1.1rem; font-weight: 600; }
-  #overlay p  { font-size: 0.8rem; color: #d1d5db; }
+  #heading h2 { font-size: 1.1rem; font-weight: 600; margin: 0; }
+  #heading p  { font-size: 0.8rem; color: #d1d5db; margin: 0.15rem 0 0; }
+  #ctx-menu {
+    position: fixed;
+    background: #1f2937;
+    border: 1px solid #374151;
+    border-radius: 0.5rem;
+    padding: 0.25rem 0;
+    z-index: 999;
+    display: none;
+    min-width: 140px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  }
+  #ctx-menu button {
+    display: block;
+    width: 100%;
+    padding: 0.4rem 1rem;
+    background: none;
+    border: none;
+    color: #d1d5db;
+    font-size: 0.8rem;
+    text-align: left;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  #ctx-menu button:hover { background: #374151; color: #fff; }
 </style>
 </head>
 <body>
-<div id="container">
-  <div id="overlay">
-    <h2>Forbidden Burrito</h2>
-    <p>Poke that belly!</p>
+<div id="heading">
+  <h2>Forbidden Burrito</h2>
+  <p>Poke that belly!</p>
+</div>
+
+<div id="container"></div>
+
+<div id="ctx-menu"><button id="ctx-save">Save image</button></div>
+
+<div id="slider-row">
+  <div class="slider-group">
+    <label for="jiggle-duration">Jiggle duration:</label>
+    <input type="range" id="jiggle-duration" min="0" max="3" step="1" value="0">
+    <span id="jiggle-label">1s</span>
+  </div>
+  <div class="toggle-group">
+    <label for="show-belly">Highlight belly:</label>
+    <input type="checkbox" id="show-belly" class="toggle">
   </div>
 </div>
 
@@ -59,8 +145,8 @@
 <script type="module">
 import * as THREE from "three";
 
-const MAX_RIPPLES = 6;
-const BELLY = { cx: 0.43, cy: 0.25, rx: 0.22, ry: 0.12, yMax: 0.36 };
+const MAX_RIPPLES = 1;
+const BELLY = { cx: 0.36, cy: 0.32, rx: 0.11, ry: 0.07, yMax: 0.38 };
 const IMG = "/Bulldog-1.webp";
 
 const vert = `
@@ -75,10 +161,13 @@ precision highp float;
 uniform sampler2D uTexture;
 uniform float     uTime;
 uniform float     uAspect;
-uniform vec4      uRipples[6];
+uniform vec4      uRipples[1];
 uniform vec2      uBellyC;
 uniform vec2      uBellyRad;
 uniform float     uBellyYMax;
+uniform float     uJiggleDuration;
+uniform float     uMaxAge;
+uniform float     uShowBelly;
 varying vec2 vUv;
 
 float dogMask(vec2 uv) {
@@ -96,17 +185,20 @@ float bellyMask(vec2 uv) {
 
 void main() {
   vec2 disp = vec2(0.0);
-  for (int i = 0; i < 6; i++) {
+  float hlEase = 0.0;
+  for (int i = 0; i < 1; i++) {
     float t0 = uRipples[i].z;
     if (t0 < 0.0) continue;
     float age = uTime - t0;
-    if (age > 2.8) continue;
+    if (age > uMaxAge) continue;
     vec2  ctr  = uRipples[i].xy;
     float jStr = uRipples[i].w;
     vec2  diff = vUv - ctr;
     diff.x *= uAspect;
     float dist = length(diff);
-    float decay = exp(-age * 1.9) * exp(-dist * 4.5);
+    float ease = 1.0 - smoothstep(0.0, uJiggleDuration, age);
+    hlEase = ease;
+    float decay = ease * exp(-dist * 4.5);
     float wave  = sin(dist * 38.0 - age * 14.0) * 0.016 * decay;
     if (dist > 0.001) {
       vec2 dir = diff / dist;
@@ -114,14 +206,21 @@ void main() {
       disp  += dir * wave;
     }
     if (jStr > 0.0) {
-      float squish = sin(age * 22.0) * exp(-age * 3.2) * jStr * 0.011 * bellyMask(vUv);
+      float squish = sin(age * 22.0) * ease * jStr * 0.011 * bellyMask(vUv);
       disp.y += squish;
       disp.x += squish * 0.25;
     }
   }
-  float mask = dogMask(vUv);
+  float bellyBottom = uBellyC.y - uBellyRad.y;
+  float bottomCut   = smoothstep(bellyBottom - 0.04, bellyBottom, vUv.y);
+  float mask = dogMask(vUv) * mix(bellyMask(vUv), 1.0, bottomCut);
   vec2  uv   = vUv + disp * mask;
   gl_FragColor = texture2D(uTexture, clamp(uv, 0.001, 0.999));
+  if (uShowBelly > 0.5) {
+    float bm = bellyMask(vUv);
+    float hl = 0.55 - hlEase * 0.4;
+    gl_FragColor.rgb = mix(gl_FragColor.rgb, vec3(1.0, 0.4, 0.6), bm * hl);
+  }
 }`;
 
 const container = document.getElementById("container");
@@ -137,17 +236,19 @@ const scene  = new THREE.Scene();
 const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
 
 const ripples = Array.from({ length: MAX_RIPPLES }, () => new THREE.Vector4(0, 0, -1, 0));
-let head = 0;
 const clock = new THREE.Clock();
 
 const uniforms = {
-  uTexture:   { value: null },
-  uTime:      { value: 0 },
-  uAspect:    { value: el.clientWidth / el.clientHeight },
-  uRipples:   { value: ripples },
-  uBellyC:    { value: new THREE.Vector2(BELLY.cx, BELLY.cy) },
-  uBellyRad:  { value: new THREE.Vector2(BELLY.rx, BELLY.ry) },
-  uBellyYMax: { value: BELLY.yMax },
+  uTexture:     { value: null },
+  uTime:        { value: 0 },
+  uAspect:      { value: el.clientWidth / el.clientHeight },
+  uRipples:     { value: ripples },
+  uBellyC:      { value: new THREE.Vector2(BELLY.cx, BELLY.cy) },
+  uBellyRad:    { value: new THREE.Vector2(BELLY.rx, BELLY.ry) },
+  uBellyYMax:   { value: BELLY.yMax },
+  uJiggleDuration: { value: 1.0 },
+  uMaxAge:         { value: 1.0 },
+  uShowBelly:      { value: 0 },
 };
 
 scene.add(new THREE.Mesh(
@@ -168,22 +269,25 @@ function isInBelly(uvX, uvY) {
   return Math.sqrt(dx * dx + dy * dy) < 1.0;
 }
 
-el.addEventListener("click", e => {
+const getUV = (e) => {
   const r   = el.getBoundingClientRect();
-  const uvX = (e.clientX - r.left) / r.width;
-  const uvY = 1 - (e.clientY - r.top) / r.height;
+  return {
+    uvX: (e.clientX - r.left) / r.width,
+    uvY: 1 - (e.clientY - r.top) / r.height,
+  };
+};
+
+el.addEventListener("pointerdown", e => {
+  const { uvX, uvY } = getUV(e);
   if (!isInBelly(uvX, uvY)) return;
   const dx = (uvX - BELLY.cx) / BELLY.rx;
   const dy = (uvY - BELLY.cy) / BELLY.ry;
   const d  = Math.sqrt(dx * dx + dy * dy);
-  ripples[head % MAX_RIPPLES].set(uvX, uvY, clock.getElapsedTime(), (1 - d) * 2.5);
-  head++;
+  ripples[0].set(uvX, uvY, clock.getElapsedTime(), (1 - d) * 2.5);
 });
 
-el.addEventListener("mousemove", e => {
-  const r   = el.getBoundingClientRect();
-  const uvX = (e.clientX - r.left) / r.width;
-  const uvY = 1 - (e.clientY - r.top) / r.height;
+el.addEventListener("pointermove", e => {
+  const { uvX, uvY } = getUV(e);
   el.style.cursor = isInBelly(uvX, uvY) ? "pointer" : "default";
 });
 
@@ -191,6 +295,52 @@ new ResizeObserver(() => {
   renderer.setSize(el.clientWidth, el.clientHeight);
   uniforms.uAspect.value = el.clientWidth / el.clientHeight;
 }).observe(el);
+
+const jiggleSlider = document.getElementById("jiggle-duration");
+const jiggleLabel  = document.getElementById("jiggle-label");
+const durations = [1, 3, 6, 999];
+const durationLabels = ["1s", "3s", "6s", "forever"];
+jiggleSlider.value = 0;
+jiggleSlider.addEventListener("input", () => {
+  const idx = parseInt(jiggleSlider.value);
+  const dur = durations[idx];
+  const oldDur = uniforms.uJiggleDuration.value;
+  if (ripples[0].z >= 0 && dur < oldDur) {
+    const age = clock.getElapsedTime() - ripples[0].z;
+    ripples[0].z = Math.max(0, clock.getElapsedTime() - Math.min(age / oldDur, 1.0) * dur);
+  }
+  uniforms.uJiggleDuration.value = dur;
+  uniforms.uMaxAge.value = dur;
+  jiggleLabel.textContent = durationLabels[idx];
+});
+
+const showBellyToggle = document.getElementById("show-belly");
+showBellyToggle.checked = false;
+showBellyToggle.addEventListener("change", e => {
+  uniforms.uShowBelly.value = e.target.checked ? 1 : 0;
+});
+
+const ctxMenu = document.getElementById("ctx-menu");
+const ctxSave  = document.getElementById("ctx-save");
+
+el.addEventListener("contextmenu", e => {
+  e.preventDefault();
+  ctxMenu.style.display = "block";
+  ctxMenu.style.left = e.clientX + "px";
+  ctxMenu.style.top  = e.clientY + "px";
+});
+
+document.addEventListener("click", () => {
+  ctxMenu.style.display = "none";
+});
+
+ctxSave.addEventListener("click", () => {
+  ctxMenu.style.display = "none";
+  const a = document.createElement("a");
+  a.href = IMG;
+  a.download = "bulldog.webp";
+  a.click();
+});
 
 requestAnimationFrame(function tick() {
   requestAnimationFrame(tick);

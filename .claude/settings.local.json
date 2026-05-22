@@ -19,7 +19,14 @@
       "PowerShell(npm *)",
       "PowerShell(Get-ChildItem -Recurse -File E:\\\\dev\\\\Portfolio\\\\AstroPortfolio\\\\public\\\\ | Select-Object Name, @{Name=\"Size\\(Bytes\\)\";Expression={$_.Length}}, @{Name=\"Size\\(KB\\)\";Expression={[math]::Round\\($_.Length/1KB, 2\\)}} | Sort-Object Name)",
       "PowerShell(Get-ChildItem -Recurse -File \"E:\\\\dev\\\\Portfolio\\\\AstroPortfolio\\\\public\\\\\" | Select-Object Name, @{N=\"Size\\(Bytes\\)\";E={$_.Length}}, @{N=\"Size\\(KB\\)\";E={[math]::Round\\($_.Length/1KB, 2\\)}} | Format-Table -AutoSize)",
-      "PowerShell(npx astro build 2>&1)"
+      "PowerShell(npx astro build 2>&1)",
+      "PowerShell(Get-Content E:\\\\dev\\\\Portfolio\\\\public\\\\bulldog.html -Raw | Select-String -Pattern \"body \\\\{\" -AllMatches | ForEach-Object { $_.Matches } | Select-Object -First 1)",
+      "PowerShell(Format-Hex *)",
+      "PowerShell([System.IO.File]::ReadAllLines\\(\"E:\\\\dev\\\\Portfolio\\\\public\\\\bulldog.html\"\\)[44..50] | ForEach-Object { $bytes = [System.Text.Encoding]::UTF8.GetBytes\\($_\\); \"$\\($bytes[0].ToString\\('X2'\\)\\) $\\($bytes[1].ToString\\('X2'\\)\\) $_\" })",
+      "PowerShell([System.IO.File]::ReadAllLines\\(\"E:\\\\dev\\\\Portfolio\\\\public\\\\bulldog.html\"\\)[56..65] | ForEach-Object { $bytes = [System.Text.Encoding]::UTF8.GetBytes\\($_\\); $first = if \\($bytes.Count -gt 0\\) { $bytes[0].ToString\\('X2'\\) } else { \"empty\" }; \"$first $_\" })",
+      "PowerShell([System.IO.File]::ReadAllLines\\(\"E:\\\\dev\\\\Portfolio\\\\public\\\\bulldog.html\"\\)[155..165] | ForEach-Object { $bytes = [System.Text.Encoding]::UTF8.GetBytes\\($_\\); $first = if \\($bytes.Count -gt 0\\) { $bytes[0].ToString\\('X2'\\) } else { \"empty\" }; \"$first $_\" })",
+      "PowerShell($lines = [System.IO.File]::ReadAllLines\\(\"E:\\\\dev\\\\Portfolio\\\\public\\\\bulldog.html\"\\); for \\($i = 78; $i -lt 85; $i++\\) { $bytes = [System.Text.Encoding]::UTF8.GetBytes\\($lines[$i]\\); $hex = \\($bytes | ForEach-Object { $_.ToString\\('X2'\\) }\\) -join ' '; Write-Output \"$\\($i\\): $hex |$\\($lines[$i]\\)|\" })",
+      "PowerShell($lines = [System.IO.File]::ReadAllLines\\(\"E:\\\\dev\\\\Portfolio\\\\public\\\\bulldog.html\"\\); for \\($i = 88; $i -lt 98; $i++\\) { $bytes = [System.Text.Encoding]::UTF8.GetBytes\\($lines[$i]\\); $hex = \\($bytes | ForEach-Object { $_.ToString\\('X2'\\) }\\) -join ' '; Write-Output \"$\\($i\\): |$\\($lines[$i]\\)|\" })"
     ]
   },
   "enabledMcpjsonServers": [

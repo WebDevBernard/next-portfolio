@@ -6,11 +6,11 @@ import * as THREE from "three";
 const MAX_RIPPLES = 6;
 
 const BELLY = {
-  cx: 0.43,
-  cy: 0.25,
-  rx: 0.25,
-  ry: 0.12,
-  yMax: 0.36,
+  cx: 0.36,
+  cy: 0.32,
+  rx: 0.11,
+  ry: 0.07,
+  yMax: 0.38,
 };
 
 const vert = `
@@ -86,11 +86,10 @@ void main() {
     }
   }
 
-  // Mask ripple to dog silhouette.
-  // Only check the SOURCE pixel — no destination check.
-  // The wider smoothstep edge on dogMask() softens the seam
-  // enough that no outline is visible.
-  float mask = dogMask(vUv);
+  // Mask: dog silhouette everywhere, belly zone at the bottom boundary
+  float bellyBottom = uBellyC.y - uBellyRad.y;
+  float bottomCut   = smoothstep(bellyBottom - 0.04, bellyBottom, vUv.y);
+  float mask = dogMask(vUv) * mix(bellyMask(vUv), 1.0, bottomCut);
   vec2  uv   = vUv + disp * mask;
 
   gl_FragColor = texture2D(uTexture, clamp(uv, 0.001, 0.999));
