@@ -3,7 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Heading from "../components/ui/Heading.astro";
 import Description from "../components/ui/Description.astro";
 import ProjectCards from "../components/ProjectCards";
-import Carousel from "../components/Carousel";
+import BulldogSection from "../components/BulldogSection";
 import { ContactForm } from "../components/Form/ContactForm";
 import { ContactButton } from "../components/Contact/ContactButton";
 import { ContactSectionHeading } from "../components/Contact/ContactSectionHeading";
@@ -12,15 +12,29 @@ import { introContent, contactContent } from "../lib/data";
 
 <BaseLayout>
   <!-- Hero -->
-  <section class="w-full space-y-6 mt-8">
+  <section class="w-full space-y-6 mt-16">
     <Heading as="h1" underlineColor="decoration-[#4AE54A]/60">
       {introContent.title}
     </Heading>
-    <Description direction="down" color="teal" class="flex space-x-4">
+    <Description direction="down" color="teal" class="flex space-x-4 mt-12">
       <img src="/hi.svg" alt="hi" width={40} height={40} />
       <p>{introContent.description}</p>
     </Description>
     <ContactButton client:load />
+  </section>
+
+  <!-- This Cost 2 Million Tokens -->
+  <section
+    aria-label="This Cost 2 Million Tokens"
+    class="space-y-6 flex flex-col items-center"
+  >
+    <Heading as="h2" underlineColor="decoration-yellow-300">
+      This Cost 2 Million Tokens
+    </Heading>
+    <BulldogSection client:visible />
+    <Description direction="up" color="blue" class="mt-12">
+      Ghibli-style bulldog made in Sora, with jiggle physics in Three.js. Use the slider above to change the jiggle duration.
+    </Description>
   </section>
 
   <!-- Work Projects -->
@@ -39,24 +53,10 @@ import { introContent, contactContent } from "../lib/data";
     <ProjectCards type="other" client:visible />
   </section>
 
-  <!-- Ghibli Bulldogs -->
-  <section
-    aria-label="Ghibli Bulldogs"
-    class="space-y-6 flex flex-col items-center"
-  >
-    <Heading as="h2" underlineColor="decoration-yellow-300">
-      Ghibli Bulldogs
-    </Heading>
-    <Carousel client:visible />
-    <Description direction="up" color="blue">
-      Ghibli-style bulldogs made in Sora, with jiggle physics in Three.js.
-    </Description>
-  </section>
-
   <!-- Contact -->
   <section aria-label="Contact" class="space-y-6 flex flex-col items-center">
     <ContactSectionHeading title={contactContent.title} client:load />
-    <Description direction="up" color="yellow">
+    <Description direction="up" color="yellow" class="mt-12">
       {contactContent.description}
     </Description>
     <ContactForm client:visible />

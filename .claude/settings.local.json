@@ -26,7 +26,16 @@
       "PowerShell([System.IO.File]::ReadAllLines\\(\"E:\\\\dev\\\\Portfolio\\\\public\\\\bulldog.html\"\\)[56..65] | ForEach-Object { $bytes = [System.Text.Encoding]::UTF8.GetBytes\\($_\\); $first = if \\($bytes.Count -gt 0\\) { $bytes[0].ToString\\('X2'\\) } else { \"empty\" }; \"$first $_\" })",
       "PowerShell([System.IO.File]::ReadAllLines\\(\"E:\\\\dev\\\\Portfolio\\\\public\\\\bulldog.html\"\\)[155..165] | ForEach-Object { $bytes = [System.Text.Encoding]::UTF8.GetBytes\\($_\\); $first = if \\($bytes.Count -gt 0\\) { $bytes[0].ToString\\('X2'\\) } else { \"empty\" }; \"$first $_\" })",
       "PowerShell($lines = [System.IO.File]::ReadAllLines\\(\"E:\\\\dev\\\\Portfolio\\\\public\\\\bulldog.html\"\\); for \\($i = 78; $i -lt 85; $i++\\) { $bytes = [System.Text.Encoding]::UTF8.GetBytes\\($lines[$i]\\); $hex = \\($bytes | ForEach-Object { $_.ToString\\('X2'\\) }\\) -join ' '; Write-Output \"$\\($i\\): $hex |$\\($lines[$i]\\)|\" })",
-      "PowerShell($lines = [System.IO.File]::ReadAllLines\\(\"E:\\\\dev\\\\Portfolio\\\\public\\\\bulldog.html\"\\); for \\($i = 88; $i -lt 98; $i++\\) { $bytes = [System.Text.Encoding]::UTF8.GetBytes\\($lines[$i]\\); $hex = \\($bytes | ForEach-Object { $_.ToString\\('X2'\\) }\\) -join ' '; Write-Output \"$\\($i\\): |$\\($lines[$i]\\)|\" })"
+      "PowerShell($lines = [System.IO.File]::ReadAllLines\\(\"E:\\\\dev\\\\Portfolio\\\\public\\\\bulldog.html\"\\); for \\($i = 88; $i -lt 98; $i++\\) { $bytes = [System.Text.Encoding]::UTF8.GetBytes\\($lines[$i]\\); $hex = \\($bytes | ForEach-Object { $_.ToString\\('X2'\\) }\\) -join ' '; Write-Output \"$\\($i\\): |$\\($lines[$i]\\)|\" })",
+      "PowerShell(Get-Process *)",
+      "PowerShell(try { $r = Invoke-WebRequest -Uri \"http://localhost:4321\" -TimeoutSec 3 -UseBasicParsing; \"Server running: $\\($r.StatusCode\\)\" } catch { \"Not running: $_\" })",
+      "PowerShell(Get-ChildItem *)",
+      "PowerShell(Get-NetIPAddress -AddressFamily IPv4 | Where-Object { $_.InterfaceAlias -notmatch \"Loopback|vEthernet|Hyper-V\" -and $_.IPAddress -ne \"127.0.0.1\" } | Select-Object IPAddress, InterfaceAlias)",
+      "PowerShell(npx astro dev --host)",
+      "PowerShell($content = Get-Content \"E:\\\\dev\\\\Portfolio\\\\public\\\\bulldog-2.html\" -Raw; $idx = $content.IndexOf\\(\"vec2 eyeWarp\"\\); $sub = $content.Substring\\($idx, 600\\); $bytes = [System.Text.Encoding]::UTF8.GetBytes\\($sub\\); for \\($i = 0; $i -lt [Math]::Min\\(50, $bytes.Length\\); $i++\\) { Write-Host \\(\"{0:X2}\" -f $bytes[$i]\\) -NoNewline; if \\(\\($i+1\\) % 16 -eq 0\\) { Write-Host \"\" } }; Write-Host \"\"; Write-Host \"---\"; Write-Host $sub.Substring\\(0, 450\\))",
+      "PowerShell(npm uninstall *)",
+      "PowerShell(if \\(Test-Path \"E:\\\\Untitled.png\"\\) { Write-Host \"exists\"; \\(Get-Item \"E:\\\\Untitled.png\"\\).Length } else { Write-Host \"not found\" })",
+      "PowerShell(Get-Content \"E:\\\\dev\\\\Portfolio\\\\public\\\\bulldog.html\" -Encoding UTF8 | Select-Object -Index 544,545,546,547,548,549 | ForEach-Object { [System.Text.Encoding]::UTF8.GetBytes\\($_\\) | ForEach-Object { Write-Host -NoNewline \"$_ \" }; Write-Host \"\" })"
     ]
   },
   "enabledMcpjsonServers": [

@@ -56,21 +56,6 @@ export const emailInfo = {
   to: [contactEmail],
 };
 
-export const bulldogSayings = [
-  "Yes, sir?",
-  "How can I help?",
-  "I'm the assistant!",
-  "Jiggling, sir.",
-  "Bulldog at your service.",
-  "Right away, sir.",
-  "Woof. I mean, yesh?",
-  "I tired, sir.",
-  "They don't pay me enough for this.",
-  "Reddit, funneh!",
-  "Head heavy, sir.",
-  "Please, sir.",
-];
-
 export const carouselSlides: Slide[] = [
   {
     id: 3,

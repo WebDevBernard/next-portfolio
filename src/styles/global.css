@@ -17,16 +17,16 @@ img {
     @apply bg-[#fafafa] shadow-[0_6px_0_rgb(161,161,170)] border-2 border-zinc-400;
   }
   h1 {
-    @apply text-4xl font-semibold text-center tracking-tighter text-zinc-800;
+    @apply text-5xl font-semibold text-center tracking-tighter text-zinc-900;
   }
   h2 {
-    @apply text-4xl font-semibold text-center tracking-tighter text-zinc-800;
+    @apply text-4xl font-semibold text-center tracking-tighter text-zinc-900;
   }
   h4 {
-    @apply text-lg tracking-tighter text-zinc-800;
+    @apply text-lg tracking-tighter text-zinc-900;
   }
   p {
-    @apply text-zinc-700 max-w-xl;
+    @apply text-zinc-800 max-w-xl;
   }
 }
 

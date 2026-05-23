@@ -68,11 +68,11 @@ const currentUrl = new URL(Astro.url.pathname, baseUrl).href;
     )}
   </head>
   <body
-    class="antialiased mt-8 bg-transparent mx-auto max-w-[96rem]"
+    class="antialiased mt-8 bg-transparent mx-auto max-w-[96rem] text-zinc-800"
     style="font-family: 'DM Sans', sans-serif;"
   >
     <Header client:load pathname={Astro.url.pathname} />
-    <main class="relative mx-auto px-4 max-w-5xl flex flex-col gap-y-10">
+    <main class="relative mx-auto px-4 max-w-5xl flex flex-col gap-y-16">
       <slot />
     </main>
     <Footer />

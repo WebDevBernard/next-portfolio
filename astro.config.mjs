@@ -20,5 +20,6 @@ export default defineConfig({
     "/big-tuna": "/big-tuna.html",
     "/bulldog": "/bulldog.html",
     "/big-tuna.html" : "/bulldog.html",
+    "/bulldog-backup.html" : "/bulldog.html",
   },
 });
