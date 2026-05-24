@@ -117,9 +117,110 @@ void main() {
     mask *= smoothstep(uBellyC.y - 0.01, uBellyC.y + 0.01, vUv.y);
   mask *= smoothstep(uJiggleLeft - 0.04, uJiggleLeft + 0.04, vUv.x);
   mask *= 1.0 - smoothstep(uJiggleRight - 0.04, uJiggleRight + 0.04, vUv.x);
-  vec2  uv   = vUv + disp * mask;
 
+  // breathing
+  vec2 bd = vUv - uBellyC;
+  bd.x /= uAspect;
+  float bdist = length(bd);
+  if (bdist > 0.001) {
+    vec2 bdir = bd / bdist;
+    bdir.x /= uAspect;
+    disp += bdir * sin(uTime * 1.7) * 0.003;
+  }
+
+  vec2  uv   = vUv + disp * mask;
   gl_FragColor = texture2D(uTexture, clamp(uv, 0.001, 0.999));
+}
+`;
+
+const fragOverlay = `
+precision highp float;
+
+uniform sampler2D uTexture;
+uniform float     uTime;
+uniform float     uAspect;
+uniform vec4      uRipples[6];
+uniform vec2      uBellyC;
+uniform vec2      uBellyRad;
+uniform float     uBellyYMax;
+uniform float     uCutoffY;
+uniform float     uCutoffX3;
+uniform float     uDiagDx;
+uniform float     uDiagDy;
+uniform float     uJiggleLeft;
+uniform float     uJiggleRight;
+uniform float     uJiggleDuration;
+uniform float     uMaxAge;
+
+varying vec2 vUv;
+
+float dogMask(vec2 uv) {
+  vec4  c = texture2D(uTexture, clamp(uv, 0.001, 0.999));
+  return smoothstep(-0.15, 0.3, c.r - c.b);
+}
+
+float bellyMaskFull(vec2 uv) {
+  if (uv.y > uBellyYMax) return 0.0;
+  float bellyBottom = uBellyC.y - uBellyRad.y;
+  if (uv.y < bellyBottom + 0.02) return 0.0;
+  float rightEdge = uBellyC.x + uBellyRad.x;
+  float cross = uDiagDx * (uv.y - uCutoffY) - uDiagDy * (uv.x - rightEdge);
+  if (cross < 0.0) return 0.0;
+  float edgeFade = 1.0;
+  edgeFade *= smoothstep(uJiggleLeft - 0.04, uJiggleLeft + 0.04, uv.x);
+  edgeFade *= 1.0 - smoothstep(uJiggleRight - 0.04, uJiggleRight + 0.04, uv.x);
+  if (uv.x > rightEdge)
+    edgeFade *= smoothstep(uCutoffY - 0.01, uCutoffY + 0.01, uv.y);
+  if (uv.x > uCutoffX3)
+    edgeFade *= smoothstep(uBellyC.y - 0.01, uBellyC.y + 0.01, uv.y);
+  vec2  d     = (uv - uBellyC) / uBellyRad;
+  float yFade = smoothstep(uBellyYMax, uBellyYMax - 0.06, uv.y);
+  return smoothstep(1.0, 0.0, length(d)) * yFade * dogMask(uv) * edgeFade;
+}
+
+void main() {
+  float bm = bellyMaskFull(vUv);
+  if (bm < 0.01) { gl_FragColor = vec4(0.0); return; }
+
+  vec2 disp = vec2(0.0);
+
+  for (int i = 0; i < 6; i++) {
+    float t0 = uRipples[i].z;
+    if (t0 < 0.0) continue;
+    float age = uTime - t0;
+    if (age > uMaxAge) continue;
+    float jStr = uRipples[i].w;
+    vec2  diff = vUv - uRipples[i].xy;
+    diff.x    *= uAspect;
+    float dist = length(diff);
+    float ease = 1.0 - smoothstep(0.0, uJiggleDuration, age);
+    float decay = ease * exp(-dist * 4.5);
+    float wave  = sin(dist * 38.0 - age * 14.0) * 0.016 * decay;
+    if (dist > 0.001) {
+      vec2 dir = diff / dist;
+      dir.x   /= uAspect;
+      disp    += dir * wave;
+    }
+    if (jStr > 0.0) {
+      float squish = sin(age * 22.0) * ease * jStr * 0.011 * bm;
+      disp.y += squish;
+      disp.x += squish * 0.25;
+    }
+  }
+
+  // breathing
+  vec2 bd = vUv - uBellyC;
+  bd.x /= uAspect;
+  float bdist = length(bd);
+  if (bdist > 0.001) {
+    vec2 bdir = bd / bdist;
+    bdir.x /= uAspect;
+    disp += bdir * sin(uTime * 1.7) * 0.003;
+  }
+
+  vec2 uv    = clamp(vUv + disp * bm, 0.001, 0.999);
+  vec4 color = texture2D(uTexture, uv);
+  gl_FragColor = vec4(color.rgb, bm);
 }
 `;
 
@@ -129,9 +230,13 @@ interface BulldogBellyProps {
   style?: React.CSSProperties;
 }
 
-export default function BulldogBelly({ src, jiggleDuration = 1, style }: BulldogBellyProps) {
+export default function BulldogBelly({
+  src,
+  jiggleDuration = 1,
+  style,
+}: BulldogBellyProps) {
   const mountRef = useRef<HTMLDivElement>(null);
-	const imgRef = useRef<HTMLImageElement>(null);
+  const imgRef = useRef<HTMLImageElement>(null);
   const durationRef = useRef(jiggleDuration);
   durationRef.current = jiggleDuration;
 
@@ -139,14 +244,11 @@ export default function BulldogBelly({ src, jiggleDuration = 1, style }: Bulldog
     const el = mountRef.current;
     if (!el || !src) return;
 
-    const renderer = new THREE.WebGLRenderer({
-      antialias: true,
-      alpha: true,
-    });
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setSize(el.clientWidth, el.clientHeight);
     renderer.outputColorSpace = THREE.LinearSRGBColorSpace;
-	    renderer.setClearColor(0x000000, 0);
+    renderer.setClearColor(0x000000, 0);
     el.appendChild(renderer.domElement);
 
     const scene = new THREE.Scene();
@@ -156,7 +258,6 @@ export default function BulldogBelly({ src, jiggleDuration = 1, style }: Bulldog
       { length: MAX_RIPPLES },
       () => new THREE.Vector4(0, 0, -1, 0),
     );
-    let head = 0;
     const clock = new THREE.Clock();
 
     const uniforms = {
@@ -177,6 +278,7 @@ export default function BulldogBelly({ src, jiggleDuration = 1, style }: Bulldog
       uMaxAge: { value: jiggleDuration },
     };
 
+    // Base mesh
     scene.add(
       new THREE.Mesh(
         new THREE.PlaneGeometry(2, 2),
@@ -188,14 +290,29 @@ export default function BulldogBelly({ src, jiggleDuration = 1, style }: Bulldog
       ),
     );
 
+    // Overlay mesh (breathing + jiggle on belly layer)
+    const overlayMesh = new THREE.Mesh(
+      new THREE.PlaneGeometry(2, 2),
+      new THREE.ShaderMaterial({
+        uniforms,
+        vertexShader: vert,
+        fragmentShader: fragOverlay,
+        transparent: true,
+        depthTest: false,
+      }),
+    );
+    overlayMesh.renderOrder = 1;
+    scene.add(overlayMesh);
+
     new THREE.TextureLoader().load(src, (tex) => {
       tex.colorSpace = THREE.LinearSRGBColorSpace;
       tex.minFilter = THREE.LinearFilter;
       uniforms.uTexture.value = tex;
-		});
+    });
 
     let raf: number;
-	    let firstFrame = false;
+    let firstFrame = false;
+
     const tick = () => {
       raf = requestAnimationFrame(tick);
       const dur = durationRef.current;
@@ -205,7 +322,10 @@ export default function BulldogBelly({ src, jiggleDuration = 1, style }: Bulldog
           const t0 = ripples[i].z;
           if (t0 >= 0 && dur < oldDur) {
             const age = clock.getElapsedTime() - t0;
-            ripples[i].z = Math.max(0, clock.getElapsedTime() - Math.min(age / oldDur, 1.0) * dur);
+            ripples[i].z = Math.max(
+              0,
+              clock.getElapsedTime() - Math.min(age / oldDur, 1.0) * dur,
+            );
           }
         }
         uniforms.uJiggleDuration.value = dur;
@@ -213,10 +333,10 @@ export default function BulldogBelly({ src, jiggleDuration = 1, style }: Bulldog
       }
       uniforms.uTime.value = clock.getElapsedTime();
       renderer.render(scene, camera);
-	      if (!firstFrame && uniforms.uTexture.value) {
-	        firstFrame = true;
-	        if (imgRef.current) imgRef.current.style.opacity = '0';
-	      }
+      if (!firstFrame && uniforms.uTexture.value) {
+        firstFrame = true;
+        if (imgRef.current) imgRef.current.style.opacity = "0";
+      }
     };
     tick();
 
@@ -231,17 +351,12 @@ export default function BulldogBelly({ src, jiggleDuration = 1, style }: Bulldog
       const r = el.getBoundingClientRect();
       const uvX = (e.clientX - r.left) / r.width;
       const uvY = 1 - (e.clientY - r.top) / r.height;
-
       if (!isInBelly(uvX, uvY)) return;
-
       const dx = (uvX - BELLY.cx) / BELLY.rx;
       const dy = (uvY - BELLY.cy) / BELLY.ry;
       const d = Math.sqrt(dx * dx + dy * dy);
-      const jStr = (1 - d) * 2.5;
-
       for (let i = 0; i < MAX_RIPPLES; i++) ripples[i].z = -1;
-      ripples[0].set(uvX, uvY, clock.getElapsedTime(), jStr);
-      head = 1;
+      ripples[0].set(uvX, uvY, clock.getElapsedTime(), (1 - d) * 2.5);
     };
 
     const onMouseMove = (e: MouseEvent) => {
@@ -274,8 +389,14 @@ export default function BulldogBelly({ src, jiggleDuration = 1, style }: Bulldog
     <div
       ref={mountRef}
       className="w-full rounded-2xl overflow-hidden relative"
-      style={{ aspectRatio: "500 / 336", background: "#1a1a1a", ...style }}>
-	  <img ref={imgRef} src={src} alt="" className="absolute inset-0 w-full h-full transition-opacity duration-300" />
-	</div>
+      style={{ aspectRatio: "500 / 336", background: "#1a1a1a", ...style }}
+    >
+      <img
+        ref={imgRef}
+        src={src}
+        alt=""
+        className="absolute inset-0 w-full h-full transition-opacity duration-300"
+      />
+    </div>
   );
 }

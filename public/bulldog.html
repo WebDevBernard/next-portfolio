@@ -304,6 +304,16 @@ void main() {
     mask *= smoothstep(uBellyC.y - 0.01, uBellyC.y + 0.01, vUv.y);
   mask *= smoothstep(uJiggleLeft - 0.04, uJiggleLeft + 0.04, vUv.x);
   mask *= 1.0 - smoothstep(uJiggleRight - 0.04, uJiggleRight + 0.04, vUv.x);
+  // breathing
+  vec2 bd = vUv - uBellyC;
+  bd.x /= uAspect;
+  float bdist = length(bd);
+  if (bdist > 0.001) {
+    vec2 bdir = bd / bdist;
+    bdir.x /= uAspect;
+    disp += bdir * sin(uTime * 1.7) * 0.003;
+  }
+
   vec2  uv   = vUv + disp * mask;
   gl_FragColor = texture2D(uTexture, clamp(uv, 0.001, 0.999));
 }`;
@@ -421,6 +431,16 @@ void main() {
       disp.y += squish;
       disp.x += squish * 0.25;
     }
+  }
+
+  // breathing
+  vec2 bd = vUv - uBellyC;
+  bd.x /= uAspect;
+  float bdist = length(bd);
+  if (bdist > 0.001) {
+    vec2 bdir = bd / bdist;
+    bdir.x /= uAspect;
+    disp += bdir * sin(uTime * 1.7) * 0.003;
   }
 
   vec2 uv      = clamp(vUv + disp * bm, 0.001, 0.999);
