@@ -92,12 +92,12 @@ export function ContactForm() {
         transition: { type: "spring" as const, stiffness: 80, damping: 8 },
       }}
       viewport={{ once: true, margin: "-80px" }}
-      className="md:mx-auto max-w-xl w-full"
+      className="md:mx-auto max-w-lg w-full"
     >
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="w-full rounded-xl p-6 space-y-4 flex flex-col justify-between bg-white border-2 border-zinc-400 shadow-[0_6px_0_rgb(161,161,170)]"
+          className="w-full rounded-lg p-6 space-y-4 flex flex-col justify-between bg-[#fafafa] border-2 border-zinc-400 shadow-[0_6px_0_rgb(161,161,170)]"
         >
           <FormField
             control={form.control}
