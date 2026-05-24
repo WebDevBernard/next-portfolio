@@ -206,7 +206,6 @@ const DIAG_DX = MARKER_X - (BELLY.cx + BELLY.rx);
 const DIAG_DY = MARKER_Y - CUTOFF_Y;
 const JIGGLE_LEFT  = 0.12;
 const JIGGLE_RIGHT = 0.71;
-
 const IMG = "/Bulldog-1.webp";
 
 const vert = `
@@ -565,8 +564,6 @@ function drawDebug() {
   const cy = (1 - BELLY.cy) * h;
   const rx = BELLY.rx * w;
   const ry = BELLY.ry * h;
-  const yMaxY = (1 - BELLY.yMax) * h;
-
   debugCtx.save();
   debugCtx.strokeStyle = "#ff00ff";
   debugCtx.lineWidth = 1;
@@ -582,17 +579,7 @@ function drawDebug() {
   debugCtx.arc(cx, cy, 3, 0, Math.PI * 2);
   debugCtx.fill();
 
-  // yMax cutoff line
-  debugCtx.strokeStyle = "#00ffff";
-  debugCtx.lineWidth = 1;
-  debugCtx.setLineDash([4, 4]);
-  debugCtx.beginPath();
-  debugCtx.moveTo(0, yMaxY);
-  debugCtx.lineTo(w, yMaxY);
-  debugCtx.stroke();
-  debugCtx.setLineDash([]);
-
-  // jiggle vertical boundaries (left + right)
+// jiggle vertical boundaries (left + right)
   const jiggleLeftX  = JIGGLE_LEFT * w;
   const jiggleRightX = JIGGLE_RIGHT * w;
   debugCtx.strokeStyle = "#00ff88";
