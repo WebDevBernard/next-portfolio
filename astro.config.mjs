@@ -16,6 +16,8 @@ export default defineConfig({
   },
   redirects: {
     "/resume": "/resume.pdf",
+    "/Resume": "/resume.pdf",
+    "/RESUME": "/resume.pdf",
     "/bigtuna": "/big-tuna.html",
     "/big-tuna": "/big-tuna.html",
     "/bulldog": "/bulldog.html",
