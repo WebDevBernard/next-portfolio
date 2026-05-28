@@ -5,19 +5,19 @@ import react from "@astrojs/react";
 import vercel from "@astrojs/vercel";
 import sitemap from "@astrojs/sitemap";
 
+import cloudflare from "@astrojs/cloudflare";
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://bernardyang.com",
   integrations: [react(), sitemap()],
   output: "server",
-  adapter: vercel(),
+  adapter: cloudflare(),
   vite: {
     plugins: [tailwindcss()],
   },
   redirects: {
     "/resume": "/resume.pdf",
-    "/Resume": "/resume.pdf",
-    "/RESUME": "/resume.pdf",
     "/bigtuna": "/big-tuna.html",
     "/big-tuna": "/big-tuna.html",
     "/bulldog": "/bulldog.html",
