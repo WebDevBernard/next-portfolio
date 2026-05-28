@@ -9,9 +9,11 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "generate-types": "wrangler types"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^13.5.5",
     "@astrojs/react": "^5.0.5",
     "@astrojs/sitemap": "^3.7.2",
     "@astrojs/vercel": "^10.0.7",
@@ -39,6 +41,10 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
     "@types/three": "^0.184.1",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "wrangler": "^4.95.0"
+  },
+  "overrides": {
+    "vite": "^7"
   }
 }
