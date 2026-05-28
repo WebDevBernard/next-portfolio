@@ -1,5 +1,5 @@
 import { useState, useCallback, useRef } from "react";
-import type { TurnstileHandle } from "@/components/form/Turnstile";
+import type { TurnstileHandle } from "@/components/Form/Turnstile";
 
 export function useTurnstile() {
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);

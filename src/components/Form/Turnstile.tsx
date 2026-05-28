@@ -17,8 +17,8 @@ declare global {
       reset: (widgetId: string) => void;
       remove: (widgetId: string) => void;
       execute: (widgetId: string) => void;
-      ready: (callback: () => void) => void;
     };
+    __cfTurnstileOnLoad?: () => void;
   }
 }
 
@@ -40,19 +40,59 @@ type TurnstileProps = {
   };
 };
 
+// Module-level state — shared across all instances
+type ScriptState = "unloaded" | "loading" | "ready" | "error";
+let scriptState: ScriptState = "unloaded";
+let resolveLoad: () => void;
+let rejectLoad: (err: unknown) => void;
+const scriptReady = new Promise<void>((resolve, reject) => {
+  resolveLoad = resolve;
+  rejectLoad = reject;
+  if (scriptState === "ready") resolve();
+});
+
 const SCRIPT_ID = "cf-turnstile-script";
-const SCRIPT_SRC =
-  "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
-const SCRIPT_TIMEOUT = 15_000;
+const ONLOAD_CB = "__cfTurnstileOnLoad";
+const SCRIPT_SRC = `https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=${ONLOAD_CB}`;
+
+function ensureScript() {
+  if (scriptState !== "unloaded") return;
+
+  scriptState = "loading";
+
+  // Called by Cloudflare's script when the API is fully initialised
+  window[ONLOAD_CB] = () => {
+    scriptState = "ready";
+    resolveLoad();
+    delete window[ONLOAD_CB];
+  };
+
+  // Remove any previously failed script tag
+  const existing = document.getElementById(SCRIPT_ID);
+  if (existing) {
+    existing.remove();
+    scriptState = "loading";
+  }
+
+  const script = document.createElement("script");
+  script.id = SCRIPT_ID;
+  script.src = SCRIPT_SRC;
+  script.async = true;
+  script.defer = true;
+  script.onerror = () => {
+    scriptState = "error";
+    rejectLoad(new Error("Turnstile script failed to load"));
+  };
+  document.head.appendChild(script);
+}
 
 const Turnstile = forwardRef<TurnstileHandle, TurnstileProps>(
   function Turnstile({ siteKey, onSuccess, onError, onExpire, options }, ref) {
     const containerRef = useRef<HTMLDivElement>(null);
     const widgetIdRef = useRef<string | null>(null);
-    const [apiReady, setApiReady] = useState(false);
-    const [loadFailed, setLoadFailed] = useState(false);
+    const [apiReady, setApiReady] = useState(scriptState === "ready");
+    const [loadFailed, setLoadFailed] = useState(scriptState === "error");
 
-    // Store callbacks in refs so the rendered widget always calls the latest props
     const onSuccessRef = useRef(onSuccess);
     const onErrorRef = useRef(onError);
     const onExpireRef = useRef(onExpire);
@@ -73,55 +113,32 @@ const Turnstile = forwardRef<TurnstileHandle, TurnstileProps>(
       },
     }));
 
-    // Effect 1: load the script, wait for turnstile.ready()
+    // Effect 1: ensure the script is loading and await the shared promise
     useEffect(() => {
       if (!siteKey) return;
-
-      if (window.turnstile) {
-        window.turnstile.ready(() => setApiReady(true));
-        return;
+      if (scriptState === "error") {
+        // Reset module state so the next mount retries
+        scriptState = "unloaded";
+        setLoadFailed(false);
       }
 
+      ensureScript();
+
       let cancelled = false;
-
-      const existing = document.getElementById(SCRIPT_ID);
-      if (existing) existing.remove();
-
-      const script = document.createElement("script");
-      script.id = SCRIPT_ID;
-      script.src = SCRIPT_SRC;
-      script.async = true;
-
-      const timeoutId = setTimeout(() => {
-        if (!cancelled) setLoadFailed(true);
-      }, SCRIPT_TIMEOUT);
-
-      script.onload = () => {
-        if (cancelled) return;
-        clearTimeout(timeoutId);
-        // turnstile.ready() is the canonical way to wait for full init —
-        // window.turnstile can exist before the API is actually usable
-        if (window.turnstile) {
-          window.turnstile.ready(() => {
-            if (!cancelled) setApiReady(true);
-          });
-        }
-      };
-      script.onerror = () => {
-        if (!cancelled) {
-          clearTimeout(timeoutId);
-          setLoadFailed(true);
-        }
-      };
-      document.head.appendChild(script);
+      scriptReady
+        .then(() => {
+          if (!cancelled) setApiReady(true);
+        })
+        .catch(() => {
+          if (!cancelled) setLoadFailed(true);
+        });
 
       return () => {
         cancelled = true;
-        clearTimeout(timeoutId);
       };
     }, [siteKey]);
 
-    // Effect 2: render the widget once the API is ready
+    // Effect 2: render once the API is ready and the DOM is committed
     useEffect(() => {
       if (!apiReady || !siteKey || !containerRef.current || !window.turnstile)
         return;
@@ -136,12 +153,6 @@ const Turnstile = forwardRef<TurnstileHandle, TurnstileProps>(
         callback: (token: string) => onSuccessRef.current?.(token),
         "error-callback": () => onErrorRef.current?.(),
         "expired-callback": () => onExpireRef.current?.(),
-        "timeout-callback": () => {
-          // Reset widget so user can retry the interactive challenge
-          if (widgetIdRef.current && window.turnstile) {
-            window.turnstile.reset(widgetIdRef.current);
-          }
-        },
       });
 
       return () => {
@@ -168,7 +179,7 @@ const Turnstile = forwardRef<TurnstileHandle, TurnstileProps>(
       );
     }
 
-    return <div ref={containerRef} />;
+    return <div ref={containerRef} className="min-h-[65px]" />;
   },
 );
 
