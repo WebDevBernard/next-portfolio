@@ -237,7 +237,7 @@ export function Header({ pathname }: { pathname: string }) {
         </nav>
       </div>
 
-      <div className="flex items-center gap-3 shrink-0">
+      <div className="flex items-center gap-5 shrink-0">
         <div className="hidden md:flex flex-row items-center gap-3">
           {Object.entries(navItems).map(([path, { src, label }]) => (
             <ButtonLink

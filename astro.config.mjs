@@ -2,7 +2,7 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from "@tailwindcss/vite";
 import react from "@astrojs/react";
-import vercel from "@astrojs/vercel";
+
 import sitemap from "@astrojs/sitemap";
 
 import cloudflare from "@astrojs/cloudflare";
@@ -15,13 +15,5 @@ export default defineConfig({
   adapter: cloudflare(),
   vite: {
     plugins: [tailwindcss()],
-  },
-  redirects: {
-    "/resume": "/resume.pdf",
-    "/bigtuna": "/big-tuna.html",
-    "/big-tuna": "/big-tuna.html",
-    "/bulldog": "/bulldog.html",
-    "/big-tuna.html" : "/bulldog.html",
-    "/bulldog-backup.html" : "/bulldog.html",
   },
 });
